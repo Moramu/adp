@@ -28,7 +28,7 @@
     @endif
 
 
-    {!! Form::open(array('route' => 'corals.store','method'=>'POST')) !!}
+    {!! Form::open(array('route' => 'corals.store','method'=>'POST','files' => true)) !!}
     <div class="row">
 
 
@@ -47,7 +47,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Photo:</strong>
-	        {!! Form::file('photo', array('class' => 'form-control')) !!}
+	        {!! Form::file('photo', array('files' => true, 'class' => 'form-control')) !!}
 	    </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">

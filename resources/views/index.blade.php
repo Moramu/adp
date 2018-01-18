@@ -42,7 +42,7 @@
     <tr>
         <td>{{ $coral->item_number }}</td>
         <td>{{ $coral->name }}</td>
-    	<td><img src="uploads/photo/{{ $coral->photo }}"></td>
+    	<td><img src="{{ $coral->photo }}"></td>
 	<td>{{ $coral->plastic_quantity }}</td>
         <td>{{ $coral->cost_price}}</td>
         <td>{{ $coral->product_weight}}</td>

@@ -45,18 +45,40 @@ class CoralController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Image $image)
     {
+	$coral = new Coral;
 	//fields validation
         $this->validate($request, [
            'item_number' => 'numeric|required|unique:corals',
 	    'name' => 'required|unique:corals',
-	//    'retail_price' => 'numeric|required',
         ]);
+
+	if(Input::file()){
+	$image = Input::file('photo');
+    	$fileName  = time() . '.' . $image->getClientOriginalExtension();
+    	$path = public_path('/uploads/photo/' . $fileName);
+	Image::make(Input::file('photo'))->resize(100,100)->save($fileName);
+//	Image::update('photo'->$fileName);
+	$coral->item_number = $request -> item_number;
+	$coral->name = $request -> name;
+	$coral->photo = $fileName;
+	$coral->plastic_quantity = $request -> plastic_quantity;
+	$coral->cost_price = $request -> cost_price;
+	$coral->product_weight = $request -> product_weight;
+	$coral->retail_price = $request -> retail_price;
+	$coral->wholesale_price = $request -> wholesale_price;
+	$coral->barcode = $request -> barcode;
+	$coral->description = $request -> description;
+	$coral->save();
+	return redirect()->route('corals.index')
+                        ->with('success','Item created successfully');
+	} else {	
 
         Coral::create($request->all());
         return redirect()->route('corals.index')
                         ->with('success','Item created successfully');
+    }
     }
      /**
      * Display the specified resource.
@@ -66,7 +88,7 @@ class CoralController extends Controller
      */
     public function show($id)
     {
-        // get the nerd
+        // get the coral
         $coral = Coral::find($id);
 
         // show the view and pass the coral to it
@@ -102,7 +124,9 @@ class CoralController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'item_number' => 'required',
+        //    'item_number' => 'required',
+	 'item_number' => 'numeric|required',
+	    'name' => 'required',
         ]);
 
 
@@ -110,142 +134,7 @@ class CoralController extends Controller
         return redirect()->route('corals.index')
                         ->with('success','Item updated successfully');
     }
+
     
-/**     public function store(Request $request)
-    {
-        // validate
-    
-        $rules = array(
-            'item_number'       => 'required',
-        //    'name'      => 'required',
-	//    'photo' => 'sometimes|mimes:jpeg,jpg,png,gif|max:100000',
-        //    'plastic_quantity' => 'required|numeric',
-	//    'cost_price'       => 'required|numeric',
-        //    'product_weight'      => 'required|numeric',
-	//    'retail_price'      => 'required|numeric',
-	//    'wholesale_price'      => 'required|numeric',
-	//    'barcode'      => 'required|numeric',
-	//    'description'      => 'required'
-        );
-        $validator = Validator::make($request->all(), $rules);
 
-        // process the login
-        if ($validator->fails()) {
-            return Redirect::to('corals/create')
-                ->withErrors($validator);
-        } else {
-            // store
-            $coral = new Coral;
-            $coral->item_number = Input::get('item_number');
-        //    $coral->name = Input::get('name');
-        //    $coral->plastic_quantity = Input::get('plastic_quantity');
-	//    $coral->cost_price = Input::get('cost_price');
-	//    $coral->product_weight = Input::get('product_weight');
-	//    $coral->retail_price = Input::get('retail_price');
-	//    $coral->wholesale_price = Input::get('wholesale_price');
-	//    $coral->barcode = Input::get('barcode');
-	//    $coral->description = Input::get('description');
-            $coral->save();
-
-            // redirect
-            Session::flash('message', 'Successfully created Coral!');
-            return Redirect::to('corals');
-        }
-    }
-**/ 
-/**   
-     public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'item_number'       => 'required',
-            'name'      => 'required',
-	//    'photo' => 'nullable|mimes:jpeg,jpg,png,gif|max:100000',
-            'plastic_quantity' => 'required|numeric',
-	    'cost_price'       => 'required|numeric',
-            'product_weight'      => 'required|numeric',
-	    'retail_price'      => 'required|numeric',
-	    'wholesale_price'      => 'required|numeric',
-	    'barcode'      => 'required|numeric',
-	    'description'      => 'required'
-        ]);
-//	if (!'photo')  { 'photo'='no_image.jpg'};
-//	if ($this->photo=(is_null('photo'))){return $this->'photo';}
-        Coral::find($id)->update($request->all());
-        return redirect()->route('corals.index')
-                       ->with('success','Coral updated successfully');
-    }
-**/
-/**    public function updatePhoto (Request $request)
-    {
-	 $this->validate($request, [
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        ]);
-	if($request->hasFile('photo')){
-	$photo = $request->file('photo');
-	$filenme = time() . '.' . $photo->getClientOriginalExtension();
-	Image::make($photo)->resize(300, 300)->save(public_path('uploads/photo/'. $filename));
-	}
-    return redirect()->route('corals.index')
-                       ->with('success','Coral updated successfully');
-    
-    }
-**/    
-/**    public function updatePhoto (Request $request)
-    {
-	 $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        ]);
-	if($request->hasFile('image')){
-	$photo = $request->file('image');
-	$filenme = time() . '.' . $photo->getClientOriginalExtension();
-	Image::make($photo)->resize(300, 300)->save(public_path('uploads/photo/'. $filename));
-	}
-    return redirect()->route('corals.index')
-                       ->with('success','Coral updated successfully');
-    
-    }
-**/    
-/**    
-     public function update($id, Request $request)
-    {
-        // validate
-        $rules = array(
-            'item_number'       => 'required',
-            'name'      => 'required',
-            'plastic_quantity' => 'required|numeric',
-	    'cost_price'       => 'required|numeric',
-            'product_weight'      => 'required|numeric',
-	    'retail_price'      => 'required|numeric',
-	    'wholesale_price'      => 'required|numeric',
-	    'barcode'      => 'required|numeric',
-	    'description'      => 'required'
-        );
-    //    $validator = Validator::make($request->all(),$rules);
-	 $validator = Validator::make(Input::all(), $rules);
-        // process the login
-        if ($validator->fails()) {
-            return Redirect::to('corals/' . $id . '/edit')
-                ->withErrors($validator);
-        } else {
-            // store
-            $coral = Coral::find($id);
-
-            $coral->item_number = Input::get('item_number');
-            $coral->name = Input::get('name');
-            $coral->plastic_quantity = Input::get('plastic_quantity');
-	    $coral->cost_price = Input::get('cost_price');
-	    $coral->product_weight = Input::get('product_weight');
-	    $coral->retail_price = Input::get('retail_price');
-	    $coral->wholesale_price = Input::get('wholesale_price');
-	    $coral->barcode = Input::get('barcode');
-	    $coral->description = Input::get('description');
-            $coral->save();
-
-
-            // redirect
-            Session::flash('message', 'Successfully updated Coral!');
-            return Redirect::to('corals');
-        }
-    }
-**/
 }

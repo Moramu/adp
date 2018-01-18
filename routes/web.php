@@ -21,7 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('importExport', 'ExcelController@importExport');
 Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('importExcel', 'ExcelController@importExcel');
+
 Route::resource('corals', 'CoralController');
-//Route::post('corals','ImageUploadControlle@imageUploadPost');
-//Route::get('corals',['as'=>'image.upload','uses'=>'ImageUploadController@imageUpload']);
-//Route::post('corals',['as'=>'edit','uses'=>'ImageUploadController@imageUploadPost']);
