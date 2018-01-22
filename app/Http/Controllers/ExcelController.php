@@ -69,13 +69,5 @@ class ExcelController extends Controller
 	}
 	return back();
     }
-    public function showTable () {
-    
-    $corals = App\Coral::all();
-    foreach ($corals as $coral){
-    echo $coral->name;
-    }
-
-    }
 
 }

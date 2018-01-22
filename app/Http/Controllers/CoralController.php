@@ -59,7 +59,6 @@ class CoralController extends Controller
     	$fileName  = time() . '.' . $image->getClientOriginalExtension();
     	$path = public_path('/uploads/photo/' . $fileName);
 	Image::make(Input::file('photo'))->resize(100,100)->save($fileName);
-//	Image::update('photo'->$fileName);
 	$coral->item_number = $request -> item_number;
 	$coral->name = $request -> name;
 	$coral->photo = $fileName;
@@ -88,12 +87,12 @@ class CoralController extends Controller
      */
     public function show($id)
     {
+	
         // get the coral
-        $coral = Coral::find($id);
-
+	 $coral = Coral::find($id);
         // show the view and pass the coral to it
-        return View::make('show')
-            ->with('coral', $coral);
+	 return View::make('show')
+         ->with('coral', $coral);
     }
     
     /**
@@ -124,17 +123,65 @@ class CoralController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-        //    'item_number' => 'required',
-	 'item_number' => 'numeric|required',
+    	    'item_number' => 'numeric|required',
 	    'name' => 'required',
         ]);
 
-
+	if(Input::file()){
+	$image = Input::file('photo');
+    	$fileName  = time() . '.' . $image->getClientOriginalExtension();
+    	$path = public_path('/uploads/photo/$id/' . $fileName);
+	Image::make(Input::file('photo'))->resize(100,100)->save($fileName);
+	Coral::where('id', $id)->update(array('photo' => $fileName,
+			'item_number'=>Input::get('item_number'),
+			'name'=>Input::get('name'),
+			'plastic_quantity'=>Input::get('plastic_quantity'), 
+			'cost_price'=>Input::get('cost_price'), 
+			'product_weight'=>Input::get('product_weight'), 
+			'retail_price'=>Input::get('retail_price'), 
+			'wholesale_price'=>Input::get('wholesale_price'), 
+			'barcode'=>Input::get('barcode'), 
+			'description'=>Input::get('description'),
+			));
+	return redirect()->route('corals.index')
+                        ->with('success','Item updated successfully');
+	
+	} 
+	
         Coral::find($id)->update($request->all());
         return redirect()->route('corals.index')
                         ->with('success','Item updated successfully');
     }
 
-    
 
+     public function destroy($id)
+    {
+        Coral::find($id)->delete();
+        return redirect()->route('corals.index')
+                        ->with('success','Item deleted successfully');
+    }
+    
+    public function updateColors(Request $request,$id) {
+		$coral = Coral::find($id);
+	    
+/**		Coral::where('id', $id)->update(array('photo' => $fileName,
+			'blueridge'=>Input::get('blueridge'),
+			'blue'=>Input::get('blue'),			
+			'brick'=>Input::get('brick'),
+			'yellow'=>Input::get('yellow'),
+			'dark_red'=>Input::get('dark_red'),
+			'orage'=>Input::get('orange'),
+			'green'=>Input::get('green'),
+			'turquoise'=>Input::get('turquoise'),
+			'purple'=>Input::get('purple'),
+			'pink'=>Input::get('pink'),
+			'mustard'=>Input::get('mustard'),
+			));
+	return redirect()->route('corals.index')
+                        ->with('success','Colors updated successfully');
+**/
+return $coral;
+    
 }
+}
+
