@@ -164,13 +164,13 @@ class CoralController extends Controller
     public function updateColors(Request $request,$id) {
 		$coral = Coral::find($id);
 	    
-/**		Coral::where('id', $id)->update(array('photo' => $fileName,
+		Coral::where('id', $id)->update(array(
 			'blueridge'=>Input::get('blueridge'),
 			'blue'=>Input::get('blue'),			
 			'brick'=>Input::get('brick'),
 			'yellow'=>Input::get('yellow'),
 			'dark_red'=>Input::get('dark_red'),
-			'orage'=>Input::get('orange'),
+			'orange'=>Input::get('orange'),
 			'green'=>Input::get('green'),
 			'turquoise'=>Input::get('turquoise'),
 			'purple'=>Input::get('purple'),
@@ -179,8 +179,8 @@ class CoralController extends Controller
 			));
 	return redirect()->route('corals.index')
                         ->with('success','Colors updated successfully');
-**/
-return $coral;
+
+//return $coral;
     
 }
 }

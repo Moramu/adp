@@ -16,9 +16,7 @@
     </div>
     <h1>Showing - {{ $coral->name }} </h1>
 
-//{!! Form::model($coral,['method'=>'PATCH','route'=>['CorallController@updateColors',$coral->id]])!!} 
-    {!! Form::model(array('action' => 'CoralControlles@updateColors'))!!} 
-//{!! Form::model($coral, ['method' => 'PATCH', 'action' => ['CoralController@updateColors',$coral->id]]) !!}
+{!! Form::model($coral,['method'=>'POST'])!!} 
 
 <table class="table table-bordered">
     <tr>
@@ -28,7 +26,7 @@
 	<th>Yellow</th>
 	<th>Red</th>
 	<th>Orange</th>
-	<th>Greeb</th>
+	<th>Green</th>
 	<th>Turquoise</th>
 	<th>Purple</th>
 	<th>Pink</th>
