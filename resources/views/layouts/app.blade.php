@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'ADPM') }}
+                        {{ config('AquaDesignManagment', 'AquaDesignPro') }}
                     </a>
                 </div>
 

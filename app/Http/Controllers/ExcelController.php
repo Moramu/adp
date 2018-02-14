@@ -8,12 +8,20 @@ use Input;
 use App\Coral;
 use DB;
 use Excel;
+use Auth;
 class ExcelController extends Controller
 {
-    public function importExport()
-    {
-	return view('importExport');
+
+
+    public function __construct() {
+    $this->middleware('auth');
     }
+
+    public function index()
+    {
+	return view('excelIndex');
+    }
+
     public function downloadExcel($type)
     {
 	$data = Coral::get()->toArray();
@@ -24,7 +32,7 @@ class ExcelController extends Controller
             });
 	})->download($type);
     }
-    public function importExcel(Request $request)
+    public function store(Request $request)
     {
 	if($request->hasFile('import_file')){
 	    $path = $request->file('import_file')->getRealPath();
@@ -54,13 +62,8 @@ class ExcelController extends Controller
 		    'pink' => $value->pink,
 		    'mustard' => $value->mustard,
 		    'summary' => $value->summary,
-		    'description' => $value->description];
-		
-		/**    'title'=> $value->title,
-		    'description'=> $value->description];
-		**/
-
-}
+		    'description' => $value->description];	
+	    }
 		if(!empty($insert)){
 		    DB::table('corals')->insert($insert);
 		    dd('Insert Record successfully.');

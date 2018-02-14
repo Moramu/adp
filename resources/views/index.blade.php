@@ -9,9 +9,15 @@
             <div class="pull-left">
                 <h2>Corals</h2>
             </div>
+	    <div class="pull-right">
+    	        <a class="btn btn-success" href="{{ route('excel.index') }}"> Import/Export Corals</a>
+
+            </div>
+
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('corals.create') }}"> Create New Item</a>
             </div>
+
         </div>
     </div>
 
@@ -53,7 +59,7 @@
         <td>{{ $coral->description }}</td>
 
         <td>
-            <a class="btn btn-info" href="{{ route('corals.show',$coral->id) }}">Show Qtty</a>
+            <a class="btn btn-info " href="{{ route('corals.show',$coral->id) }}">Show Qtty</a>
             <a class="btn btn-primary" href="{{ route('corals.edit',$coral->id) }}">Edit Coral</a>
             {!! Form::open(['method' => 'DELETE','route' => ['corals.destroy', $coral->id],'style'=>'display:inline']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

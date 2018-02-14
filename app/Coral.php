@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coral extends Model
 {
-    public $fillable = [
+    protected $fillable = [
 	'id',
 	'item_number',
 	'name',

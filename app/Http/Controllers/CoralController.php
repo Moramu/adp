@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Session;
 
+use Auth;
 use View;
 use Image;
 use \App\Coral;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Input;
 
 class CoralController extends Controller
 {
+
+    public function __construct()
+    {
+    $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +33,7 @@ class CoralController extends Controller
 
         // load the view and pass the corals
 	return view('index',compact('corals'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
      /**
@@ -176,12 +184,16 @@ class CoralController extends Controller
 			'purple'=>Input::get('purple'),
 			'pink'=>Input::get('pink'),
 			'mustard'=>Input::get('mustard'),
+			'summary'=>Input::get('blueridge')+Input::get('blue')+Input::get('brick')+Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
++Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard'),
 			));
 	return redirect()->route('corals.index')
                         ->with('success','Colors updated successfully');
 
 //return $coral;
     
-}
+    }
+    
+
 }
 

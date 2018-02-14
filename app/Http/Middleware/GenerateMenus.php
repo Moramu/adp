@@ -18,8 +18,8 @@ class GenerateMenus
 	\Menu::make('MyNavBar', function ($menu) {
         $menu->add('Home');
         $menu->add('Corals', 'corals');
-        $menu->add('test', 'test');
-        $menu->add('test', 'test');
+    //    $menu->add('importExport - Corals', 'importExport');
+        $menu->add('Fish', 'fish');
     });
         return $next($request);
     }
