@@ -58,9 +58,10 @@ class FishController extends Controller
      */
     public function fishFormAjax($id)
     {
-        $categories = DB::table("water_type")
+        $categories = DB::table("fish_categories")
                     ->where("type_id",$id)
                     ->pluck("category","id");
+//	echo json_encode($categories);
         return json_encode($categories);
     }
 

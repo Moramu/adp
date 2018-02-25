@@ -10,13 +10,7 @@
                 <h2>Corals</h2>
             </div>
 
-	    <div>
-	        <h4>Search</h4>
-		    {!! Form::open (array('route'=>'coralSearch','method'=>'GET')) !!}
-		        <input type="text" name="s" value="{{ Request::query('s') }}" placeholder="Search coral..." />
-		    {!! Form::close() !!}
-	    </div>
-
+	
 
 	    <div class="pull-right">
     	        <a class="btn btn-success" href="{{ route('excel.index') }}"> Import/Export Corals</a>

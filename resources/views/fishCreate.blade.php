@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Add new Fish!</h2>
+                <h2>Add new Fish</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{route('fish.index') }}">Back</a>
@@ -57,28 +57,27 @@
                 {!! Form::number('barcode', null, array('placeholder' => '9332233453','class' => 'form-control')) !!}
             </div>
         </div>
+```````<div class="container">
+    	    <div class="panel-heading">Select Type and get bellow Related Category</div>
+    		    <div class="panel-body">
+        		<div class="form-group">
+        		    <label for="title">Select Type:</label>
+            		    <select name="type" class="form-control" style="width:350px">
+                	    <option value="type">--- Select Water Type ---</option>
+                	    @foreach ($types as $key => $value)
+                    	    <option value="{{ $key }}">{{ $value }}</option>
+                	    @endforeach
+            		    </select>
+        		</div>
+        	    <div class="form-group">
+            		    <label for="title">Select Category:</label>
+            		    <select name="category" class="form-control" style="width:350px">
+			    <option value="category">--- Select Category ---</option>
+            		    </select>
+        	    </div>
+    	    </div>
 
-    
-	<div class="container">
-      <div class="panel-heading">Select Type and get bellow Related Category</div>
-      <div class="panel-body">
-            <div class="form-group">
-                <label for="title">Select Type:</label>
-                <select name="type" class="form-control" style="width:350px">
-                    <option value="">--- Select Type ---</option>
-                    @foreach ($types as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="title">Select Category:</label>
-                <select name="category" class="form-control" style="width:350px">
-                </select>
-            </div>
-      </div>
-
-</div>	
+	</div>	
 
 
 	<div class="col-xs-12 col-sm-12 col-md-12">
@@ -105,7 +104,7 @@
             var typeID = $(this).val();
             if(typeID) {
                 $.ajax({
-                    url: '/myform/ajax/'+typeID,
+                    url: '/adp/public/fish/create/'+typeID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {

@@ -20,13 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('corals/{id}','CoralController@updateColors');
-Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'));
+Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'))->name('test');
+//Route::get('fish/create/{id}','FishController@fishFormAjax');
 
 Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
 Route::resource('fish', 'FishController');
 
-Route::get('test','FishController@test');
+Route::get('test/{id}','FishController@fishFormAjax');
 
 //Route::get('importExcel','CoralController@importExcel');
 //Route::post('updateColors', 'CoralController@updateColors');
