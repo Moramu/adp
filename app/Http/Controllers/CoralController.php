@@ -32,7 +32,7 @@ class CoralController extends Controller
 	$corals = Coral::orderBy('item_number','ASC')->paginate(10);
 
         // load the view and pass the corals
-	return view('index',compact('corals'))
+	return view('coralIndex',compact('corals'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
@@ -44,7 +44,7 @@ class CoralController extends Controller
      public function create()
     {
         // load the create form (app/views/corals/create.blade.php)
-        return view('create');
+        return view('coralCreate');
     }
 
     /**
@@ -99,7 +99,7 @@ class CoralController extends Controller
         // get the coral
 	 $coral = Coral::find($id);
         // show the view and pass the coral to it
-	 return View::make('show')
+	 return View::make('coralShow')
          ->with('coral', $coral);
     }
     
@@ -118,7 +118,7 @@ class CoralController extends Controller
         //return View::make('edit')
             //->with('coral', $coral);
 	$coral = Coral::find($id);
-        return view('edit',compact('coral'));
+        return view('coralEdit',compact('coral'));
     }
     
      /**
@@ -185,15 +185,23 @@ class CoralController extends Controller
 			'pink'=>Input::get('pink'),
 			'mustard'=>Input::get('mustard'),
 			'summary'=>Input::get('blueridge')+Input::get('blue')+Input::get('brick')+Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
-+Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard'),
+			    +Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard'),
 			));
 	return redirect()->route('corals.index')
                         ->with('success','Colors updated successfully');
+	    //return $coral;
+    }
 
-//return $coral;
-    
+/**
+    public function getIndex( Request $request ) {
+	$s = $request->query('s');
+	
+	// Query and paginate result
+	$coral = Coral::where('name', 'like', '%'.$s.'%')->orWhere('description', 'like', '%'.$s.'%')->paginate(6);
+
+	return view('coralSearch', ['corals' => $coral, 's' => $s ]);
     }
     
-
+*/
 }
 

@@ -59,26 +59,33 @@
         </div>
 
     
-	<div class="container">
-      <div class="panel-heading">Select Type and get bellow Related Category</div>
-      <div class="panel-body">
-            <div class="form-group">
-                <label for="title">Select Type:</label>
-                <select name="type" class="form-control" style="width:350px">
-                    <option value="">--- Select Type ---</option>
-                    @foreach ($types as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="title">Select Category:</label>
-                <select name="category" class="form-control" style="width:350px">
-                </select>
-            </div>
-      </div>
 
-</div>	
+
+
+
+{{--
+	<div class="col-xs-12 col-sm-12 col-md-12">
+	<div class="form-group">
+            <strong>Type/Category:</strong>
+	    {!! Form::select('type',array(
+		 'Salt Water' => array('Joyous', 'Glad', 'Ecstatic'),
+		 'Fresh Water' => array('Bereaved', 'Pensive', 'Down'),
+		), null, ['id' => 'type', 'class' => 'form-control']) !!}
+	    </div>
+        </div>
+		<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Type:</strong>
+            	{!! Form::select('type',array( 'Salt' => 'Salt Water', 'Fresh' => 'Fresh Water'), null,['id' => 'cities', 'class' => 'form-control'] ) !!}
+            </div>
+        </div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Category:</strong>
+                {!! Form::select('category',array('Gobby' => 'Gobby', 'Puffer' => 'Puffer'), null, ['id' => 'cities', 'class' => 'form-control']) !!}
+	    </div>
+        </div>
+--}}
 
 
 	<div class="col-xs-12 col-sm-12 col-md-12">
@@ -98,32 +105,47 @@
 
 
 @endsection
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name="type"]').on('change', function() {
-            var typeID = $(this).val();
-            if(typeID) {
-                $.ajax({
-                    url: '/myform/ajax/'+typeID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-
-                        
-                        $('select[name="category"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="category"]').append('<option value="'+ key +'">'+ value +'</option>');
-                        });
-
-
-                    }
-                });
-            }else{
-                $('select[name="category"]').empty();
-            }
-        });
+<script>
+$(function () { // wait for page to load
+    var typeDropdown = $("#type"),
+        subDropdown = $('<select></select>'), // create a country dropdown
+        types = []; // ordered list of countries
+    
+    // parse the nested dropdown
+    typeDropdown.children().each(function () {
+        var group = $(this),
+            typeName = group.attr('label'),
+            option;
+        
+        // create an option for the country
+        option = $('<option></option>').text(typeName);
+        
+        // store the associated city options
+        option.data('type', group.children());
+        
+        // check if the country should be selected
+        if( group.find(':selected').length > 0 ) {
+            option.prop('selected', true);
+        }
+        
+        // add the country to the dropdown
+        subDropdown.append(option);
     });
+    
+    // add the country dropdown to the page
+    typeDropdown.before(subDropdown);
+    
+    // this function updates the city dropdown based on the selected country
+    function updateSubs() {
+        var type = subDropdown.find(':selected');
+        typeDropdown.empty().append(type.data('type'));
+    }
+    
+    // call the function to set the initial cities
+    updateSubs();
+    
+    // and add the change handler
+    subDropdown.on('change', updateSubs);
+});
 </script>
-
 </body>

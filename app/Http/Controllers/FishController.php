@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Session;
 
+use DB;
 use Auth;
 use View;
 use Image;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 class FishController extends Controller
 {
@@ -45,7 +46,22 @@ class FishController extends Controller
      public function create()
     {
         // load the create form 
-        return view('fishCreate');
+	//$types = DB::table("water_type")->lists("name","id");
+	$types = DB::table("water_type")->pluck("type","id");
+        return view('fishCreate',compact('types'));
+    }
+
+    /**
+     * Get Ajax Request and restun Data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fishFormAjax($id)
+    {
+        $categories = DB::table("water_type")
+                    ->where("type_id",$id)
+                    ->pluck("category","id");
+        return json_encode($categories);
     }
 
     /**
@@ -62,7 +78,7 @@ class FishController extends Controller
            'item_number' => 'numeric|required|unique:fish',
 	    'name' => 'required|unique:fish',
 	    'type'=> 'required',
-	//  'category' => 'required',
+	    'category' => 'required',
         ]);
 
 	if(Input::file()){
@@ -162,17 +178,10 @@ class FishController extends Controller
         return redirect()->route('fish.index')
                         ->with('success','Item deleted successfully');
     }
-
-    public function test () {
-
-        $type = Fish::with(array('water'=>function($query){
-        $query->select('type','category');
-    }))->get();
-
-	 return view('test', ['type' => $type]);
-
-    }  
     
-  
+
+
+
+      
 }
 

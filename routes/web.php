@@ -20,11 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('corals/{id}','CoralController@updateColors');
+Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'));
 
 Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
 Route::resource('fish', 'FishController');
-
 
 Route::get('test','FishController@test');
 
@@ -37,3 +37,4 @@ Route::get('test','FishController@test');
 //Route::get('importExport', 'ExcelController@importExport');
 //Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 //Route::post('importExcel', 'ExcelController@importExcel');
+//Route::get('corals/search/{s?}', 'CoralController@getIndex')->where('s', '[\w\d]+')->name('coralSearch');
