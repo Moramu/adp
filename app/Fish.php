@@ -17,7 +17,7 @@ class Fish extends Model
 	'category'
     ];
 
-    public function water () {
-	return $this->belongsTo('\App\waterCat', 'id');
+    public function fishSizes () {
+	return $this->hasMany('\App\fishSize');
     }
 }

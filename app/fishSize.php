@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class fishSize extends Model
 {
-    protected $fillable = ['fId','js','s','sm','m','ml','l','xl','n/a'];
+    protected $fillable = ['fish_id','js','s','sm','m','ml','l','xl','n/a'];
 
-/**
-    public function fishSz () {
+
+    public function fish () {
 	return $this->belongsTo('\App\Fish');
     }
-**/
+
 }

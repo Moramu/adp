@@ -15,7 +15,7 @@ class CreateFishSizesTable extends Migration
     {
         Schema::create('fish_sizes', function (Blueprint $table) {
             $table->increments('id');
-	    $table->integer('fId');
+	    $table->integer('fish_id');
 	    $table->string('js');
 	    $table->string('s');
 	    $table->string('sm');

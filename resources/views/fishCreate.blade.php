@@ -63,7 +63,7 @@
         		<div class="form-group">
         		    <label for="title">Select Type:</label>
             		    <select name="type" class="form-control" style="width:350px">
-                	    <option value="type">--- Select Water Type ---</option>
+                	    <option value="">--- Select Water Type ---</option>
                 	    @foreach ($types as $key => $value)
                     	    <option value="{{ $key }}">{{ $value }}</option>
                 	    @endforeach
@@ -72,7 +72,7 @@
         	    <div class="form-group">
             		    <label for="title">Select Category:</label>
             		    <select name="category" class="form-control" style="width:350px">
-			    <option value="category">--- Select Category ---</option>
+			    <option value="">--- Select Category ---</option>
             		    </select>
         	    </div>
     	    </div>
