@@ -21,7 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('corals/{id}','CoralController@updateColors');
 Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'))->name('test');
-//Route::get('fish/create/{id}','FishController@fishFormAjax');
+Route::get('/admin', 'AdminController@index');
+Route::get('/sadmin', 'SuperAdminController@index');
 
 Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
