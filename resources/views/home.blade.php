@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -13,7 +15,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+		    
                     {!! $MyNavBar->asUl() !!}
                 </div>
             </div>

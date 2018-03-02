@@ -1,0 +1,245 @@
+body {
+    color: #8f8f8f;
+    font: 12px Tahoma, sans-serif;
+    background-color: #f8f8f8;
+    border-top: 5px solid #7e7e7e;
+    margin: 0;
+}
+input[type="text"] {
+    background-color: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    height: 30px;
+    color: #b2b2b2;
+    padding: 0 10px;
+    vertical-align: top;
+}
+button {
+    color: #fff;
+    background-color: #29c5e6;
+    border: none;
+    height: 32px;
+    font-family: 'Oswald', sans-serif;
+}
+.search {
+    background: #3b464c;
+}
+p {
+    margin: 20px 0;
+}
+#wrapper {
+    max-width: 960px;
+    margin: auto;
+}
+header {
+    padding: 20px 0;
+}
+.top_logo {
+    height: 50px;
+    width: 100px;
+}
+.avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    float:right;
+}
+nav a {
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    
+    background: #e7e9ec;
+}
+
+nav li {
+    list-style-position: inside;
+    font: 14px 'Oswald', sans-serif;
+    padding: 10px;
+}
+
+.top-menu {
+    text-align: center;
+}
+
+.top-menu li {
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 0;
+}
+
+.top-menu li.active {
+    background: #29c5e6;
+    color: #fff;
+}
+
+.top-menu a {
+    color: #645858;
+}
+
+.dropdown {
+    float: right;
+    padding-left: 15px;
+    padding-top: 9px;
+}
+
+.btn-primary-my {
+    color: #fff;
+    background-color: #3b464c;
+    border-color: #2e6da4;
+    border-top-color: rgb(46, 109, 164);
+    border-right-color: rgb(46, 109, 164);
+    border-bottom-color: rgb(46, 109, 164);
+    border-left-color: rgb(46, 109, 164);
+}
+
+#heading {
+    background: transparent url('/adp/public/storage/h1-bg.png');
+    margin: 30px 0;
+    padding-left: 20px;
+    height: 50px;
+}
+
+h1 {
+    display: inline-block;
+    color: #7e7e7e;
+    font: 40px/40px 'Oswald', sans-serif;
+    background: url(/adp/public/storage/bg.png);
+    margin: 10px;
+    padding: 0 10px;
+}
+
+aside {
+    float: left;
+    width: 250px;
+}
+section {
+    margin-left: 280px;
+    padding-bottom: 50px;
+}
+
+.aside-menu li {
+    font-weight: 300;
+    list-style-type: square;
+    border-top: 1px solid #c1c1c1;
+}
+
+.aside-menu li:first-child {
+    border: none;
+}
+
+.aside-menu li.active {
+    color: #29c5e6;
+}
+
+.aside-menu a {
+    color: #8f8f8f;
+}
+aside > h2 {
+    background: #29c5e6;
+    font: 14px 'Oswald', sans-serif;
+    color: #fff;
+    padding: 10px;
+    margin: 30px 0 0 0;
+}
+
+aside > p {
+    background: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    padding: 10px;
+    margin: 0;
+}
+
+blockquote {
+    margin: 0;
+    background: #29c5e6;
+    padding: 10px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
+blockquote p {
+    color: #fff;
+    font-style: italic;
+    font-size: 33px;
+    margin: 0;
+}
+
+blockquote cite {
+    display: block;
+    font-size: 20px;
+    font-style: normal;
+    color: #1d8ea6;
+    margin: 0;
+    text-align: right;
+}
+
+figure {
+    display: inline-block;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
+figure img {
+    display: block;
+    border: 1px solid #fff;
+    outline: 1px solid #c9c9c9;
+}
+
+figure figcaption {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+figure figcaption span {
+    display: block;
+    font-size: 14px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+figure div {
+    font-size: 14px;
+    color: #29c5e6;
+}
+
+.team-row figure {
+    margin-top: 20px;
+}
+
+.team-row figure + figure {
+    margin-left: 43px;
+}
+    color: #29c5e6;
+}
+section > figure + figure {
+    margin-left: 28px;
+}
+section > h2 {
+    background: #29c5e6;
+    font: 30px 'Oswald', sans-serif;
+    font-weight: 300;
+    color: #fff;
+    padding: 0 10px;
+    margin: 30px 0 0 0;
+}
+footer {
+    background: #7e7e7e;
+    color: #dbdbdb;
+    font-size: 11px;
+}
+
+#footer {
+    max-width: 960px;
+    margin: auto;
+    padding: 10px 0;
+    height: 90px;
+}
+
+
+

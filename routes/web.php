@@ -22,7 +22,8 @@ Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('corals/{id}','CoralController@updateColors');
 Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'))->name('test');
 Route::get('/admin', 'AdminController@index');
-Route::get('/sadmin', 'SuperAdminController@index');
+Route::get('/sadmin', 'SuperAdminController@index')->name('sadmin');
+
 
 Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
@@ -30,13 +31,21 @@ Route::resource('fish', 'FishController');
 
 Route::get('test/{id}','FishController@fishFormAjax');
 
-//Route::get('importExcel','CoralController@importExcel');
-//Route::post('updateColors', 'CoralController@updateColors');
-//Route::put('corals/{id}', 'CoralController@updateColors');
-//Route::post('corals/show','CoralController@updateColors');
-//Route::patch('/corals/{id}',['as' => 'corals.update','uses' => 'CoralController@updateColors']);
-//Route::post('/edit/id', [ 'as' => 'corals.update', 'uses' => 'UserController@colorsUpdate']);
-//Route::get('importExport', 'ExcelController@importExport');
-//Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
-//Route::post('importExcel', 'ExcelController@importExcel');
-//Route::get('corals/search/{s?}', 'CoralController@getIndex')->where('s', '[\w\d]+')->name('coralSearch');
+
+
+
+/** Super_admin acces **/ 
+Route::group( ['middleware' => ['auth','role:super_admin']], function()
+{     
+Route::get('sadmin/products', function () {
+    return view('/superadmin/products');
+})->name('products');
+
+Route::get('sadmin/services', function () {
+    return view('/superadmin/services');
+})->name('services');
+
+Route::get('sadmin/settings', function () {
+    return view('/superadmin/settings');
+})->name('settings');
+});

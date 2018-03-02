@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
  
 @section('content')
 <div class="container">
@@ -13,9 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
- 
-                    This is Admin Dashboard. You must be privileged to be here !
-                </div>
+                 </div>
             </div>
         </div>
     </div>
