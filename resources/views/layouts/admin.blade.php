@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset ('css/default.css')}}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <script src="{{asset ('js/default.js')}}"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -90,9 +90,7 @@
 	</div>
     <footer>
     <div id="footer">
-	<div id="footer-logo">
 	</div>
-    </div>
     </footer>
     
 </body>

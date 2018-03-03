@@ -2,18 +2,13 @@
 
 @section('content')
 
-    <div class="row">
-	<div class="col-lg-12 margin-tb">
-	    <div class="pull-left">
-		<h2>View/Edit Colors Quantity</h2>
-	    <img src="{{asset($coral->photo)}}">
+    	    <div class="pull-left">
+	        <h1 class="pageH1">{{ $coral->name }} </h1>
+	    <img class="product_picture" src="{{asset($coral->photo)}}">
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-primary" href="{{route('corals.index')}}">Back</a>
+		<a class="btn btn-primary createButton" href="{{route('corals.index')}}">Back</a>
 	    </div>
-	</div>
-    </div>
-    <h1>Showing - {{ $coral->name }} </h1>
 
 {!! Form::model($coral,['method'=>'POST'])!!} 
 

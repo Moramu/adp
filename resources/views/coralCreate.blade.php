@@ -1,18 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Create New Coral</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('corals.index') }}">Back</a>
-            </div>
-        </div>
-    </div>
+                <h1 class="pageH1">Add New Coral</h2>
+                <a class="btn btn-primary createButton" href="{{route('corals.index') }}">Back</a>
+        
 
 
     @if (count($errors) > 0)
@@ -93,7 +86,7 @@
         </div>
 	
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary pull-left">Submit</button>
         </div>
 
 

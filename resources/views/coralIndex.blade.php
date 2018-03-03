@@ -41,7 +41,7 @@
         <td>
             <a class="btn btn-info " href="{{ route('corals.show',$coral->id) }}">Show Qtty</a>
             <a class="btn btn-primary" href="{{ route('corals.edit',$coral->id) }}">Edit Coral</a>
-            {!! Form::open(['method' => 'DELETE','route' => ['corals.destroy', $coral->id],'style'=>'display:inline']) !!}
+            {!! Form::open(['method' => 'DELETE','route' => ['corals.destroy', $coral->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
             {!! Form::close() !!}
         </td>

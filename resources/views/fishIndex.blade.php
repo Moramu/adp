@@ -10,6 +10,8 @@
     @endif
 
     <h1 class="pageH1">Fish</h1>
+        <a class="btn btn-info createButton" href="{{ route('fish.create')}}">Add fish</a>
+        
     <table class="table table-bordered">
         <tr>
             <th>Item Number</th>

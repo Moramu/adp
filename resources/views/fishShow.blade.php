@@ -1,37 +1,28 @@
-@extends('layouts.app')
-@section('title', 'Page Title')
+@extends('layouts.admin')
 
 @section('content')
 
-    <div class="row">
-	<div class="col-lg-12 margin-tb">
-	    <div class="pull-left">
-		<h2>View/Edit Colors Quantity</h2>
-	    <img src="{{asset($coral->photo)}}">
-	    </div>
-	    <div class="pull-right">
+	<h1 class="pageH1"> {{ $fish->name }}</h1>
+	<img class="product_picture" src="{{asset($fish->photo)}}">
+	
+        <div class="pull-right">
 		<a class="btn btn-primary" href="{{route('corals.index')}}">Back</a>
-	    </div>
 	</div>
-    </div>
-    <h1>Showing - {{ $coral->name }} </h1>
 
-{!! Form::model($coral,['method'=>'POST'])!!} 
+
+{!! Form::model($fish,['method'=>'POST'])!!} 
 
 <table class="table table-bordered">
     <tr>
-	<th>BlueRidge</th>
-	<th>Blue</th>
-	<th>Brick</th>
-	<th>Yellow</th>
-	<th>Red</th>
-	<th>Orange</th>
-	<th>Green</th>
-	<th>Turquoise</th>
-	<th>Purple</th>
-	<th>Pink</th>
-	<th>Mustard</th>
-	<th>Summary</th>
+	<th>Js/T</th>
+	<th>S</th>
+	<th>SM</th>
+	<th>M</th>
+	<th>ML</th>
+	<th>L</th>
+	<th>XL</th>
+	<th>N/A</th>
+	
     </tr>
     <tr>
 	<td>{!!Form::number('blueridge',null,array('style'=>'width:50px'))!!}</td>
@@ -41,11 +32,8 @@
 	<td>{!!Form::number('dark_red',null,array('style'=>'width:50px'))!!}</td>
 	<td>{!!Form::number('orange',null,array('style'=>'width:50px'))!!}</td>
 	<td>{!!Form::number('green',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('turquoise',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('purple',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('pink',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('mustard',null,array('style'=>'width:50px'))!!}</td>
-	<td>{{$coral->summary}}</td>
+	<td>{!!Form::number('green',null,array('style'=>'width:50px'))!!}</td>
+
     <tr>
 </table>
 

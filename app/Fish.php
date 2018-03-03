@@ -20,4 +20,6 @@ class Fish extends Model
     public function fishSizes () {
 	return $this->hasMany('\App\fishSize');
     }
+    
+    
 }

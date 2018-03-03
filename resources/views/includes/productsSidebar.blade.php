@@ -9,7 +9,7 @@
 		    <li><a href="">Chillers</a></li>
 		    
 		    <li id="corals"><a href="{{route('corals.index')}}">Corals</a></li>
-		    @if (Request::is('corals'))
+		    @if (Request::is('corals/*')||Request::is('corals'))
 		    <script>
 		    var c = document.getElementById('corals');
 		    c.className +=" active";
@@ -17,7 +17,7 @@
 		    @endif
 		    <li><a href=""></a>Filters</li>
 		    <li id="fish"><a href="{{route('fish.index')}}">Fish</a></li>
-		    @if (Request::is('fish'))
+		    @if (Request::is('fish')||Request::is('fish/*'))
 		    <script>
 		    var c = document.getElementById('fish');
 		    c.className +=" active";

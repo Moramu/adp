@@ -1,19 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 @section('content')
 
-    <div class="row">
-	<div class="col-lg-12 margin-tb">
-	    <div class="pull-left">
-		<h2>Edit Fish</h2>
-	    </div>
+		<h1 class="pageH1">Edit Fish</h1>
 	    <div class="pull-right">
-		<a class="btn btn-primary" href="{{route('fish.index') }}">Back</a>
+		<a class="btn btn-primary createButton" href="{{route('fish.index') }}">Back</a>
 	    </div>
-	</div>
-    </div>
+	
 
 
     @if (count($errors) > 0)
@@ -51,7 +46,7 @@
             <div class="form-group">
                 <strong>Photo:</strong>
                 {!! Form::file('photo', array('files'=>true,'class' => 'form-control')) !!}
-		<img src="{{ asset($fish->photo) }}">
+		<img class="product_picture" src="{{ asset($fish->photo) }}">
             </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
@@ -61,42 +56,26 @@
             </div>
         </div>
 
-{{--
-        
 	<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+    	    <div class="form-group">
                 <strong>Type:</strong>
-                {!! Form::select('type',['Salt'=>'Salt Water','Fresh'=>'Fresh Water'], null, array('placeholder' => 'Select type...','class' => 'form-control')) !!}
-            </div>
-        </div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Category:</strong>
-                {!! Form::select('category',['Gobby'=> 'Gobby', 'Puffer'=>'Puffer'], null, array('placeholder' => 'Select category...','class' => 'form-control')) !!}
-            </div>
-        </div>
-
---}}	
-	```````<div class="container">
-	    <div class="panel-heading">Select Type and get bellow Related Category</div>
-	        <div class="panel-body">
-    	    <div class="form-group">
-    	        <label for="title">Select Type:</label>
-        	        <select name="type" class="form-control" style="width:350px">
-            	    <option value="">--- Select Water Type ---</option>
-            	    @foreach ($types as $key => $value)
+            	    <select name="type" class="form-control" style="width:350px">
+            		    <option value='type'>--- Select Water Type ---</option>
+            			@foreach ($types as $key => $value)
                 	    <option value="{{ $key }}">{{ $value }}</option>
-            	    @endforeach
-        	        </select>
+            			@endforeach
+        	    </select>
     	    </div>
+	</div>
+    
+    	<div class="col-xs-12 col-sm-12 col-md-12">
     	    <div class="form-group">
-        	        <label for="title">Select Category:</label>
-        	        <select name="category" class="form-control" style="width:350px">
-	        <option value="">--- Select Category ---</option>
-        	        </select>
+    		<strong>Category:</strong>
+	    	    <select name="category" class="form-control" style="width:350px">
+	    		<option value='category'>--- Select Category ---</option>
+        	    </select>
     	    </div>
-	    </div>
-	</div>	
+	</div>
 	
 	
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -109,7 +88,7 @@
 
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary pull-left">Submit</button>
         </div>
 
 

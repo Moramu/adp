@@ -1,21 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add new Fish</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{route('fish.index') }}">Back</a>
-            </div>
-        </div>
-    </div>
-
+            <h1 class="pageH1">Add new Fish</h1>
+            <a class="btn btn-primary createButton" href="{{route('fish.index') }}">Back</a>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -57,27 +48,30 @@
                 {!! Form::number('barcode', null, array('placeholder' => '9332233453','class' => 'form-control')) !!}
             </div>
         </div>
-```````<div class="container">
-    	    <div class="panel-heading">Select Type and get bellow Related Category</div>
-    		    <div class="panel-body">
-        		<div class="form-group">
-        		    <label for="title">Select Type:</label>
-            		    <select name="type" class="form-control" style="width:350px">
+    
+	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Type:</strong>
+    		    <select name="type" class="form-control" style="width:350px">
                 	    <option value="">--- Select Water Type ---</option>
                 	    @foreach ($types as $key => $value)
                     	    <option value="{{ $key }}">{{ $value }}</option>
                 	    @endforeach
-            		    </select>
-        		</div>
-        	    <div class="form-group">
+            	    </select>
+	    </div>
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Category:</strong>
             		    <label for="title">Select Category:</label>
             		    <select name="category" class="form-control" style="width:350px">
 			    <option value="">--- Select Category ---</option>
             		    </select>
-        	    </div>
-    	    </div>
+            </div>
+    	</div>
 
-	</div>	
+	
 
 
 	<div class="col-xs-12 col-sm-12 col-md-12">
@@ -88,7 +82,7 @@
         </div>
 	
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary pull-left">Submit</button>
         </div>
 
 
