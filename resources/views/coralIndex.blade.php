@@ -1,35 +1,14 @@
-@extends('layouts.app') 
+@extends('layouts.admin') 
 
 @section('content')
-
-
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Corals</h2>
-            </div>
-
-	
-
-	    <div class="pull-right">
-    	        <a class="btn btn-success" href="{{ route('excel.index') }}"> Import/Export Corals</a>
-            </div>
-
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('corals.create') }}"> Create New Item</a>
-            </div>
-
-        </div>
-    </div>
-
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
-
-
+    <h1 class="pageH1">Corals</h1>
+     <a class="btn btn-info createButton " href="{{ route('corals.create') }}">Add Coral</a>
     <table class="table table-bordered">
         <tr>
             <th>Item Number</th>
@@ -42,7 +21,7 @@
             <th>Wholesale Price</th>
             <th>Barcode</th>
 	    <th>Summary Quantity</th>
-            <th>Description</th>
+            <th>Description</th> 
             <th width="280px">Action</th>
         </tr>
     @foreach ($corals as $key => $coral)
@@ -56,8 +35,8 @@
 	<td>{{ $coral->retail_price}}</td>
         <td>{{ $coral->wholesale_price }}</td>
         <td>{{ $coral->barcode }}</td>
-	<td>{{ $coral->summary }}</td>
-        <td>{{ $coral->description }}</td>
+	<td>{{ $coral->summary }}</td> 
+	<td>{{str_limit($coral->description) }}</td> 
 
         <td>
             <a class="btn btn-info " href="{{ route('corals.show',$coral->id) }}">Show Qtty</a>

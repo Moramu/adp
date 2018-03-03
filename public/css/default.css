@@ -5,14 +5,7 @@ body {
     border-top: 5px solid #7e7e7e;
     margin: 0;
 }
-input[type="text"] {
-    background-color: #f3f3f3;
-    border: 1px solid #e7e7e7;
-    height: 30px;
-    color: #b2b2b2;
-    padding: 0 10px;
-    vertical-align: top;
-}
+
 button {
     color: #fff;
     background-color: #29c5e6;
@@ -20,14 +13,22 @@ button {
     height: 32px;
     font-family: 'Oswald', sans-serif;
 }
-.search {
+.search_field {
+    background-color: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    height: 30px;
+    color: #b2b2b2;
+    padding: 0 10px;
+    vertical-align: top;
+}
+.searchButton {
     background: #3b464c;
 }
 p {
     margin: 20px 0;
 }
 #wrapper {
-    max-width: 960px;
+    max-width: 90%;
     margin: auto;
 }
 header {
@@ -97,7 +98,7 @@ nav li {
 
 #heading {
     background: transparent url('/adp/public/storage/h1-bg.png');
-    margin: 30px 0;
+    margin: 15px 0;
     padding-left: 20px;
     height: 50px;
 }
@@ -113,11 +114,12 @@ h1 {
 
 aside {
     float: left;
-    width: 250px;
+    width: 175px;
 }
 section {
-    margin-left: 280px;
+    margin-left: 200px;
     padding-bottom: 50px;
+    min-height:600px;
 }
 
 .aside-menu li {
@@ -241,5 +243,22 @@ footer {
     height: 90px;
 }
 
+.pageH1 {
+    background: url(/adp/public/storage/bg.png);
+    margin-top:0px;
+    margin-left:0px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align:middle;
+}
 
-
+.createButton {    
+    float: right;
+    background-color: #618f9c;
+}
+.form-control {
+width:70%;
+}
+.product_picture {
+margin-top:10px;
+}

@@ -1,18 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
  
 
 @section('content')
 
-    <div class="row">
-	<div class="col-lg-12 margin-tb">
 	    <div class="pull-left">
-		<h2>Edit Coral</h2>
+		<h1 class="pageH1">Edit Coral</h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn`-primary" href="{{route('corals.index') }}">Back</a>
+		<a class="btn btn-info createButton" href="{{route('corals.index') }}">Back</a>
 	    </div>
-	</div>
-    </div>
 
 
     @if (count($errors) > 0)
@@ -50,7 +46,7 @@
             <div class="form-group">
                 <strong>Photo:</strong>
                 {!! Form::file('photo', array('files'=>true,'class' => 'form-control')) !!}
-		<img src="{{ asset($coral->photo) }}">
+		<img class="product_picture" src="{{ asset($coral->photo) }}">
             </div>
         </div>
 

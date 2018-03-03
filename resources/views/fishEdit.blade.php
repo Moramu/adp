@@ -1,5 +1,6 @@
 @extends('layouts.app')
  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 @section('content')
 
@@ -60,7 +61,7 @@
             </div>
         </div>
 
-
+{{--
         
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -74,6 +75,28 @@
                 {!! Form::select('category',['Gobby'=> 'Gobby', 'Puffer'=>'Puffer'], null, array('placeholder' => 'Select category...','class' => 'form-control')) !!}
             </div>
         </div>
+
+--}}	
+	```````<div class="container">
+	    <div class="panel-heading">Select Type and get bellow Related Category</div>
+	        <div class="panel-body">
+    	    <div class="form-group">
+    	        <label for="title">Select Type:</label>
+        	        <select name="type" class="form-control" style="width:350px">
+            	    <option value="">--- Select Water Type ---</option>
+            	    @foreach ($types as $key => $value)
+                	    <option value="{{ $key }}">{{ $value }}</option>
+            	    @endforeach
+        	        </select>
+    	    </div>
+    	    <div class="form-group">
+        	        <label for="title">Select Category:</label>
+        	        <select name="category" class="form-control" style="width:350px">
+	        <option value="">--- Select Category ---</option>
+        	        </select>
+    	    </div>
+	    </div>
+	</div>	
 	
 	
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -95,3 +118,29 @@
 
 
 @endsection
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="type"]').on('change', function() {
+            var typeID = $(this).val();
+            if(typeID) {
+                $.ajax({
+                    url: '/adp/public/fish/create/'+typeID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        
+                        $('select[name="category"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="category"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+
+                    }
+                });
+            }else{
+                $('select[name="category"]').empty();
+            }
+        });
+    });
+</script>

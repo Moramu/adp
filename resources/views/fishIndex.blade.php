@@ -1,20 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
  
 
 @section('content')
-
-
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Fish</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('fish.create') }}">Add new Fish</a>
-            </div>
-        </div>
-    </div>
-
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -22,7 +9,7 @@
         </div>
     @endif
 
-
+    <h1 class="pageH1">Fish</h1>
     <table class="table table-bordered">
         <tr>
             <th>Item Number</th>
@@ -42,7 +29,7 @@
         <td>{{ $fishes->barcode }}</td>
 	<td>{{ $fishes->type }}</td>
 	<td>{{ $fishes->category }}</td>
-        <td>{{ $fishes->description }}</td>
+        <td>{{str_limit( $fishes->description) }}</td>
 
         <td>
             <a class="btn btn-info " href="{{ route('fish.show',$fishes->id) }}">Show Qtty</a>
@@ -55,7 +42,6 @@
     @endforeach
     </table>
 
-    
     {!!$fish->render()!!}
 
 @endsection

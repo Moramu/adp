@@ -45,34 +45,55 @@
 	<nav>
 	    <ul class="top-menu">
 		
-		<li class='home'><a href="{{route('sadmin')}}">Home</li>
-		<li id="roducts"><a href="{{route('products')}}">Products</li>
-		<li class='services'><a href="{{route('services')}}">Services</a></li>
-		<li class='settings'><a href="">Settings</a></li>
+		<li id="home"><a href="{{route('sadmin')}}">Home</li>
+		<li id="products"><a href="{{route('products')}}">Products</li>
+		<li id="services"><a href="{{route('services')}}">Services</a></li>
+		<li id="settings"><a href="{{route('settings')}}">Settings</a></li>
 		<li>
 		    <form name="search" action="#" method="get">
-		    <input type="text" name="q" placeholder="Search"><button class='search' type="submit">GO</button>
+		    <input class="search_field" type="text" name="q" placeholder="Search"><button class='searchButton' type="submit">GO</button>
 		    </form>
 		</li>
 	    </ul>
 	</nav>
-    
-	@if (Request::is('sadmin/products')) 
+	@if (Request::is('sadmin')) 
+	    <script>
+	    var d = document.getElementById("home");
+	    d.className += " active";
+	    </script>
+    	@endif
+	
+	@if (Request::is('sadmin/products')||Request::is('corals')||Request::is('fish')||Request::is('corals/*')||Request::is('fish/*')) 
 	    @include ('includes.productsSidebar')
+	    <script>
+	    var p = document.getElementById("products");
+	    p.className += " active";
+	    </script>
     	@endif
 	@if (Request::is('sadmin/services'))
 	    @include ('includes.servicesSidebar')
+	    <script>
+	    var d = document.getElementById("services");
+	    d.className += " active";
+	    </script>
 	@endif
 	@if (Request::is('sadmin/settings'))
 	    @include ('includes.settingsSidebar')
+	    <script>
+	    var d = document.getElementById("settings");
+	    d.className += " active";
+	    </script>
 	@endif
-
-    	
-
 	    <section>
 	    @yield('content')
 	    </section>
-	
+	</div>
+    <footer>
+    <div id="footer">
+	<div id="footer-logo">
+	</div>
+    </div>
+    </footer>
     
 </body>
 </html>

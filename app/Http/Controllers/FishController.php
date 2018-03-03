@@ -87,7 +87,6 @@ class FishController extends Controller
     	$fileName  = time() . '.' . $image->getClientOriginalExtension();
     	$path = public_path('/uploads/photo/' . $fileName);
 	Image::make(Input::file('photo'))->resize(100,100)->save($fileName);
-//	$info[] = $request -> type;
 	$fish->item_number = $request -> item_number;
 	$fish->name = $request -> name;
 	$fish->photo = $fileName;
@@ -130,7 +129,8 @@ class FishController extends Controller
     public function edit($id)
     {
         $fish = Fish::find($id);
-        return view('fishEdit',compact('fish'));
+	$types = DB::table("water_type")->pluck("type","id");
+        return view('fishEdit',compact('fish','types'));
     }
     
      /**
@@ -180,9 +180,6 @@ class FishController extends Controller
                         ->with('success','Item deleted successfully');
     }
     
-
-
-
       
 }
 
