@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFishPriceTable extends Migration
+class CreateFishPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFishPriceTable extends Migration
      */
     public function up()
     {
-        Schema::create('fish_price', function (Blueprint $table) {
+        Schema::create('fish_prices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fish_id');
             $table->string('size');
@@ -32,6 +32,6 @@ class CreateFishPriceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fish_price');
+        Schema::dropIfExists('fish_prices');
     }
 }

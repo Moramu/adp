@@ -29,7 +29,7 @@ Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
 Route::resource('fish', 'FishController');
 
-Route::get('test/{id}','FishController@fishFormAjax');
+Route::get('test/{id}','FishController@test');
 
 
 

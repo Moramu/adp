@@ -2,15 +2,15 @@
 
 @section('content')
 
-	<h1 class="pageH1"> {{ $fish->name }}</h1>
-	<img class="product_picture" src="{{asset($fish->photo)}}">
+	<h1 class="pageH1"> {{ $fishSizes->name }}</h1>
+	<img class="product_picture" src="{{asset($fishSizes->photo)}}">
 	
         <div class="pull-right">
-		<a class="btn btn-primary" href="{{route('corals.index')}}">Back</a>
+		<a class="btn btn-primary" href="{{route('fish.index')}}">Back</a>
 	</div>
 
 
-{!! Form::model($fish,['method'=>'POST'])!!} 
+{!! Form::model($fishSizes,['method'=>'POST'])!!} 
 
 <table class="table table-bordered">
     <tr>
@@ -25,17 +25,17 @@
 	
     </tr>
     <tr>
-	<td>{!!Form::number('blueridge',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('blue',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('brick',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('yellow',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('dark_red',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('orange',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('green',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('green',null,array('style'=>'width:50px'))!!}</td>
-
+	<td>{!!Form::number('js',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('s',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('sm',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('m',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('ml',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('l',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('xl',null,array('style'=>'width:50px'))!!}</td>
+	<td>{!!Form::number('n/a',null,array('style'=>'width:50px'))!!}</td>
     <tr>
 </table>
+
 
 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
     <button type="submit" class="btn btn-primary">Submit</button>

@@ -23,7 +23,7 @@ class CreateFishSizesTable extends Migration
 	    $table->string('ml');
 	    $table->string('l');
 	    $table->string('xl');
-	    $table->string('n/a');        
+	    $table->string('n_a');        
 	    $table->timestamps();
 	    
 

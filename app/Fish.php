@@ -18,8 +18,10 @@ class Fish extends Model
     ];
 
     public function fishSizes () {
-	return $this->hasMany('\App\fishSize');
+	return $this->hasMany('App\fishSize');
     }
-    
+    public function fishPrices () {
+	return $this->hasMany('App\fishPrice');
+    }
     
 }

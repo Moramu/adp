@@ -114,10 +114,14 @@ class FishController extends Controller
     {
 	
         // get the fish
-	 $fish = Fish::find($id);
-        // show the view and pass the fish to it
-	 return View::make('fishShow')
-         ->with('fish', $fish);
+	$fish = Fish::find($id);
+	$fishSizes = Fish::with("fishSizes")->find($id);
+	$fishPrice = Fish::with("fishPrices")->find($id);
+
+    // show the view and pass the fish to it
+	// return View::make('fishShow')
+        //->with('fish', $fish)->with('fishSize',$fishSize)->with('fishPrice',$fishPrice);
+	return View::make('fishShow')->with('fishSizes',$fishSizes);
     }
     
     /**
@@ -178,6 +182,14 @@ class FishController extends Controller
         Fish::find($id)->delete();
         return redirect()->route('fish.index')
                         ->with('success','Item deleted successfully');
+    }
+    
+    public function test (Request $request,$id) {
+
+    $fishSize = Fish::with("fishSizes")->find($id);
+    $fishPrice = Fish::with("fishPrices")->find($id);
+    
+    return view('test')->with('fishSize',$fishSize)->with('fishPrice',$fishPrice);
     }
     
       
