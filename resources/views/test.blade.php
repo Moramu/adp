@@ -1,7 +1,13 @@
-{{$fishSize}}
-<tr>
-{{$fishPrice}}
-<tr>
-@foreach ($fishSize as $key => $fz) 
-{{$fz->fish_sizes->'js'}}
+@extends ('layouts.admin')
+
+@section ('content')
+
+
+@foreach ($fish->fishSizes as $fz)
+    <p>This is user {{ $fz->js }}</p>
 @endforeach
+
+
+
+
+@endsection

@@ -11,27 +11,13 @@ class FishSizesSeeder extends Seeder
      */
     public function run()
     {
-           DB::table('fish_sizes')->insert([
-            'fish_id' => 1,
-	    'js' => 2,
-	    's' => 0,
-	    'sm' => 0,
-	    'm' => 0,
-	    'ml' => 0,
-	    'l' => 0,
-	    'xl' => 0,
-	    'n/a' => 0
-        ]);
-            DB::table('fish_sizes')->insert([
-            'fish_id' => 2,
-	    'js' => 2,
-	    's' => 0,
-	    'sm' => 1,
-	    'm' => 0,
-	    'ml' => 3,
-	    'l' => 0,
-	    'xl' => 0,
-	    'n/a' => 0
-        ]);
+        DB::table('fish_sizes')->insert(['size'=> 'js']);
+    	DB::table('fish_sizes')->insert(['size'=> 's']);
+        DB::table('fish_sizes')->insert(['size'=> 'sm']);
+	DB::table('fish_sizes')->insert(['size'=> 'm']);
+	DB::table('fish_sizes')->insert(['size'=> 'ml']);
+	DB::table('fish_sizes')->insert(['size'=> 'l']);
+	DB::table('fish_sizes')->insert(['size'=> 'xl']);
+	DB::table('fish_sizes')->insert(['size'=> 'n_a']);
     }
 }

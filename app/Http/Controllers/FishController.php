@@ -112,17 +112,16 @@ class FishController extends Controller
      */
     public function show($id)
     {
-	
         // get the fish
 	$fish = Fish::find($id);
-	$fishSizes = Fish::with("fishSizes")->find($id);
-	$fishPrice = Fish::with("fishPrices")->find($id);
-
-    // show the view and pass the fish to it
-	// return View::make('fishShow')
-        //->with('fish', $fish)->with('fishSize',$fishSize)->with('fishPrice',$fishPrice);
-	return View::make('fishShow')->with('fishSizes',$fishSizes);
+//	$fish = Fish::with("fishPrices")->find($id);
+	return View::make('fishShow')->with('fish',$fish);
     }
+
+
+
+
+
     
     /**
      * Show the form for editing the specified resource.
@@ -183,15 +182,35 @@ class FishController extends Controller
         return redirect()->route('fish.index')
                         ->with('success','Item deleted successfully');
     }
-    
-    public function test (Request $request,$id) {
 
-    $fishSize = Fish::with("fishSizes")->find($id);
-    $fishPrice = Fish::with("fishPrices")->find($id);
+    public function addSizePrice ($id) {
+	$fishPrice = new fishPrice;
+/**	$fish->item_number = $request -> item_number;
+	$fish->name = $request -> name;
+	$fish->photo = $fileName;
+	$fish->barcode = $request -> barcode;
+	$fish->type = $request -> type;
+	$fish->category = $request -> category;
+	$fish->description = $request -> description;
+	$fish->save();
+	return redirect()->route('fish.index')
+                        ->with('success','Item created successfully');
+**/    }
     
-    return view('test')->with('fishSize',$fishSize)->with('fishPrice',$fishPrice);
-    }
-    
-      
+
+
+//    public function test (Request $request,$id) {
+//
+//    $fish = Fish::with("fishSizes")->find($id);
+//    $fishPrice = Fish::with("fishPrices")->find($id);
+//    foreach ($fish->fishSizes as $fishSize) {
+//      $fz[] = array( 
+//            "fish_id" =>$fish->fish_id,
+//            "size" =>$fish->size, 
+//      );
+//    }    
+//    return view('test')->with('fish', $fish);
+//    }
+
 }
 

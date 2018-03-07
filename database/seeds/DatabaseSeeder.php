@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(WaterCategoriesSeeder::class);
 	$this->call(FishSizesSeeder::class);
+	$this->call(AdminSeeder::class);
+	
+
     }
 }
