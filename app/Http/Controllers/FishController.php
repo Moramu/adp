@@ -8,6 +8,7 @@ use Auth;
 use View;
 use Image;
 use \App\Fish;
+use \App\fishPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -118,11 +119,6 @@ class FishController extends Controller
 	return View::make('fishShow')->with('fish',$fish);
     }
 
-
-
-
-
-    
     /**
      * Show the form for editing the specified resource.
      *
@@ -183,20 +179,27 @@ class FishController extends Controller
                         ->with('success','Item deleted successfully');
     }
 
-    public function addSizePrice ($id) {
-	$fishPrice = new fishPrice;
-/**	$fish->item_number = $request -> item_number;
-	$fish->name = $request -> name;
-	$fish->photo = $fileName;
-	$fish->barcode = $request -> barcode;
-	$fish->type = $request -> type;
-	$fish->category = $request -> category;
-	$fish->description = $request -> description;
-	$fish->save();
+    public function addSizePrice (Request $request,$id) {
+	$size = DB::table("fish_sizes")->pluck("size","id");
+	return view('fishAddSizePrice', compact('id','size'));
+	}
+
+
+    public function storeSizePrice (Request $request){
+    	$fishPrice = new fishPrice;
+/**	$fishPrice->fish_id = $request -> fish_id;
+	$fishPrice->size_id = $request -> size_id;
+	$fishPrice->price = $request -> price;
+	$fishPrice->rtl_price = $request -> rtl_price;
+	$fishPrice->wholesale_price = $request -> wholesale_price;
+	$fishPrice->special_price = $request -> special_price;
+	$fishPrice->quantity = $request -> quantity;
+	$fishPrice->save();
+**/	fishPrice::create($request->all());
 	return redirect()->route('fish.index')
-                        ->with('success','Item created successfully');
-**/    }
+                    ->with('success','Price added successfully');
     
+    }    
 
 
 //    public function test (Request $request,$id) {

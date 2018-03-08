@@ -16,23 +16,24 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
 Route::post('corals/{id}','CoralController@updateColors');
-Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'))->name('test');
+Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'));
 Route::get('/admin', 'AdminController@index');
 Route::get('/sadmin', 'SuperAdminController@index')->name('sadmin');
+Route::get('fish/addSizePrice/{id}','FishController@addSizePrice');
+Route::post('fish/addSizePrice','FishController@storeSizePrice')->name('storeSizePrice');
 
+/** Test Routes **/
+
+Route::get('test/{id}','FishController@test');
+
+/** Controller's Routes **/
 
 Route::resource('excel', 'ExcelController');
 Route::resource('corals', 'CoralController');
 Route::resource('fish', 'FishController');
-
-Route::get('test/{id}','FishController@test');
-
-
-
 
 /** Super_admin acces **/ 
 Route::group( ['middleware' => ['auth','role:super_admin']], function()

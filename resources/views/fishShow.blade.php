@@ -8,6 +8,9 @@
         <div class="pull-right">
 		<a class="btn btn-primary" href="{{route('fish.index')}}">Back</a>
 	</div>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="{{url('fish/addSizePrice/'.$fish->id)}}">Add Size Price</a>
+	</div>
 
 
 {!! Form::model($fish,['method'=>'POST'])!!} 
