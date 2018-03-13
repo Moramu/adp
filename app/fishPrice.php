@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class fishPrice extends Model
 {
-    protected $fillable = ['fish_id','size_id','price','rtl_price','wholesale_price','special_price','quantity'];
+    protected $fillable = ['fish_id','fish_size_id','price','rtl_price','wholesale_price','special_price','quantity'];
 
 
     public function fish () {

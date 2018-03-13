@@ -17,7 +17,7 @@ class Fish extends Model
 	'category'
     ];
 
-    public function fishPrices () {
+    public function fishPrice () {
 	return $this->hasMany('App\fishPrice');
     }
     

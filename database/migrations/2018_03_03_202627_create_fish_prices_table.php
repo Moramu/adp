@@ -16,7 +16,7 @@ class CreateFishPricesTable extends Migration
         Schema::create('fish_prices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fish_id');
-            $table->string('size_id');
+            $table->string('fish_size_id');
             $table->double('price');
             $table->double('rtl_price');
             $table->double('wholesale_price');

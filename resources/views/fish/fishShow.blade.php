@@ -8,30 +8,32 @@
         <div class="pull-right">
 		<a class="btn btn-primary" href="{{route('fish.index')}}">Back</a>
 	</div>
-	<div class="pull-right">
+	<div class="pull-right" style="padding-right:5px">
 		<a class="btn btn-primary" href="{{url('fish/addSizePrice/'.$fish->id)}}">Add Size Price</a>
 	</div>
 
-
-{!! Form::model($fish,['method'=>'POST'])!!} 
+{!! Form::open()!!} 
 <table class="table table-bordered">
     <tr>
-	<th>Js/T</th>
-	<th>S</th>
-	<th>SM</th>
-	<th>M</th>
-	<th>ML</th>
-	<th>L</th>
-	<th>XL</th>
-	<th>N/A</th>
-	
+	<th>Size</th>
+	<th>Price</th>
+	<th>Retail Price</th>
+	<th>Wholesale price</th>
+	<th>Special Price</th>
+	<th>Quantity</th>
+	<th>Functions</th>	
     </tr>
+    @foreach ($fish->fishPrice as $fz)
     <tr>
-    <tr>
+	<td>{{$fz->fish_size_id}}</td>
+	<td>{{$fz->price}}</td>
+	<td>{{$fz->rtl_price}}</td>
+	<td>{{$fz->wholesale_price}}</td>
+	<td>{{$fz->pecial_price}}</td>
+	<td>{{$fz->quantity}}</td>
+	<td></td>
+    </tr>
+    @endforeach
 </table>
-
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
 {!! Form::close() !!}
 @endsection

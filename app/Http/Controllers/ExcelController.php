@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
+use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Input;
 use App\Coral;
 use DB;
 use Excel;
 use Auth;
+
 class ExcelController extends Controller
 {
 
@@ -17,22 +18,25 @@ class ExcelController extends Controller
     $this->middleware('auth');
     }
 
-    public function index()
-    {
-	return view('excelIndex');
+    public function index() {
+    return view('excel.excelIndex');
     }
 
-    public function downloadExcel($type)
+    public function coralIndex () {
+    return view('excel.coralExcelIndex');
+    }
+
+    public function downloadExcelCorals($type)
     {
 	$data = Coral::get()->toArray();
-	return Excel::create('itsolutionstuff_example', function($excel) use ($data) {
-	    $excel->sheet('mySheet', function($sheet) use ($data)
+	return Excel::create('AquaDesignCorals', function($excel) use ($data) {
+	    $excel->sheet('corals', function($sheet) use ($data)
             {
 		$sheet->fromArray($data);
             });
 	})->download($type);
     }
-    public function store(Request $request)
+    public function storeCoral(Request $request)
     {
 	if($request->hasFile('import_file')){
 	    $path = $request->file('import_file')->getRealPath();
@@ -66,7 +70,11 @@ class ExcelController extends Controller
 	    }
 		if(!empty($insert)){
 		    DB::table('corals')->insert($insert);
-		    dd('Insert Record successfully.');
+		    //dd('Insert Record successfully.');
+		// return Redirect::route('login');
+		//    return redirect()->route('corals.index')
+		//	->with('succes','Corals imported succesfuly');
+		return redirect()->back()->with('succes', 'Corals import succesfuly!');
 		}
 	    }
 	}

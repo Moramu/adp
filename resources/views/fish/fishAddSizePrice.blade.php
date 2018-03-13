@@ -26,7 +26,7 @@
     	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Size:</strong>
-		{!! Form::select('size_id', $size, null, ['class'=>'form-control']) !!}
+		{!! Form::select('fish_size_id', $size, null, ['placeholder' => 'Select Size','class'=>'form-control']) !!}
 	    </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">

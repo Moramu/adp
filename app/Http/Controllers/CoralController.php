@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use Session;
-
 use Auth;
 use View;
 use Image;
@@ -32,7 +31,7 @@ class CoralController extends Controller
 	$corals = Coral::orderBy('item_number','ASC')->paginate(10);
 
         // load the view and pass the corals
-	return view('coralIndex',compact('corals'))
+	return view('coral.coralIndex',compact('corals'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
@@ -44,7 +43,7 @@ class CoralController extends Controller
      public function create()
     {
         // load the create form (app/views/corals/create.blade.php)
-        return view('coralCreate');
+        return view('coral.coralCreate');
     }
 
     /**
@@ -61,7 +60,7 @@ class CoralController extends Controller
            'item_number' => 'numeric|required|unique:corals',
 	    'name' => 'required|unique:corals',
         ]);
-
+	//if image attached
 	if(Input::file()){
 	$image = Input::file('photo');
     	$fileName  = time() . '.' . $image->getClientOriginalExtension();
@@ -99,7 +98,7 @@ class CoralController extends Controller
         // get the coral
 	 $coral = Coral::find($id);
         // show the view and pass the coral to it
-	 return View::make('coralShow')
+	 return View::make('coral.coralShow')
          ->with('coral', $coral);
     }
     
@@ -111,14 +110,8 @@ class CoralController extends Controller
      */
     public function edit($id)
     {
-        // get the coral
-        ///$coral = Coral::find($id);
-
-        // show the edit form and pass the coral
-        //return View::make('edit')
-            //->with('coral', $coral);
 	$coral = Coral::find($id);
-        return view('coralEdit',compact('coral'));
+        return view('coral.coralEdit',compact('coral'));
     }
     
      /**
@@ -134,7 +127,7 @@ class CoralController extends Controller
     	    'item_number' => 'numeric|required',
 	    'name' => 'required',
         ]);
-
+	//if photo changed
 	if(Input::file()){
 	$image = Input::file('photo');
     	$fileName  = time() . '.' . $image->getClientOriginalExtension();
@@ -161,14 +154,15 @@ class CoralController extends Controller
                         ->with('success','Item updated successfully');
     }
 
-
+	// Delete coral by id
      public function destroy($id)
-    {
+	{
         Coral::find($id)->delete();
         return redirect()->route('corals.index')
                         ->with('success','Item deleted successfully');
     }
     
+	// updating corals quantity
     public function updateColors(Request $request,$id) {
 		$coral = Coral::find($id);
 	    
@@ -189,19 +183,6 @@ class CoralController extends Controller
 			));
 	return redirect()->route('corals.index')
                         ->with('success','Colors updated successfully');
-	    //return $coral;
     }
-
-/**
-    public function getIndex( Request $request ) {
-	$s = $request->query('s');
-	
-	// Query and paginate result
-	$coral = Coral::where('name', 'like', '%'.$s.'%')->orWhere('description', 'like', '%'.$s.'%')->paginate(6);
-
-	return view('coralSearch', ['corals' => $coral, 's' => $s ]);
-    }
-    
-*/
 }
 

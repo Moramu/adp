@@ -9,6 +9,7 @@ use View;
 use Image;
 use \App\Fish;
 use \App\fishPrice;
+use \App\fishSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,7 @@ class FishController extends Controller
 	$fish = Fish::orderBy('item_number','ASC')->paginate(10);
 
         // load the view and pass the corals
-	return view('fishIndex',compact('fish'))
+	return view('fish.fishIndex',compact('fish'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -49,7 +50,7 @@ class FishController extends Controller
         // load the create form 
 	//$types = DB::table("water_type")->lists("name","id");
 	$types = DB::table("water_type")->pluck("type","id");
-        return view('fishCreate',compact('types'));
+        return view('fish.fishCreate',compact('types'));
     }
 
     /**
@@ -116,7 +117,9 @@ class FishController extends Controller
         // get the fish
 	$fish = Fish::find($id);
 //	$fish = Fish::with("fishPrices")->find($id);
-	return View::make('fishShow')->with('fish',$fish);
+	$size = fishSize::with('fishPrice')->find($id);
+//	$size = DB::table('fish_sizes')->pluck('id','size');
+	return View::make('fish.fishShow',compact('fish','size'));
     }
 
     /**
@@ -129,7 +132,7 @@ class FishController extends Controller
     {
         $fish = Fish::find($id);
 	$types = DB::table("water_type")->pluck("type","id");
-        return view('fishEdit',compact('fish','types'));
+        return view('fish.fishEdit',compact('fish','types'));
     }
     
      /**
@@ -179,32 +182,44 @@ class FishController extends Controller
                         ->with('success','Item deleted successfully');
     }
 
-    public function addSizePrice (Request $request,$id) {
-	$size = DB::table("fish_sizes")->pluck("size","id");
-	return view('fishAddSizePrice', compact('id','size'));
+        public function addSizePrice (Request $request,$id) {
+	$size = DB::table('fish_sizes')->pluck("size","id");
+	return view('fish.fishAddSizePrice', compact('id','size'));
 	}
+
+/** Test	
+	public function addSizePrice(Request $request,$id){
+	$size = DB::table("fish_sizes")->pluck("size");
+        return view('fishAddSizePrice',compact('id','size'));
+}
+**/
+
+
+
 
 
     public function storeSizePrice (Request $request){
     	$fishPrice = new fishPrice;
-/**	$fishPrice->fish_id = $request -> fish_id;
-	$fishPrice->size_id = $request -> size_id;
-	$fishPrice->price = $request -> price;
-	$fishPrice->rtl_price = $request -> rtl_price;
-	$fishPrice->wholesale_price = $request -> wholesale_price;
-	$fishPrice->special_price = $request -> special_price;
-	$fishPrice->quantity = $request -> quantity;
-	$fishPrice->save();
-**/	fishPrice::create($request->all());
-	return redirect()->route('fish.index')
+
+	    $this->validate($request, [
+    	    'fish_size_id' => 'required',
+	    'price' => 'required',
+	    'rtl_price' => 'required',
+	    'wholesale_price' => 'required',
+	    'quantity' => 'required',
+        ]);
+
+	$id = $request -> fish_id;
+	fishPrice::create($request->all());
+	return redirect()->route('fish.show',['id'=>$id])
                     ->with('success','Price added successfully');
-    
+ 
     }    
 
 
-//    public function test (Request $request,$id) {
+    public function test (Request $request,$id) {
 //
-//    $fish = Fish::with("fishSizes")->find($id);
+    $fish = Fish::with("fishPrices")->find($id);
 //    $fishPrice = Fish::with("fishPrices")->find($id);
 //    foreach ($fish->fishSizes as $fishSize) {
 //      $fz[] = array( 
@@ -212,8 +227,8 @@ class FishController extends Controller
 //            "size" =>$fish->size, 
 //      );
 //    }    
-//    return view('test')->with('fish', $fish);
-//    }
+    return view('test')->with('fish', $fish);
+    }
 
 }
 

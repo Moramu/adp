@@ -8,7 +8,13 @@
         </div>
     @endif
     <h1 class="pageH1">Corals</h1>
-     <a class="btn btn-info createButton " href="{{ route('corals.create') }}">Add Coral</a>
+    <div class="pull-right">
+	<a class="btn btn-primary createButton " href="{{ route('corals.create') }}">Add Coral</a>
+    </div>
+        <div class="pull-right" style="padding-right:5px;">
+        <a class="btn btn-primary createButton " href="{{ route('coralExcelIndex') }}">Import/Export Corals</a>
+    </div>
+
     <table class="table table-bordered">
         <tr>
             <th>Item Number</th>

@@ -2,9 +2,8 @@
 
 @section ('content')
 
-
-@foreach ($fish->fishSizes as $fz)
-    <p>This is user {{ $fz->js }}</p>
+@foreach ($fish->fishPrices as $fishSize)
+    <p>This is user {{ $fishSize->size_id }}</p>
 @endforeach
 
 

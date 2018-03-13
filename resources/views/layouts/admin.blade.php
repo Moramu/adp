@@ -70,7 +70,7 @@
 	    p.className += " active";
 	    </script>
     	@endif
-	@if (Request::is('sadmin/services'))
+	@if (Request::is('sadmin/services')||Request::is('waterparam')||Request::is('waterparam/*'))
 	    @include ('includes.servicesSidebar')
 	    <script>
 	    var d = document.getElementById("services");
