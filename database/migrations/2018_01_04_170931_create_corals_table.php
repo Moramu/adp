@@ -16,7 +16,7 @@ class CreateCoralsTable extends Migration
         Schema::create('corals', function (Blueprint $table) {
             $table->increments('id');
 	    $table->integer('item_number');
-    	    $table->string('name')->nullable();
+    	    $table->string('name');
 	    $table->string('photo')->default('no_image.jpg')->nullable();
 	    $table->double('plastic_quantity')->nullable();
 	    $table->double('cost_price')->nullable();

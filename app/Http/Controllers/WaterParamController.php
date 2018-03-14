@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\waterParam;
+use Charts;
+use DB;
 
 class WaterParamController extends Controller
 {
+
+    public function __construct()
+    {
+    $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +42,12 @@ class WaterParamController extends Controller
      */
     public function store(Request $request)
     {
+	$this->validate($request,[
+	    'ph' => 'numeric|required',
+	    'nitrite' => 'numeric|required',
+	    'nitrate' => 'numeric|required',
+	    'phosphate' => 'numeric|required',	
+	    ]);
         waterParam::create($request->all());
 	return redirect()->route('waterparam.index')
 		->with('succes','Parameters successfuly added');
@@ -83,5 +96,24 @@ class WaterParamController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function fresh1()
+    {
+
+    $data = DB::table('water_params')
+            ->where('line', '=', 'fresh1')->latest()->take(7)
+            ->get();
+    $dataNew = $data->reverse()->values(); 
+    $chart = Charts::multi('area', 'highcharts')
+	->title('Fresh line 1')
+	->colors(['#ff0000', '#ffff44','#99ccff','#99ff99'])
+	->labels($dataNew->pluck('created_at'))
+	->dataset('Ph', $dataNew->pluck('ph'))
+	->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	->responsive(false);    
+    return view('waterparams.test', ['chart' => $chart]);
     }
 }

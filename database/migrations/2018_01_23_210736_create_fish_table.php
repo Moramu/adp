@@ -19,8 +19,8 @@ class CreateFishTable extends Migration
 	    $table->string('name')->nullable();
 	    $table->string('photo')->default('no_image.jpg')->nullable();
 	    $table->bigInteger('barcode')->nullable();
-	    $table->string('type')->nullable();
-	    $table->string('category')->nullable();
+	    $table->string('type');
+	    $table->string('category');
 	    $table->text('description')->nullable();
 	    $table->timestamps();
         });

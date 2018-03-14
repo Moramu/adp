@@ -20,8 +20,8 @@ class CreateWaterParamsTable extends Migration
 	    $table->integer('nitrite');
 	    $table->integer('nitrate');
 	    $table->double('phosphate');
-	    $table->integer('kh');
-	    $table->double('salt');
+	    $table->integer('kh')->nullable();
+	    $table->double('salt')->nullable();
 	    $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@
                 {!! Form::select('line', array(
 					'FreshWater' => array('fresh1'=>'Fresh 1','fresh2'=>'Fresh 2','fresh3'=>'Fresh 3'),
 					'SaltWater' => array('salt1'=>'Salt 1','salt2'=>'Salt 2','office'=>'Office')
-					),null,['class'=>'form-control']) !!}
+					),null,['class'=>'form-control select']) !!}
             </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
@@ -39,7 +39,7 @@
             <div class="form-group">
                 <strong>Nitrate:</strong>
                 {!! Form::number('nitrate', null, array('class' => 'form-control')) !!}
-            </div>
+            </div>	
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -47,14 +47,14 @@
                 {!! Form::number('phosphate', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
-	<div class="col-xs-12 col-sm-12 col-md-12">
+	<div class="col-xs-12 col-sm-12 col-md-12 salt" style="display:none">
             <div class="form-group">
                 <strong>Hardness(KH):</strong>
                 {!! Form::number('kh', null, array('class' => 'form-control')) !!}
             </div>
         </div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12">
+	<div class="col-xs-12 col-sm-12 col-md-12 salt" style="display:none">
             <div class="form-group">
                 <strong>Salt:</strong>
                 {!! Form::number('salt', null, array('class' => 'form-control','step'=>'any')) !!}
@@ -67,7 +67,16 @@
     </div>
     {!! Form::close() !!}
 
+<script>
+$('.select').on('change',function(){
+        if( $(this).val()==="salt1"|| $(this).val()==="salt2"|| $(this).val()==="office"){
+        $('.salt').show()
+        }
+        else{
+        $('.salt').hide()
+        }
+    });
+</script>
 
 @endsection
-
 </body>

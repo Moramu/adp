@@ -20,7 +20,7 @@ class CreateFishPricesTable extends Migration
             $table->double('price');
             $table->double('rtl_price');
             $table->double('wholesale_price');
-            $table->double('special_price');
+            $table->double('special_price')->nullable();
 	    $table->integer('quantity');
             $table->timestamps();
         });
