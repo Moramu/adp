@@ -7,14 +7,14 @@
 	    <p>{{$message}}</p>
 	@endif 
 	
-	<h1 class="pageH1">Import/Export Corals</h1>
+	<h1 class="pageH1">Import/Export Fish</h1>
 	<div class="pull-right">
 		<a href="{{ URL::to('downloadExcel/xls') }}"><button class="btn btn-primary createButton">Download Excel xls</button></a>
 		<a href="{{ URL::to('downloadExcel/xlsx') }}"><button class="btn btn-primary createButton" style="margin-right:5px;">Download Excel xlsx</button></a>
 		<a href="{{ URL::to('downloadExcel/csv') }}"><button class="btn btn-primary createButton" style="margin-right:5px;">Download CSV</button></a>
     	</div>
 	<div>
-	<form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ route('importCorals') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+	<form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ route('importFish') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
 	    {{ csrf_field() }}
 	
         <input class="attach" type="file" name="import_file"/>

@@ -6,6 +6,7 @@ use Auth;
 use View;
 use Image;
 use \App\Coral;
+use \App\coralColors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -81,7 +82,8 @@ class CoralController extends Controller
                         ->with('success','Item created successfully');
 	} else {	
 
-        Coral::create($request->all());
+        $coral = Coral::create($request->all());
+	coralColors::create(['coral_id'=>$coral->id]);
         return redirect()->route('corals.index')
                         ->with('success','Item created successfully');
     }
@@ -96,10 +98,9 @@ class CoralController extends Controller
     {
 	
         // get the coral
-	 $coral = Coral::find($id);
+	 $coral = Coral::with('coralColors')->find($id);
         // show the view and pass the coral to it
-	 return View::make('coral.coralShow')
-         ->with('coral', $coral);
+	 return View::make('coral.coralShow',compact('coral','id'));
     }
     
     /**
@@ -164,9 +165,9 @@ class CoralController extends Controller
     
 	// updating corals quantity
     public function updateColors(Request $request,$id) {
-		$coral = Coral::find($id);
-	    
-		Coral::where('id', $id)->update(array(
+//		$coral = Coral::find($id);
+/**		$coralColors = new coralColors;	    
+        	Coral::where('id', $id)->(array(
 			'blueridge'=>Input::get('blueridge'),
 			'blue'=>Input::get('blue'),			
 			'brick'=>Input::get('brick'),
@@ -181,7 +182,14 @@ class CoralController extends Controller
 			'summary'=>Input::get('blueridge')+Input::get('blue')+Input::get('brick')+Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
 			    +Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard'),
 			));
-	return redirect()->route('corals.index')
+**/		
+	    $total = Input::get('blueridge')+Input::get('blue')+Input::get('brick')
+		    +Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
+		    +Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard');	
+	    $request->request->add(['summary' => $total]);
+	    $request->except('_token');
+	    coralColors::where('coral_id',$id)->update($request->except('_token'));	
+	    return redirect()->route('corals.index')
                         ->with('success','Colors updated successfully');
     }
 }

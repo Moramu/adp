@@ -11,7 +11,7 @@
 	    </div>
 
 {!! Form::model($coral,['method'=>'POST'])!!} 
-
+    	{!!Form::hidden('coral_id',$id)!!}
 <table class="table table-bordered">
     <tr>
 	<th>BlueRidge</th>
@@ -27,20 +27,24 @@
 	<th>Mustard</th>
 	<th>Summary</th>
     </tr>
+    	@foreach($coral->coralColors as $cc)
     <tr>
-	<td>{!!Form::number('blueridge',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('blue',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('brick',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('yellow',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('dark_red',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('orange',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('green',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('turquoise',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('purple',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('pink',null,array('style'=>'width:50px'))!!}</td>
-	<td>{!!Form::number('mustard',null,array('style'=>'width:50px'))!!}</td>
-	<td>{{$coral->summary}}</td>
+	<td>{!!Form::number('blueridge',$cc->blueridge,null,array(['class'=>'val_input']))!!}</td>
+	<td>{!!Form::number('blue',$cc->blue,null,array('class'=>'form-control'))!!}</td>
+	<td>{!!Form::number('brick',$cc->brick)!!}</td>
+	<td>{!!Form::number('yellow',$cc->yellow)!!}</td>
+	<td>{!!Form::number('dark_red',$cc->dark_red)!!}</td>
+	<td>{!!Form::number('orange',$cc->orange)!!}</td>
+	<td>{!!Form::number('green',$cc->green)!!}</td>
+	<td>{!!Form::number('turquoise',$cc->turquoise)!!}</td>
+	<td>{!!Form::number('purple',$cc->purple)!!}</td>
+	<td>{!!Form::number('pink',$cc->pink)!!}</td>
+	<td>{!!Form::number('mustard',$cc->mustard)!!}</td>
+	<td>{{$cc->summary}}</td>
     <tr>
+	@endforeach
+
+
 </table>
 
 <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('test/{id}','FishController@test');
 Route::get('testwater','WaterParamController@fresh1');
 
+/** Project Calculator Controller **/
+Route::resource('projectcalc','ProjectCalculatorController');
+
 /** Water Parameters Controller **/
 Route::resource('waterparam','WaterParamController');
 

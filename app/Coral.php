@@ -17,7 +17,7 @@ class Coral extends Model
 	'retail_price',
 	'wholesale_price',
 	'barcode',
-	'blueridge',
+/**	'blueridge',
 	'blue',
 	'brick',
 	'yellow',
@@ -28,6 +28,10 @@ class Coral extends Model
 	'pink',
 	'mustard',
 	'summary',
-	'description'];
+**/	'description'];
+
+    public function coralColors () {
+	return $this->hasMany('\App\coralColors');
+    }
 
 }

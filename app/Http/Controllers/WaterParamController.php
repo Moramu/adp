@@ -21,7 +21,112 @@ class WaterParamController extends Controller
      */
     public function index()
     {
-        return view ('waterparams.waterParamIndex');
+
+    /**  Fresh Line 1 Chart **/ 
+	$data1 = DB::table('water_params')
+            ->where('line', '=', 'fresh1')->latest()->take(7)
+            ->get();
+	$dataNew = $data1->reverse()->values(); 
+	$fresh1 = Charts::multi('area', 'highcharts')
+	    ->title('Fresh line 1 (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+    
+    /** Fresh Line 2 Chart **/
+      $data2 = DB::table('water_params')
+            ->where('line', '=', 'fresh2')->latest()->take(7)
+            ->get();
+	$dataNew = $data2->reverse()->values(); 
+	$fresh2 = Charts::multi('area', 'highcharts')
+	    ->title('Fresh line 2 (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+    
+    /** Fresh Line 3 Chart **/
+      $data3 = DB::table('water_params')
+            ->where('line', '=', 'fresh3')->latest()->take(7)
+            ->get();
+	$dataNew = $data3->reverse()->values(); 
+	$fresh3 = Charts::multi('area', 'highcharts')
+	    ->title('Fresh line 3 (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+       
+	/** Salt Line 1 Chart **/
+      $data4 = DB::table('water_params')
+            ->where('line', '=', 'salt1')->latest()->take(7)
+            ->get();
+	$dataNew = $data4->reverse()->values(); 
+	$salt1 = Charts::multi('area', 'highcharts')
+	    ->title('Salt line 1 (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99','#0033cc','#cc00cc'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dataset('Hardness(KH)',$dataNew->pluck('kh'))
+	    ->dataset('Salt',$dataNew->pluck('salt'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+        
+	/** Salt Line 2 Chart **/
+      $data5 = DB::table('water_params')
+            ->where('line', '=', 'salt2')->latest()->take(7)
+            ->get();
+	$dataNew = $data5->reverse()->values(); 
+	$salt2 = Charts::multi('area', 'highcharts')
+	    ->title('Salt line 2 (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99','#0033cc','#cc00cc'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dataset('Hardness(KH)',$dataNew->pluck('kh'))
+	    ->dataset('Salt',$dataNew->pluck('salt'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+	
+	/** Office Chart **/
+      $data6 = DB::table('water_params')
+            ->where('line', '=', 'office')->latest()->take(7)
+            ->get();
+	$dataNew = $data6->reverse()->values(); 
+	$office = Charts::multi('area', 'highcharts')
+	    ->title('Office (Last 7 records)')
+    	    ->colors(['#ff0000', '#ffff44','#99ccff','#99ff99','#0033cc','#cc00cc'])
+	    ->labels($dataNew->pluck('created_at'))
+	    ->dataset('Ph', $dataNew->pluck('ph'))
+	    ->dataset('Nitrite',$dataNew->pluck('nitrite'))
+	    ->dataset('Nitrate',$dataNew->pluck('nitrate'))
+	    ->dataset('Phosphate',$dataNew->pluck('phosphate'))
+	    ->dataset('Hardness(KH)',$dataNew->pluck('kh'))
+	    ->dataset('Salt',$dataNew->pluck('salt'))
+	    ->dimensions(0, 300)
+	    ->responsive(false); 
+	
+	    
+
+        return view ('waterParams.waterParamIndex',compact('fresh1','fresh2','fresh3','salt1','salt2','office'));
     }
 
     /**
@@ -31,7 +136,7 @@ class WaterParamController extends Controller
      */
     public function create()
     {
-        return view ('waterparams.waterParamCreate');
+        return view ('waterParams.waterParamCreate');
     }
 
     /**
@@ -98,22 +203,4 @@ class WaterParamController extends Controller
         //
     }
 
-    public function fresh1()
-    {
-
-    $data = DB::table('water_params')
-            ->where('line', '=', 'fresh1')->latest()->take(7)
-            ->get();
-    $dataNew = $data->reverse()->values(); 
-    $chart = Charts::multi('area', 'highcharts')
-	->title('Fresh line 1')
-	->colors(['#ff0000', '#ffff44','#99ccff','#99ff99'])
-	->labels($dataNew->pluck('created_at'))
-	->dataset('Ph', $dataNew->pluck('ph'))
-	->dataset('Nitrite',$dataNew->pluck('nitrite'))
-	->dataset('Nitrate',$dataNew->pluck('nitrate'))
-	->dataset('Phosphate',$dataNew->pluck('phosphate'))
-	->responsive(false);    
-    return view('waterparams.test', ['chart' => $chart]);
-    }
 }

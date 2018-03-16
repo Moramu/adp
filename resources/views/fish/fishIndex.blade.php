@@ -37,7 +37,7 @@
             <a class="btn btn-info " href="{{ route('fish.show',$fishes->id) }}">Show Qtty</a>
             <a class="btn btn-primary" href="{{ route('fish.edit',$fishes->id) }}">Edit Fish</a>
             {!! Form::open(['method' => 'DELETE','route' => ['fish.destroy', $fishes->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}
         </td>
     </tr>
