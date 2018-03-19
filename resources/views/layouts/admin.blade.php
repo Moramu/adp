@@ -63,14 +63,15 @@
 	    </script>
     	@endif
 	
-	@if (Request::is('sadmin/products')||Request::is('corals')||Request::is('fish')||Request::is('corals/*')||Request::is('fish/*')) 
+	@if (Request::is('sadmin/products')||Request::is('corals')||Request::is('fish')||Request::is('corals/*')||Request::is('fish/*')
+		||Request::is('aquaria')||Request::is('aquaria/*')) 
 	    @include ('includes.productsSidebar')
 	    <script>
 	    var p = document.getElementById("products");
 	    p.className += " active";
 	    </script>
     	@endif
-	@if (Request::is('sadmin/services')||Request::is('waterparam')||Request::is('waterparam/*')||Request::is('projectcalc')||Request::is('projectcalc/*'))
+	@if (Request::is('sadmin/services')||Request::is('waterparam')||Request::is('waterparam/*')||Request::is('project')||Request::is('project/*'))
 	    @include ('includes.servicesSidebar')
 	    <script>
 	    var d = document.getElementById("services");

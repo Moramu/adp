@@ -5,9 +5,14 @@
 	    <nav>
 		<ul class="aside-menu">
 		    <li ><a href="">Additivities</a></li>
-		    <li><a href="">Aquariums</a></li>
+		    <li id="aquaria"><a href="{{route('aquaria.index')}}">Aquariums</a></li>
+		    @if (Request::is('aquaria/*')||Request::is('aquaria'))
+		    <script>
+		    var c = document.getElementById('aquaria');
+		    c.className +=" active";
+		    </script>
+		    @endif	
 		    <li><a href="">Chillers</a></li>
-		    
 		    <li id="corals"><a href="{{route('corals.index')}}">Corals</a></li>
 		    @if (Request::is('corals/*')||Request::is('corals'))
 		    <script>

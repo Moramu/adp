@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Chiller;
 use Illuminate\Http\Request;
 
-class projectCalculatorController extends Controller
+class ChillerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class projectCalculatorController extends Controller
      */
     public function index()
     {
-        return view('projectCalculator.projectCalculatorIndex');
+        //
     }
 
     /**
@@ -40,10 +41,10 @@ class projectCalculatorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Chiller  $chiller
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Chiller $chiller)
     {
         //
     }
@@ -51,10 +52,10 @@ class projectCalculatorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Chiller  $chiller
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Chiller $chiller)
     {
         //
     }
@@ -63,10 +64,10 @@ class projectCalculatorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Chiller  $chiller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Chiller $chiller)
     {
         //
     }
@@ -74,10 +75,10 @@ class projectCalculatorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Chiller  $chiller
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Chiller $chiller)
     {
         //
     }

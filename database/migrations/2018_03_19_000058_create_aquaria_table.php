@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectCalculatorsTable extends Migration
+class CreateAquariaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateProjectCalculatorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_calculators', function (Blueprint $table) {
+        Schema::create('aquaria', function (Blueprint $table) {
             $table->increments('id');
+	    $table->integer('item_number');
 	    $table->string('name');
-	    $table->integer('corals');
-	    $table->integer('material');
+	    $table->double('list_price');
+	    $table->double('extended_price');
+	    $table->integer('co_stock');
+	    $table->string('provider');
 	    $table->double('rtl_price');
 	    $table->double('whl_price');
-	    $table->double('description');
-	    $table->string('user');
+	    $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateProjectCalculatorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_calculators');
+        Schema::dropIfExists('aquaria');
     }
 }

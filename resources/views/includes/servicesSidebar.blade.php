@@ -5,10 +5,10 @@
 	    <nav>
 		<ul class="aside-menu">
 		    <li><a href="">Price Calculator</a></li>
-		    <li id="project_calculator"><a href="{{route('projectcalc.index')}}">Project Calculator</a></li>
-		    @if (Request::is('projectcalc')||Request::is('projectcalc/*'))
+		    <li id="project"><a href="{{route('project.index')}}">Project Calculator</a></li>
+		    @if (Request::is('project')||Request::is('project/*'))
 		    <script>
-		    var c = document.getElementById('project_calculator');
+		    var c = document.getElementById('project');
 		    c.className +=" active";
 		    </script>
 		    @endif

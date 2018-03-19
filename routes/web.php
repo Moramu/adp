@@ -22,20 +22,31 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('test/{id}','FishController@test');
 Route::get('testwater','WaterParamController@fresh1');
 
-/** Project Calculator Controller **/
-Route::resource('projectcalc','ProjectCalculatorController');
+/** Project Controller **/
+Route::resource('project','ProjectController');
 
 /** Water Parameters Controller **/
 Route::resource('waterparam','WaterParamController');
 
 /** Excel Controller **/
 Route::resource('excel', 'ExcelController');
-Route::get('downloadExcel/{type}', 'ExcelController@downloadExcelCorals');
-Route::post('excel', 'ExcelController@storeCoral')->name('importCorals');
-Route::get('corals/coralExcelIndex', 'ExcelController@coralIndex')->name('coralExcelIndex');
+
+Route::get('corals/downloadExcel/{type}', 'ExcelController@downloadExcelCorals');
+Route::post('corals/excel', 'ExcelController@storeCoral')->name('importCorals');
+Route::get('corals/coralExcelIndex', 'ExcelController@coralIndex')->name('coralExcelIndex')
+;
+Route::get('aquaria/downloadExcel/{type}', 'ExcelController@downloadExcelAquaria');
+Route::post('aquaria/excel', 'ExcelController@storeAquaria')->name('importAquaria');
+Route::get('aquaria/aquariaExcelIndex', 'ExcelController@aquariaIndex')->name('aquariaExcelIndex');
+
+/** ----------------------------------------------- Products ------------------------------------ **/
+
+/** Aquarium Controller **/
+Route::resource('aquaria','AquariumController');
+Route::post('aquaria/{id}','AquariumController@updateQuantity');
 
 /** Coral Controller **/
-Route::resource('corals', 'CoralController');
+Route::resource('corals','CoralController');
 Route::post('corals/{id}','CoralController@updateColors');
 
 /** Fish Controller **/

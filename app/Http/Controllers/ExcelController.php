@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Input;
 use App\Coral;
+use App\Aquarium;
 use DB;
 use Excel;
 use Auth;
@@ -22,14 +23,14 @@ class ExcelController extends Controller
     return view('excel.excelIndex');
     }
 
+
+//** ------------------- Coral Excel ----------------- **/
+
+
     public function coralIndex () {
     return view('excel.coralExcelIndex');
     }
 
-    public function fishIndex () {
-    return view('excel.fishExcelIndex');
-    }
-    
     public function downloadExcelCorals($type)
     {
 	$data = Coral::select('item_number','name','retail_price','wholesale_price','barcode','description')->get();
@@ -86,35 +87,62 @@ class ExcelController extends Controller
 		    ];	    
 		    }
 		    DB::table('coral_colors')->insert($insert2);
-		return redirect()->back()->with('succes', 'Corals import succesfuly!');
+		return redirect()->back()->with('succes', 'Corals import successfuly!');
 		}
 	    }
 	}
-	//return back();
-	//dd($data->count());
     }
+
+
+//** ------------------- Aquaria Excel ----------------- **/
+
+    public function aquariaIndex () {
+	return view('excel.aquariaExcelIndex');
+    }
+    
+    public function downloadExcelAquaria($type)
+    {
+	$data = Aquarium::select('item_number','name','rtl_price','whl_price','quantity')->get();
+	return Excel::create('AquaDesignAquaria', function($excel) use ($data) {
+	    $excel->sheet('aquaria', function($sheet) use ($data)
+            {
+		$sheet->fromArray($data);
+            });
+	})->download($type);
+    }
+
+
+    public function storeAquaria(Request $request)
+    {	
+	if($request->hasFile('import_file')){
+	    $path = $request->file('import_file')->getRealPath();
+	    $data = Excel::load($path, function($reader) {
+	    })->get();
+	    if(!empty($data) && $data->count()){
+		foreach ($data as $key => $value) {
+		$insert[] = [
+		    'item_number' => $value->item_number,
+		    'name' => $value->name, 
+		    'list_price' => $value->list_price,
+		    'extended_price'=> $value->extended_price,
+		    'co_stock' => $value->co_stock,
+		    'provider' => $value->provider,
+		    'rtl_price' => $value->retail_price,
+		    'whl_price' => $value->wholesale_price,
+		    'quantity' => $value->quantity,
+		];
+		}	    
+		if(!empty($insert)){
+		    DB::table('aquaria')->insert($insert);
+		return redirect()->back()->with('succes', 'Aquaria import successfuly!');
+		}
+	    }
+	}
+    }
+
+    
+
 
 }
 
 
-
-/**
-
-	$insert2[] = [
-		    'coral_id' => $value->id,
-		    'blueridge' => $value->blueridge,
-		    'blue' => $value->blue,
-		    'brick' => $value->brick,
-		    'yellow' => $value->yellow,
-		    'dark_red' => $value->dark_red,
-		    'orange' => $value->orange,
-		    'green' => $value->green,
-		    'turquoise' => $value->turquoise,
-		    'purple' => $value->purple,
-		    'pink' => $value->pink,
-		    'mustard' => $value->mustard,
-		    'summary' => $value->summary
-		    ];	
-	
-
-**/

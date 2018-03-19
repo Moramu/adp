@@ -165,24 +165,6 @@ class CoralController extends Controller
     
 	// updating corals quantity
     public function updateColors(Request $request,$id) {
-//		$coral = Coral::find($id);
-/**		$coralColors = new coralColors;	    
-        	Coral::where('id', $id)->(array(
-			'blueridge'=>Input::get('blueridge'),
-			'blue'=>Input::get('blue'),			
-			'brick'=>Input::get('brick'),
-			'yellow'=>Input::get('yellow'),
-			'dark_red'=>Input::get('dark_red'),
-			'orange'=>Input::get('orange'),
-			'green'=>Input::get('green'),
-			'turquoise'=>Input::get('turquoise'),
-			'purple'=>Input::get('purple'),
-			'pink'=>Input::get('pink'),
-			'mustard'=>Input::get('mustard'),
-			'summary'=>Input::get('blueridge')+Input::get('blue')+Input::get('brick')+Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
-			    +Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard'),
-			));
-**/		
 	    $total = Input::get('blueridge')+Input::get('blue')+Input::get('brick')
 		    +Input::get('yellow')+Input::get('dark_red')+Input::get('orange')+Input::get('green')
 		    +Input::get('turquoise')+Input::get('purple')+Input::get('pink')+Input::get('mustard');	
