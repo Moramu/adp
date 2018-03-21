@@ -64,7 +64,11 @@
     	@endif
 	
 	@if (Request::is('sadmin/products')||Request::is('corals')||Request::is('fish')||Request::is('corals/*')||Request::is('fish/*')
-		||Request::is('aquaria')||Request::is('aquaria/*')) 
+		||Request::is('aquariums')||Request::is('aquariums/*')||Request::is('chillers')||Request::is('chillers/*')
+		||Request::is('filters')||Request::is('filters/*')||Request::is('food')||Request::is('food/*')||Request::is('heaters')
+		||Request::is('heaters/*')||Request::is('sterilizers')||Request::is('sterilizers/*')
+		||Request::is('additives')||Request::is('additives/*')||Request::is('lightings')||Request::is('lightings/*')
+		) 
 	    @include ('includes.productsSidebar')
 	    <script>
 	    var p = document.getElementById("products");

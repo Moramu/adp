@@ -1,11 +1,14 @@
 @extends('layouts.admin')
-
+ 
 
 @section('content')
 
-                <h1 class="pageH1">Add New Aquarium</h2>
-                <a class="btn btn-primary createButton" href="{{route('aquariums.index') }}">Back</a>
-        
+	    <div class="pull-left">
+		<h1 class="pageH1">Edit Food</h1>
+	    </div>
+	    <div class="pull-right">
+		<a class="btn btn-info createButton" href="{{route('food.index') }}">Back</a>
+	    </div>
 
 
     @if (count($errors) > 0)
@@ -20,7 +23,7 @@
     @endif
 
 
-    {!! Form::open(array('route' => 'aquariums.store','method'=>'POST','files' => true)) !!}
+    {!! Form::model($food, ['method' => 'PATCH','route' => ['food.update', $food],'files'=>'true']) !!}
     <div class="row">
 
 
@@ -30,55 +33,66 @@
                 {!! Form::number('item_number', null, array('class' => 'form-control')) !!}
             </div>
         </div>
-	<div class="col-xs-12 col-sm-12 col-md-12">
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
                 {!! Form::text('name', null, array('class' => 'form-control')) !!}
             </div>
         </div>
-	<div class="col-xs-12 col-sm-12 col-md-12">
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>List Price:</strong>
                 {!! Form::number('list_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
+	
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Extended Price:</strong>
+                <strong>Extended price:</strong>
                 {!! Form::number('extended_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
+
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Co Stock:</strong>
-                {!! Form::number('co_stock', null, array('class' => 'form-control')) !!}
+                {!! Form::number('co_stock', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
+	
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Provider:</strong>
                 {!! Form::text('provider', null, array('class' => 'form-control')) !!}
             </div>
-       </div>
+        </div>
+	
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Retail Price:</strong>
                 {!! Form::number('rtl_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
+
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Wholesale Price:</strong>
                 {!! Form::number('whl_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
+	
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Quantity:</strong>
                 {!! Form::number('quantity', null, array('class' => 'form-control')) !!}
             </div>
         </div>
-	
+
+
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary pull-left">Submit</button>
         </div>

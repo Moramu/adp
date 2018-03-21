@@ -3,8 +3,8 @@
 
 @section('content')
 
-                <h1 class="pageH1">Add New Aquarium</h2>
-                <a class="btn btn-primary createButton" href="{{route('aquaria.index') }}">Back</a>
+                <h1 class="pageH1">Add New Chiller</h2>
+                <a class="btn btn-primary createButton" href="{{route('chillers.index') }}">Back</a>
         
 
 
@@ -20,7 +20,7 @@
     @endif
 
 
-    {!! Form::open(array('route' => 'aquaria.store','method'=>'POST','files' => true)) !!}
+    {!! Form::open(array('route' => 'chillers.store','method'=>'POST','files' => true)) !!}
     <div class="row">
 
 

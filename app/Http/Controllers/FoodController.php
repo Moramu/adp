@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Chiller;
-
 use View;
 use Auth;
 use Session;
-
+use App\Food;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
-class ChillerController extends Controller
+
+class FoodController extends Controller
 {
-    // Auth
+
+    //Auth
     public function __construct()
     {
     $this->middleware('auth');
@@ -27,8 +27,8 @@ class ChillerController extends Controller
      */
     public function index(Request $request)
     {
-        $chillers = Chiller::orderBy('item_number','ASC')->paginate(10);
-	    return view('chiller.chillerIndex',compact('chillers'))
+        $foods = Food::orderBy('item_number','ASC')->paginate(10);
+    return view('food.foodIndex',compact('foods'))
 	->with('i',($request->input('page',1)-1)*10);
     }
 
@@ -39,7 +39,7 @@ class ChillerController extends Controller
      */
     public function create()
     {
-         return view ('chiller.chillerCreate');
+         return view ('food.foodCreate');
     }
 
     /**
@@ -51,7 +51,7 @@ class ChillerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'item_number'=>'numeric|required|unique:chillers',
+        'item_number'=>'numeric|required|unique:foods',
         'name'=>'required',	
         'list_price'=>'required',	
         'extended_price'=>'required',	
@@ -62,43 +62,43 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-        $chiller = Chiller::create($request->all());
+        $foods = Food::create($request->all());
     
-    return redirect()->route('chillers.index')
+	return redirect()->route('food.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Food  $food
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $chiller = Chiller::find($id);
-        return View::make('chiller.chillerShow',compact('chiller','id'));
+	$food = Food::find($id);
+	return View::make('food.foodShow',compact('food','id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chiller $chiller)
+    public function edit(Food $food)
     {
-         return view('chiller.chillerEdit',compact('chiller'));
+        return view('food.foodEdit',compact('food'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chiller $chiller)
+    public function update(Request $request,Food $food)
     {
         $this->validate($request, [
         'item_number'=>'numeric|required',
@@ -112,29 +112,31 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-    Chiller::find($chiller->id)->update($request->all());
+    Food::find($food->id)->update($request->all());
     
-    return redirect()->route('chiller.index')
+    return redirect()->route('food.index')
         ->with('success','Item created successfully');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Food  $food
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Chiller::find($id)->delete();
-	return redirect()->route('chillers.index')
+        Food::find($id)->delete();
+	return redirect()->back()
         ->with('success','Item deleted successfuly');
     }
-    /** Update Quantity **/
+    
+    //Update quantity
     public function updateQuantity (Request $request,$id) {
-    Chiller::where('id',$id)->update(array(
+    Food::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
     ));
-    return redirect()->route('chillers.index')->with('success','Quantity updated successfuly');
+    return redirect()->route('food.index')->with('success','Quantity updated successfuly');
     }
 }

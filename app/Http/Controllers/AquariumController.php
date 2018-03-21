@@ -24,8 +24,8 @@ class AquariumController extends Controller
      */
     public function index(Request $request)
     {
-        $aquaria = Aquarium::orderBy('item_number','ASC')->paginate(10);
-	return view('aquarium.aquariumIndex',compact('aquaria'))
+        $aquariums = Aquarium::orderBy('item_number','ASC')->paginate(10);
+	return view('aquarium.aquariumIndex',compact('aquariums'))
 		->with('i',($request->input('page',1)-1)*10);
     }
 
@@ -61,7 +61,7 @@ class AquariumController extends Controller
 	
         $aquarium = Aquarium::create($request->all());
 	
-	return redirect()->route('aquaria.index')
+	return redirect()->route('aquariums.index')
 	    ->with('success','Item created successfully');
     }
 
@@ -109,9 +109,9 @@ class AquariumController extends Controller
 	    'quantity'=>'required',	
 	    ]);
 	
-	$aquarium = Aquarium::create($request->all());
+	Aquarium::find($aquarium->id)->update($request->all());
 	
-	return redirect()->route('aquaria.index')
+	return redirect()->route('aquariums.index')
 	    ->with('success','Item created successfully');
         
     }
@@ -125,7 +125,7 @@ class AquariumController extends Controller
     public function destroy($id)
     {
         Aquarium::find($id)->delete();
-	return redirect()->route('aquaria.index')
+	return redirect()->route('aquariums.index')
 	    ->with('success','Item deleted successfuly');
     }
 
@@ -134,7 +134,7 @@ class AquariumController extends Controller
 	Aquarium::where('id',$id)->update(array(
 	    'quantity'=>Input::get('quantity'),
 	));
-    return redirect()->route('aquaria.index')->with('success','Quantity updated successfuly');
+    return redirect()->route('aquariums.index')->with('success','Quantity updated successfuly');
     }
 
 }

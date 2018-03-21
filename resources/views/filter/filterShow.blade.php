@@ -3,14 +3,14 @@
 @section('content')
 
     	    <div class="pull-left">
-	        <h1 class="pageH1">{{ $aquarium->name }} </h1>
+	        <h1 class="pageH1">{{ $filter->name }} </h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-primary createButton" href="{{route('aquariums.index')}}">Back</a>
+		<a class="btn btn-primary createButton" href="{{route('filters.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($aquarium,['method'=>'POST'])!!} 
-    	{!!Form::hidden('aquarium',$id)!!}
+{!! Form::model($filter,['method'=>'POST'])!!} 
+    	{!!Form::hidden('filter',$id)!!}
 <table class="table table-bordered">
     <tr>
 	<th>Quantity</th>

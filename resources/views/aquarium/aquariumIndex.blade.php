@@ -7,12 +7,12 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <h1 class="pageH1">Aquaria</h1>
+    <h1 class="pageH1">Aquariums</h1>
     <div class="pull-right">
-	<a class="btn btn-primary createButton " href="{{ route('aquaria.create') }}">Add Aquarium</a>
+	<a class="btn btn-primary createButton " href="{{ route('aquariums.create') }}">Add Aquarium</a>
     </div>
         <div class="pull-right" style="padding-right:5px;">
-        <a class="btn btn-primary createButton " href="{{ route('aquariaExcelIndex') }}">Import/Export Aquariums</a>
+        <a class="btn btn-primary createButton " href="{{ route('aquariumsExcelIndex') }}">Import/Export Aquariums</a>
     </div>
 
     <table class="table table-bordered">
@@ -28,7 +28,7 @@
 	    <th>Quantity</th>
             <th width="280px">Action</th>
         </tr>
-    @foreach ($aquaria as $key => $aqua)
+    @foreach ($aquariums as $key => $aqua)
     <tr>
         <td>{{ $aqua->item_number }}</td>
         <td>{{ $aqua->name }}</td>
@@ -41,9 +41,9 @@
 	<td>{{ $aqua->quantity}}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('aquaria.show',$aqua->id) }}">Edit Quantity</a>
-            <a class="btn btn-primary" href="{{ route('aquaria.edit',$aqua->id) }}">Edit Aquarium</a>
-            {!! Form::open(['method' => 'DELETE','route' => ['aquaria.destroy', $aqua->id],'style'=>'display:inline','class'=>'confirm']) !!}
+            <a class="btn btn-info " href="{{ route('aquariums.show',$aqua->id) }}">Edit Quantity</a>
+            <a class="btn btn-primary" href="{{ route('aquariums.edit',$aqua->id) }}">Edit Aquarium</a>
+            {!! Form::open(['method' => 'DELETE','route' => ['aquariums.destroy', $aqua->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}
         </td>
@@ -52,7 +52,7 @@
     </table>
 
 
-    {!! $aquaria->render() !!}
+    {!! $aquariums->render() !!}
 
 
 @endsection

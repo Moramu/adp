@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Chiller;
-
 use View;
 use Auth;
 use Session;
+use App\Filter;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
-class ChillerController extends Controller
+
+class FilterController extends Controller
 {
     // Auth
-    public function __construct()
+     public function __construct()
     {
     $this->middleware('auth');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,9 +27,9 @@ class ChillerController extends Controller
      */
     public function index(Request $request)
     {
-        $chillers = Chiller::orderBy('item_number','ASC')->paginate(10);
-	    return view('chiller.chillerIndex',compact('chillers'))
-	->with('i',($request->input('page',1)-1)*10);
+     $filters = Filter::orderBy('item_number','ASC')->paginate(10);
+	return view('filter.filterIndex',compact('filters'))
+	    ->with('i',($request->input('page',1)-1)*10);
     }
 
     /**
@@ -39,7 +39,7 @@ class ChillerController extends Controller
      */
     public function create()
     {
-         return view ('chiller.chillerCreate');
+	return view ('filter.filterCreate');
     }
 
     /**
@@ -51,7 +51,7 @@ class ChillerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'item_number'=>'numeric|required|unique:chillers',
+        'item_number'=>'numeric|required|unique:filters',
         'name'=>'required',	
         'list_price'=>'required',	
         'extended_price'=>'required',	
@@ -62,43 +62,43 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-        $chiller = Chiller::create($request->all());
+        $filter = Filter::create($request->all());
     
-    return redirect()->route('chillers.index')
+	return redirect()->route('filters.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Filter  $filter
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $chiller = Chiller::find($id);
-        return View::make('chiller.chillerShow',compact('chiller','id'));
+	$filter = Filter::find($id);
+        return View::make('filter.filterShow',compact('filter','id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Filter  $filter
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chiller $chiller)
+    public function edit(Filter $filter)
     {
-         return view('chiller.chillerEdit',compact('chiller'));
+         return view('filter.filterEdit',compact('filter'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Filter  $filter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chiller $chiller)
+    public function update(Request $request, Filter $filter)
     {
         $this->validate($request, [
         'item_number'=>'numeric|required',
@@ -112,29 +112,30 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-    Chiller::find($chiller->id)->update($request->all());
+    Filter::find($filter->id)->update($request->all());
     
-    return redirect()->route('chiller.index')
+    return redirect()->route('filters.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Filter  $filter
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Chiller::find($id)->delete();
-	return redirect()->route('chillers.index')
-        ->with('success','Item deleted successfuly');
+        Filter::find($id)->delete();
+	    return redirect()->back()
+	    ->with('success','Item deleted successfuly');
     }
-    /** Update Quantity **/
+    
+    // update Quantity
     public function updateQuantity (Request $request,$id) {
-    Chiller::where('id',$id)->update(array(
+    Filter::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
     ));
-    return redirect()->route('chillers.index')->with('success','Quantity updated successfuly');
+    return redirect()->route('filters.index')->with('success','Quantity updated successfuly');
     }
 }

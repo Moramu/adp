@@ -7,7 +7,7 @@
 		<h1 class="pageH1">Edit Aquarium</h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-info createButton" href="{{route('aquaria.index') }}">Back</a>
+		<a class="btn btn-info createButton" href="{{route('aquariums.index') }}">Back</a>
 	    </div>
 
 
@@ -23,7 +23,7 @@
     @endif
 
 
-    {!! Form::model($aquarium, ['method' => 'PATCH','route' => ['aquaria.update', $aquarium],'files'=>'true']) !!}
+    {!! Form::model($aquarium, ['method' => 'PATCH','route' => ['aquariums.update', $aquarium],'files'=>'true']) !!}
     <div class="row">
 
 

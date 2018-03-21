@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Chiller;
-
-use View;
 use Auth;
+use View;
 use Session;
-
+use App\Heater;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 
-class ChillerController extends Controller
+
+class HeaterController extends Controller
 {
-    // Auth
+    //Auth
     public function __construct()
     {
     $this->middleware('auth');
@@ -27,9 +27,11 @@ class ChillerController extends Controller
      */
     public function index(Request $request)
     {
-        $chillers = Chiller::orderBy('item_number','ASC')->paginate(10);
-	    return view('chiller.chillerIndex',compact('chillers'))
-	->with('i',($request->input('page',1)-1)*10);
+        // get all sorted from 1... X corals, by 10 on page with pagination
+	$heaters = Heater::orderBy('item_number','ASC')->paginate(10);
+        // load the view and pass the heaters
+	return view('heater.heaterIndex',compact('heaters'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -39,7 +41,7 @@ class ChillerController extends Controller
      */
     public function create()
     {
-         return view ('chiller.chillerCreate');
+        return view ('heater.heaterCreate');
     }
 
     /**
@@ -51,7 +53,7 @@ class ChillerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'item_number'=>'numeric|required|unique:chillers',
+        'item_number'=>'numeric|required|unique:heaters',
         'name'=>'required',	
         'list_price'=>'required',	
         'extended_price'=>'required',	
@@ -62,43 +64,43 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-        $chiller = Chiller::create($request->all());
+        $heater = Heater::create($request->all());
     
-    return redirect()->route('chillers.index')
+    return redirect()->route('heaters.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Heater  $heater
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $chiller = Chiller::find($id);
-        return View::make('chiller.chillerShow',compact('chiller','id'));
+        $heater = Heater::find($id);
+	return View::make('heater.heaterShow',compact('heater','id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Heater  $heater
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chiller $chiller)
+    public function edit(Heater $heater)
     {
-         return view('chiller.chillerEdit',compact('chiller'));
+        return view('heater.heaterEdit',compact('heater'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Heater  $heater
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chiller $chiller)
+    public function update(Request $request, Heater $heater)
     {
         $this->validate($request, [
         'item_number'=>'numeric|required',
@@ -112,29 +114,29 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-    Chiller::find($chiller->id)->update($request->all());
+    Heater::find($heater->id)->update($request->all());
     
-    return redirect()->route('chiller.index')
+    return redirect()->route('heaters.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Heater  $heater
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Chiller::find($id)->delete();
-	return redirect()->route('chillers.index')
-        ->with('success','Item deleted successfuly');
+        Heater::find($id)->delete();
+	return redirect()->back()->with('success','Item deleted successfuly');
     }
-    /** Update Quantity **/
+    
+    //update quantity
     public function updateQuantity (Request $request,$id) {
-    Chiller::where('id',$id)->update(array(
+	Heater::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
-    ));
-    return redirect()->route('chillers.index')->with('success','Quantity updated successfuly');
+	));
+	return redirect()->route('heaters.index')->with('success','Quantity updated successfuly');
     }
 }

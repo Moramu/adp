@@ -7,12 +7,12 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <h1 class="pageH1">Aquaria</h1>
+    <h1 class="pageH1">Chillers</h1>
     <div class="pull-right">
-	<a class="btn btn-primary createButton " href="{{ route('aquaria.create') }}">Add Aquarium</a>
+	<a class="btn btn-primary createButton " href="{{ route('chillers.create') }}">Add Chiller</a>
     </div>
         <div class="pull-right" style="padding-right:5px;">
-        <a class="btn btn-primary createButton " href="{{ route('aquariaExcelIndex') }}">Import/Export Aquariums</a>
+        <a class="btn btn-primary createButton " href="{{ route('chillersExcelIndex') }}">Import/Export Chillers</a>
     </div>
 
     <table class="table table-bordered">
@@ -28,22 +28,22 @@
 	    <th>Quantity</th>
             <th width="280px">Action</th>
         </tr>
-    @foreach ($aquaria as $key => $aqua)
+    @foreach ($chillers as $key => $chiller)
     <tr>
-        <td>{{ $aqua->item_number }}</td>
-        <td>{{ $aqua->name }}</td>
-	<td>{{ $aqua->list_price }}</td>
-        <td>{{ $aqua->extended_price}}</td>
-        <td>{{ $aqua->co_stock}}</td>
-	<td>{{ $aqua->provider}}</td>
-        <td>{{ $aqua->rtl_price}}</td>
-        <td>{{ $aqua->whl_price}}</td>
-	<td>{{ $aqua->quantity}}</td> 
+        <td>{{ $chiller->item_number }}</td>
+        <td>{{ $chiller->name }}</td>
+	<td>{{ $chiller->list_price }}</td>
+        <td>{{ $chiller->extended_price}}</td>
+        <td>{{ $chiller->co_stock}}</td>
+	<td>{{ $chiller->provider}}</td>
+        <td>{{ $chiller->rtl_price}}</td>
+        <td>{{ $chiller->whl_price}}</td>
+	<td>{{ $chiller->quantity}}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('aquaria.show',$aqua->id) }}">Edit Quantity</a>
-            <a class="btn btn-primary" href="{{ route('aquaria.edit',$aqua->id) }}">Edit Aquarium</a>
-            {!! Form::open(['method' => 'DELETE','route' => ['aquaria.destroy', $aqua->id],'style'=>'display:inline','class'=>'confirm']) !!}
+            <a class="btn btn-info " href="{{ route('chillers.show',$chiller->id) }}">Edit Quantity</a>
+            <a class="btn btn-primary" href="{{ route('chillers.edit',$chiller->id) }}">Edit Chiller</a>
+            {!! Form::open(['method' => 'DELETE','route' => ['chillers.destroy', $chiller->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}
         </td>
@@ -52,7 +52,7 @@
     </table>
 
 
-    {!! $aquaria->render() !!}
+    {!! $chillers->render() !!}
 
 
 @endsection

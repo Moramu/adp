@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Chiller;
-
+use App\Sterilizer;
 use View;
 use Auth;
 use Session;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
-class ChillerController extends Controller
+
+class SterilizerController extends Controller
 {
-    // Auth
+    //Auth
     public function __construct()
     {
     $this->middleware('auth');
@@ -27,9 +26,9 @@ class ChillerController extends Controller
      */
     public function index(Request $request)
     {
-        $chillers = Chiller::orderBy('item_number','ASC')->paginate(10);
-	    return view('chiller.chillerIndex',compact('chillers'))
-	->with('i',($request->input('page',1)-1)*10);
+         $sterilizers = Sterilizer::orderBy('item_number','ASC')->paginate(10);
+	    return view('sterilizer.sterilizerIndex',compact('sterilizers'))
+	    ->with('i',($request->input('page',1)-1)*10);
     }
 
     /**
@@ -39,7 +38,7 @@ class ChillerController extends Controller
      */
     public function create()
     {
-         return view ('chiller.chillerCreate');
+        return view ('sterilizer.sterilizerCreate');
     }
 
     /**
@@ -51,7 +50,7 @@ class ChillerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'item_number'=>'numeric|required|unique:chillers',
+        'item_number'=>'numeric|required|unique:sterilizers',
         'name'=>'required',	
         'list_price'=>'required',	
         'extended_price'=>'required',	
@@ -62,43 +61,43 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-        $chiller = Chiller::create($request->all());
+        $sterilizer = Sterilizer::create($request->all());
     
-    return redirect()->route('chillers.index')
+    return redirect()->route('sterilizers.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Sterilizer  $sterilizer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sterilizer $sterilizer)
     {
-        $chiller = Chiller::find($id);
-        return View::make('chiller.chillerShow',compact('chiller','id'));
+        $sterilizer = Sterilizer::find($sterilizer->id);
+	return View::make('sterilizer.sterilizerShow',compact('sterilizer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Sterilizer  $sterilizer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chiller $chiller)
+    public function edit(Sterilizer $sterilizer)
     {
-         return view('chiller.chillerEdit',compact('chiller'));
+         return view('sterilizer.sterilizerEdit',compact('sterilizer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Sterilizer  $sterilizer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chiller $chiller)
+    public function update(Request $request, Sterilizer $sterilizer)
     {
         $this->validate($request, [
         'item_number'=>'numeric|required',
@@ -112,29 +111,31 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-    Chiller::find($chiller->id)->update($request->all());
+     Sterilizer::find($sterilizer->id)->update($request->all());
     
-    return redirect()->route('chiller.index')
+    return redirect()->route('sterilizers.index')
         ->with('success','Item created successfully');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Sterilizer  $sterilizer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sterilizer $sterilizer)
     {
-        Chiller::find($id)->delete();
-	return redirect()->route('chillers.index')
+        Sterilizer::find($sterilizer->id)->delete();
+	return redirect()->back()
         ->with('success','Item deleted successfuly');
     }
-    /** Update Quantity **/
+
+    //update quantity
     public function updateQuantity (Request $request,$id) {
-    Chiller::where('id',$id)->update(array(
+    Sterilizer::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
     ));
-    return redirect()->route('chillers.index')->with('success','Quantity updated successfuly');
+    return redirect()->route('sterilizers.index')->with('success','Quantity updated successfuly');
     }
 }

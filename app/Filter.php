@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Chiller extends Model
+class Filter extends Model
 {
      protected $fillable = ['item_number',
 	        'name',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChillersTable extends Migration
+class CreateAdditivesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateChillersTable extends Migration
      */
     public function up()
     {
-        Schema::create('chillers', function (Blueprint $table) {
+        Schema::create('additives', function (Blueprint $table) {
 	 $table->increments('id');
         $table->integer('item_number');
         $table->string('name');
@@ -35,6 +35,6 @@ class CreateChillersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chillers');
+        Schema::dropIfExists('additives');
     }
 }

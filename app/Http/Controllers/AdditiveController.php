@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Chiller;
-
 use View;
 use Auth;
 use Session;
-
+use App\Additive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
-class ChillerController extends Controller
+
+class AdditiveController extends Controller
 {
-    // Auth
+    //Auth
     public function __construct()
     {
     $this->middleware('auth');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -27,9 +26,9 @@ class ChillerController extends Controller
      */
     public function index(Request $request)
     {
-        $chillers = Chiller::orderBy('item_number','ASC')->paginate(10);
-	    return view('chiller.chillerIndex',compact('chillers'))
-	->with('i',($request->input('page',1)-1)*10);
+	$additives = Additive::orderBy('item_number','ASC')->paginate(10);
+	return view('additive.additiveIndex',compact('additives'))
+	->with('i',($request->input('page',1)-1)*10);    
     }
 
     /**
@@ -39,7 +38,7 @@ class ChillerController extends Controller
      */
     public function create()
     {
-         return view ('chiller.chillerCreate');
+        return view ('additive.additiveCreate');
     }
 
     /**
@@ -51,7 +50,7 @@ class ChillerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'item_number'=>'numeric|required|unique:chillers',
+        'item_number'=>'numeric|required|unique:additives',
         'name'=>'required',	
         'list_price'=>'required',	
         'extended_price'=>'required',	
@@ -62,43 +61,43 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-        $chiller = Chiller::create($request->all());
+        $additive = Additive::create($request->all());
     
-    return redirect()->route('chillers.index')
+    return redirect()->route('additives.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Additive  $additive
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Additive $additive)
     {
-        $chiller = Chiller::find($id);
-        return View::make('chiller.chillerShow',compact('chiller','id'));
+        Additive::find($additive->id);
+	return View::make('additive.additiveShow',compact('additive'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Additive  $additive
      * @return \Illuminate\Http\Response
      */
-    public function edit(Chiller $chiller)
+    public function edit(Additive $additive)
     {
-         return view('chiller.chillerEdit',compact('chiller'));
+        return view('additive.additiveEdit',compact('additive'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Additive  $additive
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Chiller $chiller)
+    public function update(Request $request, Additive $additive)
     {
         $this->validate($request, [
         'item_number'=>'numeric|required',
@@ -112,29 +111,28 @@ class ChillerController extends Controller
         'quantity'=>'required',	
         ]);
     
-    Chiller::find($chiller->id)->update($request->all());
+    Additive::find($additive->id)->update($request->all());
     
-    return redirect()->route('chiller.index')
+    return redirect()->route('additives.index')
         ->with('success','Item created successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Chiller  $chiller
+     * @param  \App\Additive  $additive
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Additive $additive)
     {
-        Chiller::find($id)->delete();
-	return redirect()->route('chillers.index')
-        ->with('success','Item deleted successfuly');
+        Additive::find($additive->id)->delete();
+    return redirect()->back()->with('success','Item deleted successfuly');
     }
-    /** Update Quantity **/
+    //update quantity
     public function updateQuantity (Request $request,$id) {
-    Chiller::where('id',$id)->update(array(
+    Additive::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
     ));
-    return redirect()->route('chillers.index')->with('success','Quantity updated successfuly');
+    return redirect()->route('additives.index')->with('success','Quantity updated successfuly');
     }
 }

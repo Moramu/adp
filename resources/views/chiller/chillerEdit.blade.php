@@ -4,10 +4,10 @@
 @section('content')
 
 	    <div class="pull-left">
-		<h1 class="pageH1">Edit Aquarium</h1>
+		<h1 class="pageH1">Edit Chiller</h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-info createButton" href="{{route('aquaria.index') }}">Back</a>
+		<a class="btn btn-info createButton" href="{{route('chillers.index') }}">Back</a>
 	    </div>
 
 
@@ -23,7 +23,7 @@
     @endif
 
 
-    {!! Form::model($aquarium, ['method' => 'PATCH','route' => ['aquaria.update', $aquarium],'files'=>'true']) !!}
+    {!! Form::model($chiller, ['method' => 'PATCH','route' => ['chillers.update', $chiller],'files'=>'true']) !!}
     <div class="row">
 
 

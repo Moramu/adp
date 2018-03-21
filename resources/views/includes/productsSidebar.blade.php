@@ -4,15 +4,27 @@
 <aside>
 	    <nav>
 		<ul class="aside-menu">
-		    <li ><a href="">Additivities</a></li>
-		    <li id="aquaria"><a href="{{route('aquaria.index')}}">Aquariums</a></li>
-		    @if (Request::is('aquaria/*')||Request::is('aquaria'))
+		    <li id="additives" ><a href="{{route('additives.index')}}">Additives</a></li>
+		    @if (Request::is('additives/*')||Request::is('additives'))
 		    <script>
-		    var c = document.getElementById('aquaria');
+		    var c = document.getElementById('additives');
+		    c.className +=" active";
+		    </script>
+		    @endif
+		    <li id="aquariums"><a href="{{route('aquariums.index')}}">Aquariums</a></li>
+		    @if (Request::is('aquariums/*')||Request::is('aquariums'))
+		    <script>
+		    var c = document.getElementById('aquariums');
 		    c.className +=" active";
 		    </script>
 		    @endif	
-		    <li><a href="">Chillers</a></li>
+		    <li id="chillers"><a href="{{route('chillers.index')}}">Chillers</a></li>
+		    @if (Request::is('chillers/*')||Request::is('chillers'))
+		    <script>
+		    var c = document.getElementById('chillers');
+		    c.className +=" active";
+		    </script>
+		    @endif	
 		    <li id="corals"><a href="{{route('corals.index')}}">Corals</a></li>
 		    @if (Request::is('corals/*')||Request::is('corals'))
 		    <script>
@@ -20,7 +32,13 @@
 		    c.className +=" active";
 		    </script>
 		    @endif
-		    <li><a href=""></a>Filters</li>
+		    <li id="filters"><a href="{{route('filters.index')}}">Filters</a></li>
+		    @if (Request::is('filters/*')||Request::is('filters'))
+		    <script>
+		    var c = document.getElementById('filters');
+		    c.className +=" active";
+		    </script>
+		    @endif
 		    <li id="fish"><a href="{{route('fish.index')}}">Fish</a></li>
 		    @if (Request::is('fish')||Request::is('fish/*'))
 		    <script>
@@ -28,10 +46,34 @@
 		    c.className +=" active";
 		    </script>
 		    @endif
-		    <li><a href=""></a>Food</li>
-		    <li><a href="">Heaters</a></li>
-		    <li><a href="">Light</a></li>
-		    <li><a href="">Sterilizers</a></li>
+		    <li id="food"><a href="{{route('food.index')}}">Food</a></li>
+		    @if (Request::is('food')||Request::is('food/*'))
+		    <script>
+		    var c = document.getElementById('food');
+		    c.className +=" active";
+		    </script>
+		    @endif
+		    <li id="heaters"><a href="{{route('heaters.index')}}">Heaters</a></li>
+		    @if (Request::is('heaters')||Request::is('heaters/*'))
+		    <script>
+		    var c = document.getElementById('heaters');
+		    c.className +=" active";
+		    </script>
+		    @endif
+		    <li id="lightings"><a href="{{route('lightings.index')}}">Light</a></li>
+		    @if (Request::is('lightings')||Request::is('lightings/*'))
+		    <script>
+		    var c = document.getElementById('lightings');
+		    c.className +=" active";
+		    </script>
+		    @endif
+		    <li id="sterilizers"><a href="{{route('sterilizers.index')}}">Sterilizers</a></li>
+		    @if (Request::is('sterilizers')||Request::is('sterilizers/*'))
+		    <script>
+		    var c = document.getElementById('sterilizers');
+		    c.className +=" active";
+		    </script>
+		    @endif
 		</ul>
 	    </nav>
 </aside>

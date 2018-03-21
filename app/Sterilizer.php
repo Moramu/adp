@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Chiller extends Model
+class Sterilizer extends Model
 {
-     protected $fillable = ['item_number',
+    protected $fillable = ['item_number',
 	        'name',
 	        'list_price',
 	        'extended_price',
