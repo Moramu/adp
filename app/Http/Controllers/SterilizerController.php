@@ -130,6 +130,11 @@ class SterilizerController extends Controller
 	return redirect()->back()
         ->with('success','Item deleted successfuly');
     }
+    
+    public function showQuantity (Request $request,$id) {
+    $sterilizer = Sterilizer::find($id);
+    return View::make('sterilizer.sterilizerUpdateQuantity',compact('sterilizer'));
+    }
 
     //update quantity
     public function updateQuantity (Request $request,$id) {

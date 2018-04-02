@@ -131,6 +131,11 @@ class HeaterController extends Controller
         Heater::find($id)->delete();
 	return redirect()->back()->with('success','Item deleted successfuly');
     }
+
+    public function showQuantity (Request $request,$id) {
+    $heater = Heater::find($id);
+    return View::make('heater.heaterUpdateQuantity',compact('heater'));
+    }
     
     //update quantity
     public function updateQuantity (Request $request,$id) {

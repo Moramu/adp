@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Input;
 
 class FishController extends Controller
 {
-
+    
     public function __construct()
     {
     $this->middleware('auth');
@@ -116,6 +116,8 @@ class FishController extends Controller
     {
         // get the fish
 	$fish = Fish::find($id);
+//	dd($fish);
+
 //	$fish = Fish::with("fishPrices")->find($id);
 	$size = fishSize::with('fishPrice')->find($id);
 //	$size = DB::table('fish_sizes')->pluck('id','size');
@@ -132,7 +134,8 @@ class FishController extends Controller
     {
         $fish = Fish::find($id);
 	$types = DB::table("water_type")->pluck("type","id");
-        return view('fish.fishEdit',compact('fish','types'));
+	$categories = DB::table("fish_categories")->pluck("category","type_id");
+        return view('fish.fishEdit',compact('fish','types','categories'));
     }
     
      /**
@@ -175,31 +178,26 @@ class FishController extends Controller
     }
 
 
-     public function destroy($id)
-    {
+     public function destroy($id) {
         Fish::find($id)->delete();
         return redirect()->route('fish.index')
                         ->with('success','Item deleted successfully');
     }
 
-        public function addSizePrice (Request $request,$id) {
-	$size = DB::table('fish_sizes')->pluck("size","id");
+    public function showQuantity(Request $request,$id) {
+	$fish = Fish::find($id);
+	return View::make('fish.fishUpdateQuantity',compact('fish'));
+    }
+
+    public function addSizePrice (Request $request,$id) {
+	$size = DB::table('fish_sizes')->pluck("size");
+//	dd($size);
 	return view('fish.fishAddSizePrice', compact('id','size'));
-	}
-
-/** Test	
-	public function addSizePrice(Request $request,$id){
-	$size = DB::table("fish_sizes")->pluck("size");
-        return view('fishAddSizePrice',compact('id','size'));
-}
-**/
-
-
-
+    }
 
 
     public function storeSizePrice (Request $request){
-    	$fishPrice = new fishPrice;
+    	//$fishPrice = new fishPrice;
 
 	    $this->validate($request, [
     	    'fish_size_id' => 'required',
@@ -208,27 +206,47 @@ class FishController extends Controller
 	    'wholesale_price' => 'required',
 	    'quantity' => 'required',
         ]);
-
-	$id = $request -> fish_id;
+	$fish_id = $request->fish_id;
+	$fish_size_id = $request->fish_size_id;
+	$check = DB::table('fish_prices')->where('fish_id',$fish_id)
+					->where('fish_size_id',$fish_size_id)
+				->get();		
+//		dd($count);
+	if(!$check->isEmpty()){
+	    return redirect()->back()->with('error','Size already added!');
+	}
+	else {
 	fishPrice::create($request->all());
-	return redirect()->route('fish.show',['id'=>$id])
-                    ->with('success','Price added successfully');
- 
-    }    
-
-
-    public function test (Request $request,$id) {
-//
-    $fish = Fish::with("fishPrices")->find($id);
-//    $fishPrice = Fish::with("fishPrices")->find($id);
-//    foreach ($fish->fishSizes as $fishSize) {
-//      $fz[] = array( 
-//            "fish_id" =>$fish->fish_id,
-//            "size" =>$fish->size, 
-//      );
-//    }    
-    return view('test')->with('fish', $fish);
+	    return redirect('fish/quantity/'.$fish_id)->with('success','Price added successfully');
+	}
     }
 
+    public function showSizePrice (Request $request,$id){
+	$fish_size_id = $request->id;
+	$fishPrice = fishPrice::find($fish_size_id);
+	return View::make('fish.fishUpdateSizePrice',compact('fishPrice'));
+    }
+
+    public function updateSizePrice (Request $request,$id){
+
+	    $this->validate($request, [
+	    'price' => 'required',
+	    'rtl_price' => 'required',
+	    'wholesale_price' => 'required',
+	    'quantity' => 'required',
+        ]);
+	fishPrice::find($id)->update($request->all());
+	$fp = fishPrice::find($id);
+	    return redirect('fish/quantity/'.$fp->fish_id)
+    		->with('success','Price updated successfully');
+    }
+
+    public function destroySize(Request $request,$id) {
+	$fp = fishPrice::find($id);
+        fishPrice::find($id)->delete();
+        return redirect('fish/quantity/'.$fp->fish_id)
+                        ->with('success','Item deleted successfully');
+    }
+    
 }
 

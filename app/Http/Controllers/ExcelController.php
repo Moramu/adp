@@ -139,6 +139,7 @@ class ExcelController extends Controller
 		}	    
 		if(!empty($insert)){
 		    DB::table('additives')->insert($insert);
+		//	Additive::firstOrNew(['item_number'],$insert);
 		return redirect()->back()->with('succes', 'Additives import successfuly!');
 		}
 	    }

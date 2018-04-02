@@ -131,7 +131,11 @@ class FoodController extends Controller
 	return redirect()->back()
         ->with('success','Item deleted successfuly');
     }
-    
+
+    public function showQuantity (Request $request,$id) {
+    $food = Food::find($id);
+    return View::make('food.foodUpdateQuantity',compact('food'));
+    }
     //Update quantity
     public function updateQuantity (Request $request,$id) {
     Food::where('id',$id)->update(array(

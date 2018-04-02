@@ -129,6 +129,11 @@ class LightingController extends Controller
 	    return redirect()->back()->with('success','Item deleted successfuly');
     }
 
+    public function showQuantity (Request $request,$id) {
+    $lighting = Lighting::find($id);
+    return View::make('lighting.lightingUpdateQuantity',compact('lighting'));
+    }
+
     //update quantity
     public function updateQuantity (Request $request,$id) {
     Lighting::where('id',$id)->update(array(

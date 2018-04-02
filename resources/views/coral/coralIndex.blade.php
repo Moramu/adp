@@ -45,8 +45,10 @@
 	<td>{{str_limit($coral->description) }}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('corals.show',$coral->id) }}">Show Qtty</a>
+            <a class="btn btn-info " href="{{ route('corals.show',$coral->id) }}">Show Coral</a>
             <a class="btn btn-primary" href="{{ route('corals.edit',$coral->id) }}">Edit Coral</a>
+	    <a class="btn btn-primary" href="{{ route('coralUpdateQuantity',$coral->id) }}">Update Quntity</a>
+	    
             {!! Form::open(['method' => 'DELETE','route' => ['corals.destroy', $coral->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}

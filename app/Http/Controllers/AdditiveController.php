@@ -76,6 +76,7 @@ class AdditiveController extends Controller
     public function show(Additive $additive)
     {
         Additive::find($additive->id);
+//	dd($additive);
 	return View::make('additive.additiveShow',compact('additive'));
     }
 
@@ -128,9 +129,17 @@ class AdditiveController extends Controller
         Additive::find($additive->id)->delete();
     return redirect()->back()->with('success','Item deleted successfuly');
     }
+
+    // return updatequantity view
+        public function showQuantity(Request $request,$id){
+	$additive = Additive::find($id);
+//	dd($additive);
+    	return View::make('additive.additiveUpdateQuantity',compact('additive'));
+
+    }
     //update quantity
-    public function updateQuantity (Request $request,$id) {
-    Additive::where('id',$id)->update(array(
+    public function updateQuantity (Request $request,$id) {    
+	Additive::where('id',$id)->update(array(
         'quantity'=>Input::get('quantity'),
     ));
     return redirect()->route('additives.index')->with('success','Quantity updated successfuly');

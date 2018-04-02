@@ -50,9 +50,12 @@
 		<li id="services"><a href="{{route('services')}}">Services</a></li>
 		<li id="settings"><a href="{{route('settings')}}">Settings</a></li>
 		<li>
-		    <form name="search" action="#" method="get">
-		    <input class="search_field" type="text" name="q" placeholder="Search"><button class='searchButton' type="submit">GO</button>
+		
+		    <form name="search" action="{{route('search')}}" method="POST" role="search">
+		    {{ csrf_field() }}
+		    <input class="search_field" type="text" name="search" placeholder="Search"><button class='searchButton' type="submit">GO</button>
 		    </form>
+
 		</li>
 	    </ul>
 	</nav>

@@ -78,6 +78,7 @@ class CoralController extends Controller
 	$coral->barcode = $request -> barcode;
 	$coral->description = $request -> description;
 	$coral->save();
+	coralColors::create(['coral_id'=>$coral->id]);	 
 	return redirect()->route('corals.index')
                         ->with('success','Item created successfully');
 	} else {	
@@ -94,13 +95,14 @@ class CoralController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Coral $coral)
     {
 	
         // get the coral
-	 $coral = Coral::with('coralColors')->find($id);
+	 $coral = Coral::with('coralColors')->find($coral->id);
         // show the view and pass the coral to it
-	 return View::make('coral.coralShow',compact('coral','id'));
+	//dd($coral);
+	 return View::make('coral.coralShow',compact('coral'));
     }
     
     /**
@@ -161,6 +163,11 @@ class CoralController extends Controller
         Coral::find($id)->delete();
         return redirect()->route('corals.index')
                         ->with('success','Item deleted successfully');
+    }
+
+    public function showColors(Request $request,$id){
+    $coral = Coral::find($id);
+    return View::make('coral.coralUpdateQuantity',compact('coral'));
     }
     
 	// updating corals quantity

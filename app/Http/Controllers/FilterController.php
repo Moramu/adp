@@ -131,6 +131,11 @@ class FilterController extends Controller
 	    ->with('success','Item deleted successfuly');
     }
     
+    public function showQuantity (Request $request,$id) {
+    $filter = Filter::find($id);
+    return View::make('filter.filterUpdateQuantity',compact('filter'));
+    }
+    
     // update Quantity
     public function updateQuantity (Request $request,$id) {
     Filter::where('id',$id)->update(array(

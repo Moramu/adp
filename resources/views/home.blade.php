@@ -16,7 +16,6 @@
                         </div>
                     @endif
 		    
-                    {!! $MyNavBar->asUl() !!}
                 </div>
             </div>
         </div>

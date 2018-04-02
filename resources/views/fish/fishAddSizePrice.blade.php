@@ -3,8 +3,20 @@
 
 @section('content')
 
+    @if ($message = Session::get('error'))
+        <div class="alert alert-error">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    @if ($message = Session::get('success'))
+        <div class="alert alert-succes">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
+
                 <h1 class="pageH1">Add Size Price</h2>
-                <a class="btn btn-primary createButton" href="{{url('fish/'.$id)}}">Back</a>
+                <a class="btn btn-primary createButton" href="{{url('fish/quantity/'.$id)}}">Back</a>
         
 
 
@@ -32,31 +44,31 @@
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Price:</strong>
-                {!! Form::number('price', null, array('placeholder' => '1.24','class' => 'form-control','step'=>'any')) !!}
+                {!! Form::number('price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Retail Price:</strong>
-                {!! Form::number('rtl_price', null, array('placeholder' => '55.31','class' => 'form-control','step'=>'any')) !!}
+                {!! Form::number('rtl_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Wholesale price:</strong>
-                {!! Form::number('wholesale_price', null, array('placeholder' => '1.11','class' => 'form-control','step'=>'any')) !!}
+                {!! Form::number('wholesale_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Special Price:</strong>
-                {!! Form::number('special_price', null, array('placeholder' => '','class' => 'form-control','step'=>'any')) !!}
+                {!! Form::number('special_price', null, array('class' => 'form-control','step'=>'any')) !!}
             </div>
        </div>
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Quantity:</strong>
-                {!! Form::number('quantity', null, array('placeholder' => '33','class' => 'form-control')) !!}
+                {!! Form::number('quantity', null, array('class' => 'form-control')) !!}
             </div>
         </div>
 	

@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Coral extends Model
@@ -17,18 +16,7 @@ class Coral extends Model
 	'retail_price',
 	'wholesale_price',
 	'barcode',
-/**	'blueridge',
-	'blue',
-	'brick',
-	'yellow',
-	'dark_red',
-	'orange',
-	'green',
-	'turquoise',
-	'pink',
-	'mustard',
-	'summary',
-**/	'description'];
+	'description'];
 
     public function coralColors () {
 	return $this->hasMany('\App\coralColors');

@@ -9,20 +9,29 @@
 		<a class="btn btn-primary createButton" href="{{route('filters.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($filter,['method'=>'POST'])!!} 
-    	{!!Form::hidden('filter',$id)!!}
 <table class="table table-bordered">
     <tr>
+	<th>Item Number</th>
+	<th>Name</th>
+	<th>List Price</th>
+	<th>Extended Price</th>
+	<th>Co Stock</th>
+	<th>Provider</th>
+	<th>Retail Price</th>
+	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{!!Form::number('quantity',null,array('class'=>'form-control'))!!}</td>
+	<td>{{$filter->item_number}}</td>
+	<td>{{$filter->name}}</td>
+	<td>{{$filter->list_price}}</td>
+	<td>{{$filter->extended_price}}</td>
+	<td>{{$filter->co_stock}}</td>
+	<td>{{$filter->provider}}</td>
+	<td>{{$filter->rtl_price}}</td>
+	<td>{{$filter->whl_price}}</td>
+	<td>{{$filter->quantity}}</td>
     <tr>
-
 </table>
 
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-{!! Form::close() !!}
 @endsection

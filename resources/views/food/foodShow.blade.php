@@ -9,20 +9,28 @@
 		<a class="btn btn-primary createButton" href="{{route('food.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($food,['method'=>'POST'])!!} 
-    	{!!Form::hidden('filter',$id)!!}
 <table class="table table-bordered">
     <tr>
+	<th>Item Number</th>
+	<th>Name</th>
+	<th>List Price</th>
+	<th>Extended Price</th>
+	<th>Co Stock</th>
+	<th>Provider</th>
+	<th>Retail Price</th>
+	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{!!Form::number('quantity',null,array('class'=>'form-control'))!!}</td>
+	<td>{{$food->item_number}}</td>
+	<td>{{$food->name}}</td>
+	<td>{{$food->list_price}}</td>
+	<td>{{$food->extended_price}}</td>
+	<td>{{$food->co_stock}}</td>
+	<td>{{$food->provider}}</td>
+	<td>{{$food->rtl_price}}</td>
+	<td>{{$food->whl_price}}</td>
+	<td>{{$food->quantity}}</td>
     <tr>
-
 </table>
-
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-{!! Form::close() !!}
 @endsection

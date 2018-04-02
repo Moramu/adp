@@ -130,6 +130,12 @@ class ChillerController extends Controller
 	return redirect()->route('chillers.index')
         ->with('success','Item deleted successfuly');
     }
+    
+    public function showQuantity (Request $request, $id) {
+    $chiller = Chiller::find($id);
+    return View::make('chiller.chillerUpdateQuantity',compact('chiller'));
+    }
+
     /** Update Quantity **/
     public function updateQuantity (Request $request,$id) {
     Chiller::where('id',$id)->update(array(

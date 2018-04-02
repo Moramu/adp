@@ -9,20 +9,29 @@
 		<a class="btn btn-primary createButton" href="{{route('chillers.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($chiller,['method'=>'POST'])!!} 
-    	{!!Form::hidden('chiller',$id)!!}
 <table class="table table-bordered">
     <tr>
+	<th>Item Number</th>
+	<th>Name</th>
+	<th>List Price</th>
+	<th>Extended Price</th>
+	<th>Co Stock</th>
+	<th>Provider</th>
+	<th>Retail Price</th>
+	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{!!Form::number('quantity',null,array('class'=>'form-control'))!!}</td>
+	<td>{{$chiller->item_number}}</td>
+	<td>{{$chiller->name}}</td>
+	<td>{{$chiller->list_price}}</td>
+	<td>{{$chiller->extended_price}}</td>
+	<td>{{$chiller->co_stock}}</td>
+	<td>{{$chiller->provider}}</td>
+	<td>{{$chiller->rtl_price}}</td>
+	<td>{{$chiller->whl_price}}</td>
+	<td>{{$chiller->quantity}}</td>
     <tr>
-
 </table>
 
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-{!! Form::close() !!}
 @endsection

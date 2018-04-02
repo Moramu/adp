@@ -41,9 +41,11 @@
 	<td>{{ $filter->quantity}}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('filters.show',$filter->id) }}">Edit Quantity</a>
+            <a class="btn btn-info " href="{{ route('filters.show',$filter->id) }}">Show Filter</a>
             <a class="btn btn-primary" href="{{ route('filters.edit',$filter->id) }}">Edit Filter</a>
-            {!! Form::open(['method' => 'DELETE','route' => ['filters.destroy', $filter->id],'style'=>'display:inline','class'=>'confirm']) !!}
+    	    <a class="btn btn-primary" href="{{ route('filterUpdateQuantity',$filter->id) }}">Update Quantity</a>
+    	    
+	    {!! Form::open(['method' => 'DELETE','route' => ['filters.destroy', $filter->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}
         </td>

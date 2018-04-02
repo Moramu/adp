@@ -41,9 +41,11 @@
 	<td>{{ $aqua->quantity}}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('aquariums.show',$aqua->id) }}">Edit Quantity</a>
+            <a class="btn btn-info " href="{{ route('aquariums.show',$aqua->id) }}">Show Aquarium</a>
             <a class="btn btn-primary" href="{{ route('aquariums.edit',$aqua->id) }}">Edit Aquarium</a>
-            {!! Form::open(['method' => 'DELETE','route' => ['aquariums.destroy', $aqua->id],'style'=>'display:inline','class'=>'confirm']) !!}
+    	    <a class="btn btn-primary" href="{{ route('aquariumUpdateQuantity',$aqua->id) }}">Update Quantity</a>
+    
+	    {!! Form::open(['method' => 'DELETE','route' => ['aquariums.destroy', $aqua->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}
         </td>

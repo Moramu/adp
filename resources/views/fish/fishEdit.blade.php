@@ -55,12 +55,12 @@
                 {!! Form::number('barcode', null, array('placeholder' => 'Barcode','class' => 'form-control')) !!}
             </div>
         </div>
-
+{{--
 	<div class="col-xs-12 col-sm-12 col-md-12">
     	    <div class="form-group">
                 <strong>Type:</strong>
             	    <select name="type" class="form-control" style="width:350px">
-            		    <option value='type'>--- Select Water Type ---</option>
+			    <option value='type'>--- Select Water Type ---</option>
             			@foreach ($types as $key => $value)
                 	    <option value="{{ $key }}">{{ $value }}</option>
             			@endforeach
@@ -76,6 +76,22 @@
         	    </select>
     	    </div>
 	</div>
+	
+--}}
+	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Type:</strong>
+                {!! Form::select('type',$types, null, array('class' => 'form-control')) !!}
+		
+            </div>
+        </div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Category:</strong>
+        	{!! Form::select('category',$categories, null, array('class' => 'form-control')) !!}
+		
+            </div>
+        </div>
 	
 	
         <div class="col-xs-12 col-sm-12 col-md-12">

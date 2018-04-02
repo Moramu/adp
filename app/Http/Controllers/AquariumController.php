@@ -129,6 +129,10 @@ class AquariumController extends Controller
 	    ->with('success','Item deleted successfuly');
     }
 
+    public function showQuantity (Request $request,$id) {
+	$aquarium = Aquarium::find($id);
+	return View::make('aquarium.aquariumUpdateQuantity',compact('aquarium'));
+    }    
 	
     public function updateQuantity (Request $request,$id) {
 	Aquarium::where('id',$id)->update(array(

@@ -6,23 +6,32 @@
 	        <h1 class="pageH1">{{ $additive->name }} </h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-primary createButton" href="{{route('filters.index')}}">Back</a>
+		<a class="btn btn-primary createButton" href="{{route('additives.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($additive,['method'=>'POST'])!!} 
-    	{!!Form::hidden('additive',$additive->id)!!}
 <table class="table table-bordered">
     <tr>
+	<th>Item Number</th>
+	<th>Name</th>
+	<th>List Price</th>
+	<th>Extended Price</th>
+	<th>Co Stock</th>
+	<th>Provider</th>
+	<th>Retail Price</th>
+	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{!!Form::number('quantity',null,array('class'=>'form-control'))!!}</td>
+	<td>{{$additive->item_number}}</td>
+	<td>{{$additive->name}}</td>
+	<td>{{$additive->list_price}}</td>
+	<td>{{$additive->extended_price}}</td>
+	<td>{{$additive->co_stock}}</td>
+	<td>{{$additive->provider}}</td>
+	<td>{{$additive->rtl_price}}</td>
+	<td>{{$additive->whl_price}}</td>
+	<td>{{$additive->quantity}}</td>
     <tr>
-
 </table>
 
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-{!! Form::close() !!}
 @endsection

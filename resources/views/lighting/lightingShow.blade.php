@@ -9,20 +9,29 @@
 		<a class="btn btn-primary createButton" href="{{route('lightings.index')}}">Back</a>
 	    </div>
 
-{!! Form::model($lighting,['method'=>'POST'])!!} 
-    	{!!Form::hidden('lighting',$lighting->id)!!}
 <table class="table table-bordered">
     <tr>
+	<th>Item Number</th>
+	<th>Name</th>
+	<th>List Price</th>
+	<th>Extended Price</th>
+	<th>Co Stock</th>
+	<th>Provider</th>
+	<th>Retail Price</th>
+	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{!!Form::number('quantity',null,array('class'=>'form-control'))!!}</td>
+	<td>{{$lighting->item_number}}</td>
+	<td>{{$lighting->name}}</td>
+	<td>{{$lighting->list_price}}</td>
+	<td>{{$lighting->extended_price}}</td>
+	<td>{{$lighting->co_stock}}</td>
+	<td>{{$lighting->provider}}</td>
+	<td>{{$lighting->rtl_price}}</td>
+	<td>{{$lighting->whl_price}}</td>
+	<td>{{$lighting->quantity}}</td>
     <tr>
-
 </table>
 
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</div>
-{!! Form::close() !!}
 @endsection

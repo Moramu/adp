@@ -11,6 +11,7 @@
 |
 */
 
+
 /** Main Routes **/
 Route::get('/', function () {
     return view('welcome');
@@ -18,9 +19,10 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::any('sadmin/search','SearchController@search')->name('search');
+
+
 /** Test Routes **/
-Route::get('test/{id}','FishController@test');
-Route::get('testwater','WaterParamController@fresh1');
 
 /** Excel Controller **/
 Route::resource('excel', 'ExcelController');
@@ -75,45 +77,60 @@ Route::resource('waterparam','WaterParamController');
 
 /** Additives Controller **/
 Route::resource('additives','AdditiveController');
-Route::post('additives/{id}','AdditiveController@updateQuantity');
+Route::get('additives/quantity/{id}','AdditiveController@showQuantity');
+Route::post('additives/quantity/{id}','AdditiveController@updateQuantity')->name('additiveUpdateQuantity');
 
 /** Aquarium Controller **/
 Route::resource('aquariums','AquariumController');
-Route::post('aquariums/{id}','AquariumController@updateQuantity');
+Route::get('aquariums/quantity/{id}','AquariumController@showQuantity');
+Route::post('aquariums/quantity/{id}','AquariumController@updateQuantity')->name('aquariumUpdateQuantity');
 
 /** Chiller Controller **/
 Route::resource('chillers','ChillerController');
-Route::post('chillers/{id}','ChillerController@updateQuantity');
+Route::get('chillers/quantity/{id}','ChillerController@showQuantity');
+Route::post('chillers/quantity/{id}','ChillerController@updateQuantity')->name('chillerUpdateQuantity');
 
 /** Coral Controller **/
 Route::resource('corals','CoralController');
-Route::post('corals/{id}','CoralController@updateColors');
+Route::get('corals/quantity/{id}','CoralController@showColors');
+Route::post('corals/quantity/{id}','CoralController@updateColors')->name('coralUpdateQuantity');
+
 
 /** Filter Controller **/
 Route::resource('filters','FilterController');
-Route::post('filters/{id}','FilterController@updateQuantity');
+Route::get('filters/quantity/{id}','FilterController@showQuantity');
+Route::post('filters/quantity/{id}','FilterController@updateQuantity')->name('filterUpdateQuantity');
 
 /** Fish Controller **/
 Route::resource('fish', 'FishController');
 Route::get('fish/addSizePrice/{id}','FishController@addSizePrice');
 Route::post('fish/addSizePrice','FishController@storeSizePrice')->name('storeSizePrice');
+Route::get('fish/updateSizePrice/{id}','FishController@showSizePrice');
+Route::post('fish/updateSizePrice/{id}','FishController@updateSizePrice')->name('updateSizePrice');
+Route::get('fish/destroySize/{id}','FishController@destroySize')->name('destroySize');
+
 Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'));
+Route::get('fish/quantity/{id}','FishController@showQuantity')->name('fishShowQuantity');
 
 /** Food Controller **/
 Route::resource('food','FoodController');
-Route::post('food/{id}','FoodController@updateQuantity');
+Route::get('food/quantity/{id}','FoodController@showQuantity');
+Route::post('food/quantity/{id}','FoodController@updateQuantity')->name('foodUpdateQuantity');
 
 /** Heater Controller **/
 Route::resource('heaters','HeaterController');
-Route::post('heaters/{id}','HeaterController@updateQuantity');
+Route::get('heaters/quantity/{id}','HeaterController@showQuantity');
+Route::post('heaters/quantity/{id}','HeaterController@updateQuantity')->name('heaterUpdateQuantity');
 
 /** Light Controller **/
 Route::resource('lightings','LightingController');
-Route::post('lightings/{id}','LightingController@updateQuantity');
+Route::get('lightings/quantity/{id}','LightingController@showQuantity');
+Route::post('lightings/quantity/{id}','LightingController@updateQuantity')->name('lightingUpdateQuantity');
 
 /** Sterilizer Controller **/
 Route::resource('sterilizers','SterilizerController');
-Route::post('sterilizers/{id}','SterilizerController@updateQuantity');
+Route::get('sterilizers/quantity/{id}','SterilizerController@showQuantity');
+Route::post('sterilizers/quantity/{id}','SterilizerController@updateQuantity')->name('sterilizerUpdateQuantity');
 
 
 /** ----------------------------------------------- Access ------------------------------------ **/

@@ -41,8 +41,10 @@
 	<td>{{ $heater->quantity}}</td> 
 
         <td>
-            <a class="btn btn-info " href="{{ route('heaters.show',$heater->id) }}">Edit Quantity</a>
+            <a class="btn btn-info " href="{{ route('heaters.show',$heater->id) }}">Show Heater</a>
             <a class="btn btn-primary" href="{{ route('heaters.edit',$heater->id) }}">Edit Heater</a>
+	    <a class="btn btn-primary" href="{{ route('heaterUpdateQuantity',$heater->id) }}">Update Quantity</a>
+
             {!! Form::open(['method' => 'DELETE','route' => ['heaters.destroy', $heater->id],'style'=>'display:inline','class'=>'confirm']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger delete']) !!}
             {!! Form::close() !!}

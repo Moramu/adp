@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Project;
+use App\Aquarium;
 
 class ProjectController extends Controller
 {
@@ -28,7 +29,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.projectCreate');
+	$aquariums = Aquarium::all()->pluck('name','id');
+        return view('project.projectCreate',compact('aquariums'));
     }
 
     /**
@@ -39,7 +41,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = $request->all();
+	dd($project);
     }
 
     /**

@@ -122,6 +122,9 @@ section {
     padding-bottom: 50px;
     min-height:600px;
 }
+.search{
+min-height:-webkit-fill-available;
+}
 
 .aside-menu li {
     font-weight: 300;
@@ -280,3 +283,15 @@ width:200px;
 .delete {
 width:70px;
 }
+
+.alert-error {
+    color: #2d2224;
+    background-color: #f21f4d;
+    border-color: #d6e9c6;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
