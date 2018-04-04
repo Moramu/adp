@@ -39,14 +39,14 @@
 	<th>Special Price</th>
 	<th>Quantity</th>
     </tr>
-    @foreach ($fish->fishPrice as $fz)
+
+    @foreach ($fish->fishPrice as $fp)
     <tr>
-	<td>{{$fz->fish_size_id}}</td>
-	<td>{{$fz->price}}</td>
-	<td>{{$fz->rtl_price}}</td>
-	<td>{{$fz->wholesale_price}}</td>
-	<td>{{$fz->pecial_price}}</td>
-	<td>{{$fz->quantity}}</td>
+	<td><b>{{$fp->fishSize}}<b></td>
+	<td>{{$fp->rtl_price}}</td>
+	<td>{{$fp->wholesale_price}}</td>
+	<td>{{$fp->pecial_price}}</td>
+	<td>{{$fp->quantity}}</td>
     </tr>
     @endforeach
 </table>

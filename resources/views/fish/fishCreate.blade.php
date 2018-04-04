@@ -98,7 +98,7 @@
             var typeID = $(this).val();
             if(typeID) {
                 $.ajax({
-                    url: '/adp/public/fish/create/'+typeID,
+                    url: 'create/'+typeID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {

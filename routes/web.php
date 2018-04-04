@@ -65,6 +65,9 @@ Route::get('sterilizers/sterilizersExcelIndex', 'ExcelController@sterilizersInde
 
 
 /** ----------------------------------------------- Services ------------------------------------ **/
+/** Reef Controller **/
+Route::resource('reef','ReefController');
+Route::post('reef/create/reefFormAjax','ReefController@reefFormAjax');
 
 /** Project Controller **/
 Route::resource('project','ProjectController');
@@ -108,8 +111,7 @@ Route::post('fish/addSizePrice','FishController@storeSizePrice')->name('storeSiz
 Route::get('fish/updateSizePrice/{id}','FishController@showSizePrice');
 Route::post('fish/updateSizePrice/{id}','FishController@updateSizePrice')->name('updateSizePrice');
 Route::get('fish/destroySize/{id}','FishController@destroySize')->name('destroySize');
-
-Route::get('fish/create/{id}',array('as'=>'myform.ajax','uses'=>'FishController@fishFormAjax'));
+Route::get('fish/create/{id}','FishController@fishFormAjax');
 Route::get('fish/quantity/{id}','FishController@showQuantity')->name('fishShowQuantity');
 
 /** Food Controller **/

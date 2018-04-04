@@ -29,6 +29,7 @@
 	<th>Quantity</th>
 	<th>Functions</th>
     </tr>
+    
     @foreach ($fish->fishPrice as $fz)
     <tr>
 	<td>{{$fz->fish_size_id}}</td>

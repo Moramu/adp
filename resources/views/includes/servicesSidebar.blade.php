@@ -5,6 +5,13 @@
 	    <nav>
 		<ul class="aside-menu">
 		    <li><a href="">Price Calculator</a></li>
+		    <li id="reef"><a href="{{route('reef.index')}}">Reef Calculator</a></li>
+		    @if (Request::is('reef')||Request::is('reef/*'))
+		    <script>
+		    var c = document.getElementById('reef');
+		    c.className +=" active";
+		    </script>
+		    @endif
 		    <li id="project"><a href="{{route('project.index')}}">Project Calculator</a></li>
 		    @if (Request::is('project')||Request::is('project/*'))
 		    <script>

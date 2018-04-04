@@ -4,8 +4,7 @@
 @section('content')
 
                 <h1 class="pageH1">Add New Project</h2>
-                <a class="btn btn-primary createButton" href="{{route('project.index') }}">Back</a>
-        
+            
 
 
     @if (count($errors) > 0)
@@ -34,21 +33,33 @@
 	    <div class="form-group">
 		    <strong>Aquarium:</strong>
 		    {!! Form::checkbox('aquarium','yes',null,array('class'=>'aquarium')) !!}
-			<strong>Custom Reef:</strong>
-		    {!! Form::checkbox('reef','yes') !!}
 			<strong>Support System:</strong>	    
-		    {!! Form::checkbox('system','yes') !!}
+		    {!! Form::checkbox('system','yes',null,array('class'=>'system')) !!}
 			<strong>Cabinet:</strong>
-		    {!! Form::checkbox('cabinet','yes') !!}
+		    {!! Form::checkbox('cabinet','yes',null,array('class'=>'cabinet')) !!}
 	    </div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 aquariumdiv" style="display:none" >
             <div class="form-group">
-                <strong>Custom:</strong>
+	        <strong>Custom:</strong>
                 {!! Form::checkbox('aquariumcustom','yes', null, array('class' => 'acustom aselect')) !!}
 		<strong>Stock:</strong>
 		{!! Form::checkbox('aquariumstock','yes' ,null, array('class' => 'astock aselect')) !!}
-            </div>
+	    </div>
+        </div>
+	<div class="col-xs-12 col-sm-12 col-md-12 systemdiv" style="display:none" >
+            <div class="form-group">
+    	        <strong>Chiller:</strong>
+                {!! Form::checkbox('chiller','yes', null, array('class' => 'chiller sselect')) !!}
+		<strong>Filter:</strong>
+		{!! Form::checkbox('filter','yes' ,null, array('class' => 'filter sselect')) !!}
+		<strong>Heater:</strong>
+		{!! Form::checkbox('heater','yes' ,null, array('class' => 'heater sselect')) !!}
+		<strong>Light:</strong>
+		{!! Form::checkbox('light','yes' ,null, array('class' => 'light sselect')) !!}
+		<strong>Sterilizer:</strong>
+		{!! Form::checkbox('sterilizer','yes' ,null, array('class' => 'sterilizer sselect')) !!}
+	    </div>
         </div>
 	<div class="col-xs-12 col-sm-12 col-md-12 customdiv" style="display:none">
             <div class="form-group">
@@ -62,6 +73,9 @@
                 {!! Form::select('stock_tank',$aquariums, null, array('class' => 'form-control')) !!}
             </div>
         </div>
+
+
+
 	
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary pull-left">Submit</button>
@@ -75,6 +89,9 @@
 
 $('.aquarium').change(function(){
    $('.aquariumdiv').toggle();
+});
+$('.system').change(function(){
+   $('.systemdiv').toggle();
 });
 $('.acustom').change(function(){
    $('.customdiv').toggle();

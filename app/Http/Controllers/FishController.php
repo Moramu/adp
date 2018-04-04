@@ -112,16 +112,12 @@ class FishController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        // get the fish
 	$fish = Fish::find($id);
-//	dd($fish);
-
-//	$fish = Fish::with("fishPrices")->find($id);
-	$size = fishSize::with('fishPrice')->find($id);
-//	$size = DB::table('fish_sizes')->pluck('id','size');
+	$size = fishSize::all();
 	return View::make('fish.fishShow',compact('fish','size'));
+	
     }
 
     /**
@@ -184,21 +180,21 @@ class FishController extends Controller
                         ->with('success','Item deleted successfully');
     }
 
+    // quantity and sizes view
     public function showQuantity(Request $request,$id) {
 	$fish = Fish::find($id);
-	return View::make('fish.fishUpdateQuantity',compact('fish'));
+	$size = fishSize::with('fishPrice')->find($id);
+	return View::make('fish.fishUpdateQuantity',compact('fish','size'));
     }
 
+    // add size view
     public function addSizePrice (Request $request,$id) {
 	$size = DB::table('fish_sizes')->pluck("size");
-//	dd($size);
 	return view('fish.fishAddSizePrice', compact('id','size'));
     }
 
-
+    // store new price
     public function storeSizePrice (Request $request){
-    	//$fishPrice = new fishPrice;
-
 	    $this->validate($request, [
     	    'fish_size_id' => 'required',
 	    'price' => 'required',
@@ -211,7 +207,6 @@ class FishController extends Controller
 	$check = DB::table('fish_prices')->where('fish_id',$fish_id)
 					->where('fish_size_id',$fish_size_id)
 				->get();		
-//		dd($count);
 	if(!$check->isEmpty()){
 	    return redirect()->back()->with('error','Size already added!');
 	}
@@ -221,14 +216,15 @@ class FishController extends Controller
 	}
     }
 
+    //show size price
     public function showSizePrice (Request $request,$id){
 	$fish_size_id = $request->id;
-	$fishPrice = fishPrice::find($fish_size_id);
+	$fishPrice = fishPrice::find($fish_size_id);	
 	return View::make('fish.fishUpdateSizePrice',compact('fishPrice'));
     }
 
+    // Updating size price and quantity
     public function updateSizePrice (Request $request,$id){
-
 	    $this->validate($request, [
 	    'price' => 'required',
 	    'rtl_price' => 'required',
@@ -241,11 +237,12 @@ class FishController extends Controller
     		->with('success','Price updated successfully');
     }
 
+    //deleting size of fish
     public function destroySize(Request $request,$id) {
 	$fp = fishPrice::find($id);
         fishPrice::find($id)->delete();
         return redirect('fish/quantity/'.$fp->fish_id)
-                        ->with('success','Item deleted successfully');
+                        ->with('success','Size deleted successfully');
     }
     
 }

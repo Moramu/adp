@@ -13,8 +13,8 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-                <h1 class="pageH1">Update Size Price</h2>
-                <a class="btn btn-primary createButton" href="{{url('fish/quantity/'.$fishPrice->id)}}">Back</a>
+                <h1 class="pageH1">Update Size Price <b>{{$fishPrice->fish_size_id}}</b></h2>
+                <a class="btn btn-primary createButton" href="{{url('fish/quantity/'.$fishPrice->fish_id)}}">Back</a>
         
 
 
@@ -31,13 +31,6 @@
 		
 {!! Form::model($fishPrice,['method'=>'POST'])!!} 
     <div class="row">
-{{--    	<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Size:</strong>
-		{!! Form::select('fish_size_id', $size, null, ['placeholder' => 'Select Size','class'=>'form-control']) !!}
-	    </div>
-        </div>
---}}
 	<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Price:</strong>
