@@ -15,6 +15,11 @@ class CreateReefsTable extends Migration
     {
         Schema::create('reefs', function (Blueprint $table) {
             $table->increments('id');
+	    $table->integer('material_id');
+	    $table->json('corals_id');
+	    $table->double('reef_sum_rtl');
+	    $table->double('reef_sum_whl');
+	    $table->string('username');
             $table->timestamps();
         });
     }

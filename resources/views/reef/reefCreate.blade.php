@@ -29,14 +29,16 @@
     	<tr>
 	    <th>Material</th>
 	    <th>Quantity</th>
+	    <th>Material Price</th>
 	    <th>Retail Price</th>
 	    <th>Wholesale Price</th>
 	</tr>
 	<tr>
 	    <td>{!! Form::select('material',['Habitad Black']) !!}</td>
-	    <td>{!! Form::number('mquantity',null,array('step'=>'any')) !!}</td>
-	    <td></td>
-	    <td></td>
+	    <td>{!! Form::number('mq',0,array('step'=>'any','class'=>'mq')) !!}</td>
+	    <td>{!! Form::number('mp','497',array('class'=>'mpg','readonly' => 'true')) !!}</td>
+	    <td>{!! Form::number('m_price_rtl',0,array('class'=>'m_sum_rtl','readonly' => 'true','step'=>'any')) !!}</td>
+    	    <td>{!! Form::number('m_price_whl',0,array('class'=>'m_sum_whl','readonly'=>'true','step'=>'any')) !!}</td>
     	</tr>
 	</table>
 
@@ -49,14 +51,14 @@
 	    <th>Wholesale Price</th>
 	    <th>Quantity</th>
 	</tr>
-	@foreach($corals as $coral)
+	@foreach($corals as $index => $coral)
     	<tr>
 	    <td>{{$coral->item_number}}</td>
 	    <td>{{$coral->name}}</td>
 	    <td><img src="{{asset($coral->photo)}}"></td>
-	    <td class="rtl_price">{{$coral->retail_price}}</td>
-	    <td class="whl_price">{{$coral->wholesale_price}}</td>
-	    <td>{!! Form::number('cq',null,array('class'=>'cq')) !!}</td>
+	    <td>{!! Form::number('c_price_rtl['.$index.']',$coral->retail_price,array('readonly' => 'true'))!!}</td>
+	    <td>{!! Form::number('c_price_whl['.$index.']',$coral->wholesale_price,array('readonly' => 'true'))!!}</td>
+	    <td>{!! Form::number('cq['.$index.']',0,array('class'=>'cq')) !!}</td>
 	</tr>
 	@endforeach
 	</table>
@@ -70,8 +72,8 @@
 	    <td>Wholesale Price</td>
 	</tr>
 	<tr>
-	    <td>{!! Form::number('sum_rtl',null,array('class'=>'sum_rtl', 'readonly' => 'true'))!!}</td>
-	    <td>{!! Form::number('sum_whl',null,array('class'=>'sum_whl','readonly' => 'true'))!!}</td>
+	    <td>{!! Form::number('sum_rtl',null,array('class'=>'r_sum_rtl','readonly' => 'true'))!!}</td>
+	    <td>{!! Form::number('sum_whl',null,array('class'=>'r_sum_whl','readonly' => 'true'))!!}</td>
     	</tr>
 	</table>
 
@@ -83,30 +85,48 @@
 
 
 <script>
-$('.cq').on('input', function() {
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+$('.mq, .cq').on('input', function() {
 	$.ajax(
 	{
         url: "create/reefFormAjax",
         type: 'POST',
 	data:$(this.form).serialize(),
 	success:function(data){
-            	 callback(data);
+		 callback(data);
             }
 	}
 	)
 	});
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-
 function callback(response) {
-    $('.sum_whl').val(response);
-    $('.sum_rtl').val(response);
-}
+    var c_sum_rtl = 0;
+    var c_sum_whl = 0;
+    var m_price_rtl = 0;
+    var m_price_whl = 0;
+    for($i=0;$i<response.c_price_rtl.length;$i++){
+    c_sum_rtl+=parseFloat(response.c_price_rtl[$i])*parseInt(response.cq[$i]);
+    c_sum_whl+=parseFloat(response.c_price_whl[$i])*parseInt(response.cq[$i]);
+    }
+    m_sum_rtl=parseFloat(response.mq)*parseFloat(response.mp)*2.5;	
+    m_sum_whl=m_sum_rtl-(m_sum_rtl/100*30);
+    console.log(m_sum_rtl + " r");
+    console.log(m_sum_whl + " w");
+    console.log(c_sum_whl + " cw");
+    
+    $('.m_sum_rtl').val(m_sum_rtl);
+    $('.m_sum_whl').val(m_sum_whl);
+
+    
+    $('.r_sum_rtl').val(c_sum_rtl+m_sum_rtl);
+    $('.r_sum_whl').val(c_sum_whl+m_sum_whl);
+
+    }
+
+
 
 </script>
 

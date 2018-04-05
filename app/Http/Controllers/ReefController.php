@@ -31,14 +31,11 @@ class ReefController extends Controller
 	    ->orderBy('item_number','ASC')->get();
 	return view('reef.reefCreate',compact('corals'));
     }
-
+	//request value from input fields
     public function reefFormAjax(Request $request)
     {
-//	$test = (int)$request->request->get('cq');
-	$test = $request->all();
-	$rtl_price = 1;
-	$whl_price = 1; 	
-        return json_encode($test);
+	$data = $request->all();
+	return response()->json($data);
     }
 
 
