@@ -21,5 +21,7 @@ class Coral extends Model
     public function coralColors () {
 	return $this->hasMany('\App\coralColors');
     }
-
+    public function reef () {
+	return $this->hasMany('\App\Reef');
+    }
 }

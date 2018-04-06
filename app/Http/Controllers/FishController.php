@@ -183,8 +183,12 @@ class FishController extends Controller
     // quantity and sizes view
     public function showQuantity(Request $request,$id) {
 	$fish = Fish::find($id);
-	$size = fishSize::with('fishPrice')->find($id);
-	return View::make('fish.fishUpdateQuantity',compact('fish','size'));
+//	$fish = Fish::with('fishPrice')->where();
+//	$fishSize = fishSize::with('fishPrice')->get();
+//	$fishSize = fishPrice::with('fishSize')->where('id',$fish->fish_size_id)->get();
+//	dd($fishSize);
+	
+	return View::make('fish.fishUpdateQuantity',compact('fish'));
     }
 
     // add size view

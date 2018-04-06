@@ -31,7 +31,7 @@
 	<td>{{$additive->rtl_price}}</td>
 	<td>{{$additive->whl_price}}</td>
 	<td>{{$additive->quantity}}</td>
-    <tr>
+    </tr>
 </table>
 
 @endsection

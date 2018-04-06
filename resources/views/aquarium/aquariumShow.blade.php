@@ -3,10 +3,10 @@
 @section('content')
 
     	    <div class="pull-left">
-	        <h1 class="pageH1">{{ $additive->name }} </h1>
+	        <h1 class="pageH1">{{ $aquarium->name }} </h1>
 	    </div>
 	    <div class="pull-right">
-		<a class="btn btn-primary createButton" href="{{route('additives.index')}}">Back</a>
+		<a class="btn btn-primary createButton" href="{{route('aquariums.index')}}">Back</a>
 	    </div>
 
 <table class="table table-bordered">
@@ -22,15 +22,15 @@
 	<th>Quantity</th>
     </tr>
     <tr>
-	<td>{{$additive->item_number}}</td>
-	<td>{{$additive->name}}</td>
-	<td>{{$additive->list_price}}</td>
-	<td>{{$additive->extended_price}}</td>
-	<td>{{$additive->co_stock}}</td>
-	<td>{{$additive->provider}}</td>
-	<td>{{$additive->rtl_price}}</td>
-	<td>{{$additive->whl_price}}</td>
-	<td>{{$additive->quantity}}</td>
+	<td>{{$aquarium->item_number}}</td>
+	<td>{{$aquarium->name}}</td>
+	<td>{{$aquarium->list_price}}</td>
+	<td>{{$aquarium->extended_price}}</td>
+	<td>{{$aquarium->co_stock}}</td>
+	<td>{{$aquarium->provider}}</td>
+	<td>{{$aquarium->rtl_price}}</td>
+	<td>{{$aquarium->whl_price}}</td>
+	<td>{{$aquarium->quantity}}</td>
     <tr>
 </table>
 

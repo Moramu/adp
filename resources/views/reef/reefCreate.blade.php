@@ -20,11 +20,18 @@
     @endif
 
 
-    {!! Form::open(array('method'=>'GET','files' => true)) !!}
+    {!! Form::open(array('route'=>'reef.store','method'=>'POST','files' => true)) !!}
 
-
-
-
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                {!! Form::text('name', null, array('class' => 'form-control')) !!}
+            </div>
+        </div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+    
 	<table class="table table-bordered">
     	<tr>
 	    <th>Material</th>
@@ -34,14 +41,15 @@
 	    <th>Wholesale Price</th>
 	</tr>
 	<tr>
-	    <td>{!! Form::select('material',['Habitad Black']) !!}</td>
-	    <td>{!! Form::number('mq',0,array('step'=>'any','class'=>'mq')) !!}</td>
-	    <td>{!! Form::number('mp','497',array('class'=>'mpg','readonly' => 'true')) !!}</td>
+	    <td>{!! Form::select('material_id',['Habitad Black']) !!}</td>
+	    <td>{!! Form::number('m_quantity',0,array('step'=>'any','class'=>'m_quantity')) !!}</td>
+	    <td>{!! Form::number('m_price','497',array('class'=>'m_price','readonly' => 'true')) !!}</td>
 	    <td>{!! Form::number('m_price_rtl',0,array('class'=>'m_sum_rtl','readonly' => 'true','step'=>'any')) !!}</td>
     	    <td>{!! Form::number('m_price_whl',0,array('class'=>'m_sum_whl','readonly'=>'true','step'=>'any')) !!}</td>
     	</tr>
 	</table>
-
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
 	<table class="table table-bordered">
 	<tr>
 	    <th>Item Number</th>
@@ -53,16 +61,22 @@
 	</tr>
 	@foreach($corals as $index => $coral)
     	<tr>
+	    {!! Form::hidden('coral_id['.$index.']',$coral->id)!!}
+	    {!! Form::hidden('username',Auth::user()->name)!!}
+	    {!! Form::hidden('c_sum_quantity',0,array('class'=>'c_sum_quantity'))!!}
+	    
 	    <td>{{$coral->item_number}}</td>
 	    <td>{{$coral->name}}</td>
 	    <td><img src="{{asset($coral->photo)}}"></td>
-	    <td>{!! Form::number('c_price_rtl['.$index.']',$coral->retail_price,array('readonly' => 'true'))!!}</td>
+    	    <td>{!! Form::number('c_price_rtl['.$index.']',$coral->retail_price,array('readonly' => 'true'))!!}</td>
 	    <td>{!! Form::number('c_price_whl['.$index.']',$coral->wholesale_price,array('readonly' => 'true'))!!}</td>
-	    <td>{!! Form::number('cq['.$index.']',0,array('class'=>'cq')) !!}</td>
+	    <td>{!! Form::number('c_quantity['.$index.']',0,array('class'=>'c_quantity')) !!}</td>
 	</tr>
 	@endforeach
 	</table>
+	</div>
 
+	<div class="col-xs-12 col-sm-12 col-md-12">
 	<table class="table table-bordered">
     	<tr>
 	    <th colspan="2">Summary Price</th>
@@ -72,13 +86,14 @@
 	    <td>Wholesale Price</td>
 	</tr>
 	<tr>
-	    <td>{!! Form::number('sum_rtl',null,array('class'=>'r_sum_rtl','readonly' => 'true'))!!}</td>
-	    <td>{!! Form::number('sum_whl',null,array('class'=>'r_sum_whl','readonly' => 'true'))!!}</td>
+	    <td>{!! Form::number('reef_sum_rtl',0,array('class'=>'reef_sum_rtl','readonly' => 'true','style'=>'width:75px'))!!}</td>
+	    <td>{!! Form::number('reef_sum_whl',0,array('class'=>'reef_sum_whl','readonly' => 'true','style'=>'width:75px'))!!}</td>
     	</tr>
 	</table>
-
+	</div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary pull-left">Submit</button>
+        </div>
         </div>
 
     {!! Form::close() !!}
@@ -90,7 +105,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-$('.mq, .cq').on('input', function() {
+$('.m_quantity, .c_quantity').on('input', function() {
 	$.ajax(
 	{
         url: "create/reefFormAjax",
@@ -107,70 +122,26 @@ function callback(response) {
     var c_sum_whl = 0;
     var m_price_rtl = 0;
     var m_price_whl = 0;
+    var c_sum_quantity = 0;
     for($i=0;$i<response.c_price_rtl.length;$i++){
-    c_sum_rtl+=parseFloat(response.c_price_rtl[$i])*parseInt(response.cq[$i]);
-    c_sum_whl+=parseFloat(response.c_price_whl[$i])*parseInt(response.cq[$i]);
+    if(response.c_quantity[$i] !=0){
+    c_sum_quantity+=parseInt(response.c_quantity[$i]);
+    console.log(c_sum_quantity);
     }
-    m_sum_rtl=parseFloat(response.mq)*parseFloat(response.mp)*2.5;	
+    c_sum_rtl+=parseFloat(response.c_price_rtl[$i])*parseInt(response.c_quantity[$i]);
+    c_sum_whl+=parseFloat(response.c_price_whl[$i])*parseInt(response.c_quantity[$i]);
+    }
+    m_sum_rtl=parseFloat(response.m_quantity)*parseFloat(response.m_price)*2.5;	
     m_sum_whl=m_sum_rtl-(m_sum_rtl/100*30);
-    console.log(m_sum_rtl + " r");
-    console.log(m_sum_whl + " w");
-    console.log(c_sum_whl + " cw");
-    
+
     $('.m_sum_rtl').val(m_sum_rtl);
     $('.m_sum_whl').val(m_sum_whl);
-
-    
-    $('.r_sum_rtl').val(c_sum_rtl+m_sum_rtl);
-    $('.r_sum_whl').val(c_sum_whl+m_sum_whl);
-
+    $('.c_sum_quantity').val(c_sum_quantity);
+    $('.reef_sum_rtl').val(c_sum_rtl+m_sum_rtl);
+    $('.reef_sum_whl').val(c_sum_whl+m_sum_whl);
     }
 
 
 
 </script>
-
-
-
-
-
-
-
-
-
-{{-- -------------------------- Work ------------------
-
-<script>
-$('.cq').on('input', function() {
-	        cq=$.trim($("input[name='cq']").val());
-		console.log(cq + " a");
-	});
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-$.ajax(
-    {
-        url: "create/reefFormAjax",
-        type: 'POST',
-	data: {
-	cquantity: $('.cq').val(),
-	    },
-	success:function(data){
-            	 callback(data);
-            }
-    })
-
-function callback(response) {
-    $('.sum_whl').val(response);
-}
-
-</script>
-
---}}
-
-
 @endsection

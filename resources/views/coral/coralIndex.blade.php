@@ -30,7 +30,7 @@
             <th>Description</th> 
             <th width="280px">Action</th>
         </tr>
-    @foreach ($corals as $key => $coral)
+    @foreach ($corals as $coral)
     <tr>
         <td>{{ $coral->item_number }}</td>
         <td>{{ $coral->name }}</td>
@@ -41,7 +41,9 @@
 	<td>{{ $coral->retail_price}}</td>
         <td>{{ $coral->wholesale_price }}</td>
         <td>{{ $coral->barcode }}</td>
-	<td>{{ $coral->summary }}</td> 
+	    @foreach($coral->coralColors as $cc)
+	<td>{{ $cc->summary }}</td> 
+	    @endforeach
 	<td>{{str_limit($coral->description) }}</td> 
 
         <td>

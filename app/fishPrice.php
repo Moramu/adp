@@ -14,7 +14,7 @@ class fishPrice extends Model
     }
 
     public function fishSize () {
-	return $this->belongsTo('App\fishSize');
+	return $this->hasMany('App\fishSize','id');
     }
 
 }

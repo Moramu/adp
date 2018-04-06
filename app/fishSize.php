@@ -10,7 +10,7 @@ class fishSize extends Model
 
 
     public function fishPrice () {
-	return $this->hasMany('App\fishPrice');
+	return $this->belongsTo('App\fishPrice','fish_size_id');
     }
 
 }
