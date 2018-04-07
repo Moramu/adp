@@ -24,6 +24,8 @@ class CreateReefsTable extends Migration
 	    $table->json('coral_id');
 	    $table->json('c_quantity');
 	    $table->integer('c_sum_quantity');
+	    $table->double('c_sum_rtl');
+            $table->double('c_sum_whl');
 	    $table->double('reef_sum_rtl');
 	    $table->double('reef_sum_whl');
 	    $table->string('username');

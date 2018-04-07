@@ -68,6 +68,7 @@ Route::get('sterilizers/sterilizersExcelIndex', 'ExcelController@sterilizersInde
 /** Reef Controller **/
 Route::resource('reef','ReefController');
 Route::post('reef/create/reefFormAjax','ReefController@reefFormAjax');
+Route::patch('reef/{id}/edit/reefFormAjax','ReefController@reefFormAjax');
 
 /** Project Controller **/
 Route::resource('project','ProjectController');

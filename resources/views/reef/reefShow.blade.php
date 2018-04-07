@@ -21,13 +21,10 @@
 </table>
 
 <table class="table table-bordered">
-    <tr>
-	<th colspan="4">Price Summary</th>
-    </tr>
     <tr>	
 	<th>Material</th>
-	<th>Material Quantity</th>	
-	<th>Material Price(unit)</th>	
+	<th>Material Quantity(unit)</th>	
+	<th>Material Price</th>	
 	<th>Retail Price</th>
 	<th>Wholesale Price</th>
     </tr>
@@ -40,8 +37,17 @@
     </tr>
 </table>
 
-
-
+<table class="table table-bordered">
+    <tr>
+	<th colspan="4">Corals Price Summary</th>
+    </tr>
+    <tr>
+	<th>Retail Price</th>
+	<th>{{$reef->c_sum_rtl}}</th>
+	<th>Wholesale Price</th>
+	<th>{{$reef->c_sum_whl}}</th>	
+    </tr>
+</table>
 
 <table class="table table-bordered">
     <tr>
@@ -52,20 +58,16 @@
 	<th>Wholesale Price</th>
 	<th>Quantity</th>
     </tr>
-    
-    @for($i=0;$i<count($reef->coral_id);$i++)    
-	@if($reef->c_quantity[$i]!=0)
-    <tr>
-	<td>{{$reef->coral_id[$i]}}</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>{{$reef->c_quantity[$i]}}</td>
-
+	@foreach($corals as $index=> $coral)
+    <tr>    
+	<td>{{$coral->item_number}}</td>	
+	<td>{{$coral->name}}</td>
+	<td><img src="{{asset($coral->photo)}}"></td>
+	<td>{{$coral->retail_price}}</td>
+	<td>{{$coral->wholesale_price}}</td>
+	<td>{{$reef->c_quantity[$index]}}</td>
     </tr>
-	@endif
-    @endfor
+	@endforeach    
 </table>
 
 @endsection

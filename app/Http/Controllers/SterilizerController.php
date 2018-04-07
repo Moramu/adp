@@ -114,7 +114,7 @@ class SterilizerController extends Controller
      Sterilizer::find($sterilizer->id)->update($request->all());
     
     return redirect()->route('sterilizers.index')
-        ->with('success','Item created successfully');
+        ->with('success','Item updated successfully');
         
     }
 

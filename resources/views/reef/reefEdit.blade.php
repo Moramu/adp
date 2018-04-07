@@ -20,8 +20,7 @@
     @endif
 
 
-    {!! Form::open(array('route'=>'reef.store','method'=>'POST','files' => true)) !!}
-
+    {!! Form::model($reef, ['method' => 'PATCH','route' => ['reef.update', $reef],'files'=>'true']) !!}
     
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -42,10 +41,10 @@
 	</tr>
 	<tr>
 	    <td>{!! Form::select('material_id',['Habitad Black']) !!}</td>
-	    <td>{!! Form::number('m_quantity',0,array('step'=>'any','class'=>'m_quantity')) !!}</td>
+	    <td>{!! Form::number('m_quantity',$reef->m_quantity,array('step'=>'any','class'=>'m_quantity')) !!}</td>
 	    <td>{!! Form::number('m_price','497',array('class'=>'m_price','readonly' => 'true')) !!}</td>
-	    <td>{!! Form::number('m_price_rtl',0,array('class'=>'m_sum_rtl','readonly' => 'true','step'=>'any')) !!}</td>
-    	    <td>{!! Form::number('m_price_whl',0,array('class'=>'m_sum_whl','readonly'=>'true','step'=>'any')) !!}</td>
+	    <td>{!! Form::number('m_price_rtl',$reef->m_sum_rtl,array('class'=>'m_sum_rtl','readonly' => 'true','step'=>'any')) !!}</td>
+    	    <td>{!! Form::number('m_price_whl',$reef->m_sum_whl,array('class'=>'m_sum_whl','readonly'=>'true','step'=>'any')) !!}</td>
     	</tr>
 	</table>
 	</div>
@@ -72,7 +71,7 @@
 	    <td><img src="{{asset($coral->photo)}}"></td>
     	    <td>{!! Form::number('c_price_rtl['.$index.']',$coral->retail_price,array('readonly' => 'true'))!!}</td>
 	    <td>{!! Form::number('c_price_whl['.$index.']',$coral->wholesale_price,array('readonly' => 'true'))!!}</td>
-	    <td>{!! Form::number('c_quantity['.$index.']',0,array('class'=>'c_quantity')) !!}</td>
+	    <td>{!! Form::number('c_quantity['.$index.']',$reef->c_quantity[$index],array('class'=>'c_quantity')) !!}</td>
 	</tr>
 	@endforeach
 	</table>
@@ -88,8 +87,8 @@
 	    <td>Wholesale Price</td>
 	</tr>
 	<tr>
-	    <td>{!! Form::number('reef_sum_rtl',0,array('class'=>'reef_sum_rtl','readonly' => 'true','style'=>'width:75px'))!!}</td>
-	    <td>{!! Form::number('reef_sum_whl',0,array('class'=>'reef_sum_whl','readonly' => 'true','style'=>'width:75px'))!!}</td>
+	    <td>{!! Form::number('reef_sum_rtl',$reef->reef_sum_rtl,array('class'=>'reef_sum_rtl','readonly' => 'true','style'=>'width:75px'))!!}</td>
+	    <td>{!! Form::number('reef_sum_whl',$reef->reef_sum_whl,array('class'=>'reef_sum_whl','readonly' => 'true','style'=>'width:75px'))!!}</td>
     	</tr>
 	</table>
 	</div>
@@ -110,8 +109,8 @@ $.ajaxSetup({
 $('.m_quantity, .c_quantity').on('input', function() {
 	$.ajax(
 	{
-        url: "create/reefFormAjax",
-        type: 'POST',
+        url: "edit/reefFormAjax",
+        type: 'PATCH',
 	data:$(this.form).serialize(),
 	success:function(data){
 		 callback(data);

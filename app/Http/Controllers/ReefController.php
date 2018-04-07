@@ -7,6 +7,7 @@ use View;
 use App\Reef;
 use App\Coral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ReefController extends Controller
 {
@@ -67,9 +68,19 @@ class ReefController extends Controller
 	$reef->m_price = $request->m_price;
 	$reef->m_price_rtl = $request->m_price_rtl;
 	$reef->m_price_whl = $request->m_price_whl;
-	$reef->coral_id = $request->coral_id;
-	$reef->c_quantity = $request->c_quantity;
+	$tmp_coral_quantity = $request->c_quantity;
+	$tmp_coral_id = $request->coral_id;
+	for($i=0;$i<count($tmp_coral_quantity);$i++){
+	    if($tmp_coral_quantity[$i]!=0){
+		$new_coral_quantity[] = $tmp_coral_quantity[$i];
+		$new_coral_id[]=$tmp_coral_id[$i];
+	    }
+	}
+	$reef->c_quantity = $new_coral_quantity;
+	$reef->coral_id = $new_coral_id;
 	$reef->c_sum_quantity = $request->c_sum_quantity;
+	$reef->c_sum_rtl = $request->c_sum_rtl;
+	$reef->c_sum_whl = $request->c_sum_whl;
 	$reef->reef_sum_rtl = $request->reef_sum_rtl;
 	$reef->reef_sum_whl = $request->reef_sum_whl;
 	$reef->username = $request->username;
@@ -89,9 +100,9 @@ class ReefController extends Controller
     public function show(Reef $reef)
     {
 	$reef = Reef::find($reef->id);
-//	$coral= Coral::with('reef')->find($reef->coral_id);
+	$corals = Coral::find($reef->coral_id);
 //	dd($coral);
-        return View::make('reef.reefShow',compact('reef'));
+        return View::make('reef.reefShow',compact('reef','corals'));
     }
 
     /**
@@ -102,7 +113,9 @@ class ReefController extends Controller
      */
     public function edit(Reef $reef)
     {
-        //
+	$reef = Reef::find($reef->id);
+	$corals = Coral::find($reef->coral_id);
+        return view('reef.reefEdit',compact('reef','corals'));
     }
 
     /**
@@ -114,7 +127,41 @@ class ReefController extends Controller
      */
     public function update(Request $request, Reef $reef)
     {
-        //
+	$this->validate($request,[
+	'name'=>'required',
+	]);
+
+	$tmp_coral_quantity = $request->c_quantity;
+	$tmp_coral_id = $request->coral_id;
+	for($i=0;$i<count($tmp_coral_quantity);$i++){
+	    if($tmp_coral_quantity[$i]!=0){
+		$new_coral_quantity[] = $tmp_coral_quantity[$i];
+		$new_coral_id[]=$tmp_coral_id[$i];
+	    }
+	}
+	
+	
+       Reef::find($reef->id)->update(
+	array(
+	    'name'=>Input::get('name'),
+	    'material_id'=>Input::get('material_id'),
+	    'm_quantiy'=>Input::get('m_quantity'),
+	    'm_price'=>Input::get('m_price'),
+	    'm_price_rtl'=>Input::get('m_price_rtl'),
+	    'm_price_whl'=>Input::get('m_price_whl'),
+	    'c_quantity'=>$new_coral_quantity,
+	    'coral_id'=>$new_coral_id,
+	    'c_sum_quantity'=>Input::get('c_sum_quantity'),
+	    'c_sum_rtl'=>Input::get('c_sum_rtl'),
+	    'c_sum_whl'=>Input::get('c_sum_whl'),
+	    'reef_sum_rtl'=>Input::get('reef_sum_rtl'),
+	    'reef_sum_whl'=>Input::get('reef_sum_whl'),
+	    'username'=>Input::get('username'),
+	    )
+	);
+
+	return redirect()->route('reef.index')
+	    ->with('success','Reef updated successfuly');
     }
 
     /**
