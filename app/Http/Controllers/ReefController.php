@@ -58,10 +58,12 @@ class ReefController extends Controller
     {
 //	$test = $request->all();
 //	dd($test);
-	$reef = new Reef;
 	$this->validate($request,[
 	'name'=>'required|unique:reefs',
 	]);
+/**
+
+	$reef = new Reef;
 	$reef->name = $request->name;
 	$reef->material_id = $request->material_id;
 	$reef->m_quantity = $request->m_quantity;
@@ -76,6 +78,7 @@ class ReefController extends Controller
 		$new_coral_id[]=$tmp_coral_id[$i];
 	    }
 	}
+
 	$reef->c_quantity = $new_coral_quantity;
 	$reef->coral_id = $new_coral_id;
 	$reef->c_sum_quantity = $request->c_sum_quantity;
@@ -85,6 +88,8 @@ class ReefController extends Controller
 	$reef->reef_sum_whl = $request->reef_sum_whl;
 	$reef->username = $request->username;
 	$reef->save();
+**/
+	Reef::create($request->all());
 	return redirect()->route('reef.index')
 		->with('success','Reef successfuly added');
 	
@@ -101,7 +106,11 @@ class ReefController extends Controller
     {
 	$reef = Reef::find($reef->id);
 	$corals = Coral::find($reef->coral_id);
-//	dd($coral);
+	for($i=0;$i<count($reef->c_quantity);$i++){
+	if($reef->c_quantity[$i]==0){
+	unset($corals[$i]);
+    	}
+	}
         return View::make('reef.reefShow',compact('reef','corals'));
     }
 
@@ -114,7 +123,10 @@ class ReefController extends Controller
     public function edit(Reef $reef)
     {
 	$reef = Reef::find($reef->id);
-	$corals = Coral::find($reef->coral_id);
+//	$corals = Coral::find($reef->coral_id);
+	$corals = Coral::where('cost_price','>',0)
+	    ->orderBy('item_number','ASC')->get();
+
         return view('reef.reefEdit',compact('reef','corals'));
     }
 
@@ -141,8 +153,8 @@ class ReefController extends Controller
 	}
 	
 	
-       Reef::find($reef->id)->update(
-	array(
+       Reef::find($reef->id)->update($request->all());
+/**	array(
 	    'name'=>Input::get('name'),
 	    'material_id'=>Input::get('material_id'),
 	    'm_quantiy'=>Input::get('m_quantity'),
@@ -159,7 +171,7 @@ class ReefController extends Controller
 	    'username'=>Input::get('username'),
 	    )
 	);
-
+**/
 	return redirect()->route('reef.index')
 	    ->with('success','Reef updated successfuly');
     }
